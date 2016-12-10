@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,javascript,twosum" name="Keywords">
+		<meta content="leetcodeJS大法之two-sum" name="description">
+		<title>leetcodeJS大法之two-sum</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="two-sum.js" ></script>
+		<script>
+			var nums = [2, 7, 11, 15],target = 9;
+			
+			console.time('开始找下标');
+			console.log("找下标:"+JSON.stringify(TwoSum.twoSum1(nums,target)));
+			console.timeEnd('开始找下标');
+			
+			console.time('开始找值');
+			console.log("找值:"+JSON.stringify(TwoSum.twoSum2(nums,target)));
+			console.timeEnd('开始找值');
+		</script>
+	</body>
+</html>
