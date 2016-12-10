@@ -60,4 +60,4 @@
 		}
 	};
 
-})(window.TwoSum = {});
+})(window.LeetCode = window.LeetCode||{});
