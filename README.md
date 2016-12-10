@@ -7,7 +7,7 @@ leetcode之javascript大法。用自己的思路去解题。不定期更新。
 
 [Source Code](https://github.com/dailc/leetcode/blob/master/algorithms/Two%20Sum/two-sum.js)
 
-### 1.Add Two Number
+### 2.Add Two Number
 注意审题:
 2->4->3 代表逆序存储的342
 
