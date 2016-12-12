@@ -13,7 +13,7 @@
 	 * @description 获取字符串的最长 子substring的长度,不包含重复字符串
 	 * 时间复杂度 0(N)
 	 * @param {String} str 目标字符串
-	 * @param {Number} 最长子substring的长度
+	 * @return {Number} 最长子substring的长度
 	 */
 	exports.lengthOfLongestSubstring = function(str) {
 		var len = str.length;

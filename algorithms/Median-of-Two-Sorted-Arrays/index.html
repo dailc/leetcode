@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,javascript,Median-of-Two-Sorted-Arrays" name="Keywords">
+		<meta content="leetcodeJS大法之Median-of-Two-Sorted-Arrays" name="description">
+		<title>leetcodeJS大法之longest-substring-without-repeating-characters</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="median-of-two-sorted-arrays.js" ></script>
+		<script>
+		var array1 = [1,2,4,8,20];
+		var array2 = [5,9,30];
+		//采用一个tmp字符串记录,用substring来确保这个字符串存储的是最近一次匹配字符
+		console.log(LeetCode.findMedianSortedArrays2(array1,array2));
+		</script>
+	</body>
+</html>

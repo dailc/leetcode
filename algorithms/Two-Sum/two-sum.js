@@ -11,9 +11,9 @@
 	/**
 	 * @description 第一种求值方案，采用map记录，一层for循环循环找值
 	 * 时间复杂度 0(N)
-	 * @param {number[]} nums
-	 * @param {number[]} target
-	 * @param {number[]}
+	 * @param {Number[]} nums
+	 * @param {Number[]} target
+	 * @param {Number[]}
 	 */
 	exports.twoSum1 = function(nums, target) {
 		//事实上 _map {}也可用 [] 替代
