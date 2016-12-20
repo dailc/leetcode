@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
@@ -8,16 +9,90 @@
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 		<meta content="leetcode,算法,javascript,Median-of-Two-Sorted-Arrays" name="Keywords">
 		<meta content="leetcodeJS大法之Median-of-Two-Sorted-Arrays" name="description">
-		<title>leetcodeJS大法之longest-substring-without-repeating-characters</title>
+		<title>leetcodeJS大法之Median-of-Two-Sorted-Arrays</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
+
 	<body>
-		<script type="text/javascript" src="median-of-two-sorted-arrays.js" ></script>
+		<button id="refresh" style="width: 100%;height: 30px;">刷新数据</button>
+		<h3>元数据</h3>
+		<div>
+			<pre>
+			<code id="origin_data">
+			</code>				
+			</pre>
+		</div>
+		<h3>过程</h3>
+		<div>
+			<pre>
+			<code id="process_data">
+			</code>				
+			</pre>
+		</div>
+		<h3>结果</h3>
+		<div>
+			<pre>
+			<code id="result_data">
+			</code>				
+			</pre>
+		</div>
+		<script type="text/javascript" src="median-of-two-sorted-arrays.js"></script>
 		<script>
-		var array1 = [1,2,4,8,20];
-		var array2 = [5,9,30];
-		//采用一个tmp字符串记录,用substring来确保这个字符串存储的是最近一次匹配字符
-		console.log(LeetCode.findMedianSortedArrays2(array1,array2));
+			init();
+			document.getElementById('refresh').addEventListener('click', function() {
+				init();
+			});
+
+			function init() {
+				var array1 = [];
+				var array2 = [];
+				var random1 = (~~(Math.random() * 6) + 2);
+				var random2 = (~~(Math.random() * 6) + 2);
+				for(var i = 0; i < random1; i++) {
+					array1.push(~~(Math.random() * 20));
+				}
+				for(var i = 0; i < random2; i++) {
+					array2.push(~~(Math.random() * 20));
+				}
+				var sortFun = function(a, b) {
+					return a - b;
+				}
+				array1.sort(sortFun);
+				array2.sort(sortFun);
+				var originalHtml = '\nX=' + JSON.stringify(array1) + ';';
+				originalHtml += '\nY=' + JSON.stringify(array2) + ';';
+
+				var procssHtml = '';
+				var step = 1;
+
+				var resultHtml = '';
+				//采用一个tmp字符串记录,用substring来确保这个字符串存储的是最近一次匹配字符
+				var result = LeetCode.findMedianSortedArrays3(array1, array2, function(X, Y, k) {
+					console.log("X:" + JSON.stringify(X));
+					console.log("Y:" + JSON.stringify(Y));
+					console.log("k:" + k);
+					procssHtml += '\n\n第' + step + '步';
+					procssHtml += '\nk=' + k + ';';
+					procssHtml += '\nX=' + JSON.stringify(X) + ';';
+					procssHtml += '\nY=' + JSON.stringify(Y) + ';';
+					step++;
+				});
+
+				resultHtml += '\n结果为:' + result;
+				console.log("result:" + result);
+
+				setHtml('#origin_data', originalHtml);
+				setHtml('#process_data', procssHtml);
+				setHtml('#result_data', resultHtml);
+			}
+
+			function setHtml(dom, html) {
+				if(typeof dom === 'string') {
+					dom = document.querySelector(dom);
+				}
+				dom.innerHTML = html;
+			}
 		</script>
 	</body>
+
 </html>
