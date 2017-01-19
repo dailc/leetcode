@@ -8,3 +8,5 @@
 * 暴力穷举O(n3)
 
 本示例里面使用的是理解起来较为简单的 `中心扩展法`
+
+http://www.cnblogs.com/egust/p/4580299.html
