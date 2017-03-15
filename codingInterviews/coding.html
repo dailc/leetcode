@@ -1,0 +1,1936 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			(function() {
+				return;
+				//用两个栈实现队列的先进先出效果
+				var stack1 = [],
+					stack2 = [];
+
+				function appendTail(el) {
+					if(!stack1) { return };
+					stack1.push(el);
+				}
+
+				function deletedHead() {
+					if(!stack1 || !stack2) { return };
+					if(stack2.length <= 0) {
+						for(var i = 0, len = stack1.length; i < len; i++) {
+							var tmp = stack1.pop();
+							stack2.push(tmp);
+						}
+					}
+					if(stack2.length <= 0) {
+						throw new Error('queue is empty');
+					}
+					return stack2.pop();
+
+				}
+
+				appendTail('1');
+				appendTail('2');
+				appendTail('3');
+
+				console.log(deletedHead());
+				console.log(deletedHead());
+				console.log(deletedHead());
+				console.log(deletedHead());
+			})();
+		</script>
+		<script>
+			//递增数组的选择数组寻求最小数
+			(function() {
+				return;
+				var arr = [1, 0, 1, 1, 1];
+				var len = arr.length;
+				if(len <= 0) {
+					throw new Error('数组为空');
+				}
+				var p1 = 0,
+					p2 = len - 1;
+				var result = p1;
+				while(arr[p1] >= arr[p2]) {
+					var mid = parseInt((p1 + p2) / 2);
+					if(arr[p1] === arr[p2] && arr[p1] === arr[mid]) {
+						var result = minInOrder(arr, p1, p2);
+						console.log("最小数为:" + result);
+						//三个数字相等的情况，用顺序查找
+						return;
+					}
+					if(arr[mid] >= arr[p1]) {
+						p1 = mid;
+					} else if(arr[mid] <= arr[p2]) {
+						p2 = mid;
+					}
+					if(p2 - p1 <= 1) {
+						result = p2;
+						break;
+					}
+				}
+
+				function minInOrder(arr, p1, p2) {
+					var result = arr[p1];
+					for(var i = p1 + 1; i < p2; i++) {
+						if(result > arr[i]) {
+							result = arr[i];
+						}
+					}
+					return result;
+				}
+				console.log("~最小数为:" + arr[result]);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//斐波那契数列  递归与循环
+				//递归有性能问题，需要优化，去除重复计算所以可以改为循环实现，应用-青蛙跳台阶，矩形覆盖。初始条件可以是从>1开始也可以>2开始
+				function fibonacci1(n) {
+					if(n <= 0) {
+						return 0;
+					} else if(n === 1) {
+						return 1;
+					}
+					return fibonacci1(n - 1) + fibonacci1(n - 2);
+				}
+
+				//console.log(fibonacci1(4));
+
+				//循环解决
+				function fibonacci2(n) {
+					var result = [0, 1];
+					if(n < 2) {
+						return result[n];
+					}
+					var fibOne = 1;
+					var fibTwo = 0;
+					var fib = 0;
+					for(var i = 2; i <= n; i++) {
+						fib = fibOne + fibTwo;
+						fibTwo = fibOne;
+						fibOne = fib;
+					}
+					return fib;
+				}
+
+				console.log(fibonacci2(6));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//一般来说
+				//正数 边界值 1, 0x7FFFFFFF
+				//负数 边界值0x80000000 0xffffffff
+				//二进制中的个数 
+				//<<左移，数字变大，右边补0
+				//>>右移时正数左边补N个0，负数左边补N个1
+				//要避免负数右移时可能造成的死循环，所以用flag进行移位运算
+				//1与，2与，3,...N与可以判断有多少个个数，复杂度0(N)
+
+				function numberOf1One(n) {
+					var count = 0;
+					var flag = 1;
+					while(flag) {
+						if(n & flag) {
+							count++;
+						}
+						flag = flag << 1;
+					}
+					return count;
+				}
+
+				//方法二，优化过后的
+				//思路，一个整数减去一，和源证书做与运算，相当于把整数的最右边一个1变为了0
+				//这是一个很常用的思路
+				//所有，有多少个一，就进行多少次运算
+				function numberOf1Two(n) {
+					var count = 0;
+					while(n) {
+						count++;
+						n = (n - 1) & n;
+					}
+					return count;
+				}
+				console.log(numberOf1Two(111111));
+				//比如求两个整数异或，再求出异或中1的个数，可以得出m改变多少个位数可以变为n
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//数值的整数次方
+
+				function power(base, exponent) {
+					if(typeof base !== 'number' || typeof exponent !== 'number') {
+						throw new Error('数字非法，请确保为数值类型');
+					}
+					if(equal(base, 0.0) && exponent < 0) {
+						throw new Error('数字错误，不允许出现0的负数次方');
+					}
+					var symbol = 1;
+					if(exponent < 0) {
+						exponent = -exponent;
+						symbol = -1;
+					}
+					var result = mathPow2(base, exponent);
+					if(symbol === -1) {
+						result = 1 / result;
+					}
+
+					return result;
+				}
+
+				function equal(num1, num2) {
+					if(num1 - num2 > -0.0000001 &&
+						num1 - num2 < 0.0000001) {
+						return true;
+					}
+					return false;
+				}
+
+				function mathPow(base, exponent) {
+					if(exponent === 0) {
+						//0的0次方也默认返回1了
+						return 1;
+					}
+					var result = 1;
+					for(var i = 1; i <= exponent; i++) {
+						result *= base;
+					}
+					return result;
+				}
+				//阶乘
+				function mathPow2(base, exponent) {
+					if(exponent === 0) {
+						//0的0次方也默认返回1了
+						return 1;
+					}
+					if(exponent === 1) {
+						return base;
+					}
+					var result = mathPow2(base, exponent >> 1);
+					result *= result;
+					if(exponent & 0X1 === 1) {
+						result *= base;
+					}
+
+					return result;
+				}
+
+				console.log(power(-2, -1));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//打印1到最大的N位数 
+				//大数问题
+
+				function print1ToMaxOfN(n) {
+					if(n <= 0) {
+						return;
+					}
+					var numbers = [];
+					for(var i = 0; i < n; i++) {
+						numbers[i] = '0';
+					}
+					while(!increment(numbers)) {
+						//如果正常+1
+						printNumber(numbers);
+					}
+					delete numbers;
+				}
+
+				//打印
+				function printNumber(numbers) {
+					var isBegin0 = true;
+					var result = '';
+					for(var i = 0, len = numbers.length; i < len; i++) {
+						if(isBegin0 && numbers[i] !== '0') {
+							isBegin0 = false;
+						}
+						if(!isBegin0) {
+							result += numbers[i];
+						}
+					}
+					if(result != '') {
+						console.log(result);
+					}
+
+				}
+				//字符串增加数字
+				function increment(numbers) {
+					//是否溢出
+					var isOverFlow = false;
+					//进位
+					var takeOver = 0,
+						len = numbers.length;
+					for(var i = len - 1; i >= 0; i--) {
+						var sum = (numbers[i] - '0') + takeOver;
+						if(i === len - 1) {
+							sum++;
+						}
+						if(sum >= 10) {
+							//溢出了，需要进位
+							if(i == 0) {
+								//溢出
+								isOverFlow = true;
+								break;
+							} else {
+								//正常进位
+								sum -= 10;
+								takeOver = 1;
+								numbers[i] = '' + sum;
+								//进入下一位的判断
+								continue;
+							}
+						} else {
+							numbers[i] = '' + sum;
+							break;
+						}
+					}
+					return isOverFlow;
+				}
+
+				//递归增加数字
+				function print1ToMaxOfN2(n) {
+					if(n <= 0) {
+						return;
+					}
+					var numbers = [];
+					for(var i = 0; i < n; i++) {
+						numbers[i] = '0';
+					}
+					print1ToMaxOfN2Recursively(numbers, n, -1);
+				}
+
+				//每一位都从0到9打印
+				function print1ToMaxOfN2Recursively(numbers, len, index) {
+					if(index === len - 1) {
+						printNumber(numbers);
+						return;
+					}
+					for(var i = 0; i < 10; i++) {
+						numbers[index + 1] = i + '';
+						print1ToMaxOfN2Recursively(numbers, len, index + 1);
+					}
+				}
+
+				print1ToMaxOfN2(2);
+
+			})();
+		</script>
+		<script>
+			(function() {
+				//记得严格模式下是不允许删除原型链中的属性或者直接变量的
+				//只允许删除属性-前提是没有设置不可删除
+				return;
+				//在O(1)时间删除链表节点  单向链表
+				//思路:不需要从头遍历，只需要将下一个节点的内容复制到需要被删除的节点
+				//然后将下一个节点删除
+				//如果被删除的是尾节点，仍然从头遍历
+				//记得确保前提-自己节点是基于链表的-需要调用者去进行负责，完成假设
+				function deleteNode(headNode, deletedNode) {
+					if(!headNode || !deletedNode) {
+						return;
+					}
+					if(deletedNode._next != null) {
+						//不是尾节点
+						var next = deletedNode._next;
+						deletedNode.value = next.value;
+						deletedNode._next = next._next;
+
+						delete next;
+						next = null;
+					} else if(headNode == deletedNode) {
+						//头节点和尾节点相同
+						delete deletedNode;
+						deletedNode = null;
+						headNode = null;
+					} else {
+						var node = headNode;
+						while(node._next != deletedNode) {
+							node = node._next;
+						}
+						node._next = null;
+						delete deletedNode;
+						deletedNode = null;
+					}
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				"use strict";
+				//思路一: 指针交换，一个指针在前，一个在后 交互奇数偶数，第一个是偶数，第二个是奇数则交换
+				//优化思路:在基础上进行解耦，可拓展性，将判断条件抽象为一个函数，增加复用性
+
+				function reOrder(arr, func) {
+					if(!arr || !Array.isArray(arr) || !func) {
+						return;
+					}
+					var len = arr.length;
+					var begin = 0;
+					var end = len - 1;
+					while(begin < end) {
+						//如果不是偶数，是偶数就符合条件跳出了
+						while(begin < end && !func(arr[begin])) {
+							begin++;
+						}
+						//如果是偶数，不是偶数就跳出了
+						while(begin < end && func(arr[end])) {
+							end--;
+						}
+						if(begin < end) {
+							var tmp = arr[begin];
+							arr[begin] = arr[end];
+							arr[end] = tmp;
+						}
+					}
+				}
+
+				function reOrderOddEven(arr) {
+					reOrder(arr, isEven);
+				}
+				//判断是否是偶数
+				function isEven(num) {
+					console.log((num & 0X1 == 0x1));
+					console.log((num & 0X1 == 0x0));
+					//奇数&1 结果为0x1,但偶数不为0x0
+					return !(num & 0X1);
+				}
+
+				var arr = [2, 3, 6, 8, 1, 5];
+				reOrderOddEven(arr);
+				console.log(JSON.stringify(arr));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//链表中倒数第K个节点
+				//思路，采用两个指针，第一个指针先走k-1步，然后第二个指针再开始走
+				//注意鲁棒性robust
+				function findKtoTail(headNode, k) {
+					if(!headNode || k <= 0) {
+						return null;
+					}
+					var p1 = headNode;
+					for(var i = 0; i < k - 1; i++) {
+						if(p1._next) {
+							p1 = p1._next;
+						} else {
+							return null;
+						}
+					}
+					var p2 = headNode;
+					while(p1._next) {
+						p1 = p1._next;
+						p2 = p2._next;
+					}
+
+					return p2;
+				}
+
+				//反转链表
+				//防止断裂
+				function reverseList(head) {
+					if(!head) {
+						return null;
+					}
+					var reserveHead = null;
+					var prev = null;
+					var pNode = head;
+
+					while(pNode) {
+						var next = pNode.next;
+						if(!next) {
+							//找到头节点了
+							reserveHead = pNode;
+						}
+						pNode.next = prev;
+						prev = pNode;
+						pNode = next;
+					}
+
+					return reserveHead;
+				}
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//合并两个排序的链表 
+				//合并两个递增链表
+				function merge(head1, head2) {
+					if(head1 == null) {
+						return head2;
+					}
+					if(head2 == null) {
+						return head1;
+					}
+					var mergeHead = null;
+					if(head1.value < head2.value) {
+						mergeHead = head1;
+						mergeHead.next = merge(head1.next, head2);
+					} else {
+						mergeHead = head2;
+						mergeHead.next = merge(head1, head2.next);
+					}
+					return mergeHead;
+				}
+				//默认为root2为null的话，返回false
+				//主要是递归
+				function hasSubTree(root1, root2) {
+					var result = false;
+					if(root1 != null && root2 != null) {
+						if(root1.value == root2.value) {
+							result = doesTreeHave1Tree2(root1, root2);
+						}
+						if(!result) {
+							result = hasSubTree(root1.left, root2);
+						}
+						if(!result) {
+							result = hasSubTree(root1.right, root2);
+						}
+					}
+					return result;
+				}
+
+				function doesTreeHave1Tree2(root1, root2) {
+					//先判断为true的
+					if(root2 == null) {
+						return true;
+					}
+					if(root1 == null) {
+						return false;
+					}
+
+					if(root1.value != root2.value) {
+						return false;
+					}
+					return doesTreeHave1Tree2(root1.left, root2.left) && doesTreeHave1Tree2(root1.right, root2.right);
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//二叉树的遍历 
+				//一次交换左右节点后，继续递归
+				function mirrorRecursively(root) {
+					if(!root) {
+						return null;
+					}
+					if(root.left == null && root.right == null) {
+						return null;
+					}
+					var tmp = root.left;
+					root.left = root.right;
+					root.right = tmp;
+					if(root.left != null) {
+						mirrorRecursively(root.left);
+					}
+					if(root.right != null) {
+						mirrorRecursively(root.right);
+					}
+				}
+
+				//顺时针打印矩阵
+				function printMatrixClockWisely(arr, colunms, rows) {
+					if(!arr || colunms <= 0 || rows <= 0) {
+						return;
+					}
+					var start = 0;
+					while(colunms > start * 2 && rows > start * 2) {
+						printMatrixInCircle(arr, colunms, rows, start);
+						start++;
+					}
+
+				}
+
+				function printMatrixInCircle(arr, colunms, rows, start) {
+					var endX = colunms - 1 - start;
+					var endY = rows - 1 - start;
+					//第一步,横向打印
+					for(var i = start; i <= endX; i++) {
+						console.log(arr[start][i]);
+					}
+					//第二步
+					if(start < endY) {
+						for(var i = start + 1; i <= endY; i++) {
+							console.log(arr[i][endX]);
+						}
+					}
+					//第三步,从右到做
+					if(start < endX && start < endY) {
+						for(var i = endX - 1; i >= start; i--) {
+							console.log(arr[endY][i]);
+						}
+					}
+					//第四步，从下到上,和第三步相比，Y要多一行
+					if(start < endX && start < endY - 1) {
+						for(var i = endY - 1; i >= start + 1; i--) {
+							console.log(arr[i][start]);
+						}
+					}
+
+				}
+
+				var arr = [
+					[1, 2, 3, 4],
+					[5, 6, 7, 8],
+					[9, 10, 11, 12]
+				];
+				printMatrixClockWisely(arr, 4, 3);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+
+				function getMinDividedNum(n) {
+					var sum = 1,
+						len = 1;
+					while(sum % n) {
+						len++;
+						sum = (sum % n) * 10 + 1;
+					}
+					return len;
+				}
+				var num = 2011;
+				console.log('n:' + num + ',len:' + getMinDividedNum(num));
+				//输出:n:2013,len:60
+
+				console.log(1 + "5"); // 15
+				console.log(1 - "5"); // -4
+				console.log("5" - 1); // 4
+				console.log(-"5"); // 5 
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//包含min函数的栈 
+				//思路:采用辅助栈
+				function StackWithMin() {
+					this.stack = [];
+					this.minStack = [];
+				}
+				StackWithMin.prototype.push = function(value) {
+					this.stack.push(value);
+					if(this.minStack.length === 0 || value < this.minStack[this.minStack.length - 1]) {
+						this.minStack.push(value);
+					} else {
+						this.minStack.push(this.minStack[this.minStack.length - 1]);
+					}
+				};
+				StackWithMin.prototype.pop = function() {
+					if(this.stack.length > 0 && this.minStack.length > 0) {
+						this.minStack.pop();
+						return this.stack.pop();
+					}
+				};
+				StackWithMin.prototype.min = function() {
+					if(this.stack.length > 0 && this.minStack.length > 0) {
+						return this.minStack[this.minStack.length - 1];
+					}
+				};
+
+				var stack = new StackWithMin();
+
+				stack.push(3);
+				stack.push(4);
+				stack.push(2);
+				stack.push(1);
+
+				console.log("min值:" + stack.min() + ',弹出:' + stack.pop());
+				console.log("min值:" + stack.min() + ',弹出:' + stack.pop());
+				console.log("min值:" + stack.min() + ',弹出:' + stack.pop());
+				console.log("min值:" + stack.min() + ',弹出:' + stack.pop());
+				console.log("min值:" + stack.min() + ',弹出:' + stack.pop());
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//栈的压入，弹出序列
+				//如果一个弹出的数字刚好是栈顶数字。那么直接弹出
+				//如果下一个弹出的数字不再栈顶，我们把压栈中还没有入栈的数字压入辅助栈
+				//直到把下一个需要弹出的数字压入栈顶为止
+				//如果所有的数字都压入栈了 仍然没有找到下一个弹出的数字，那么该序列不可能是一个弹出序列
+				function isPopOrder(push, pop, len) {
+					var isPossible = false;
+					if(!push || !pop || len <= 0) {
+						return isPossible;
+					}
+					var stack = [];
+					while(pop.length) {
+
+						while(stack.length == 0 || stack[stack.length - 1] != pop[pop.length - 1]) {
+							if(push.length <= 0) {
+								break;
+							}
+							stack.push(push.pop());
+						}
+						if(stack[stack.length - 1] != pop[pop.length - 1]) {
+							break;
+						}
+						stack.pop();
+						pop.pop();
+					}
+					if(stack.length == 0 && pop.length == 0) {
+						isPossible = true;
+					}
+					return isPossible;
+				}
+				var push = [5, 4, 3, 2, 1];
+				var pop = [2, 1, 5, 3, 4];
+				var len = 5;
+
+				console.log(isPopOrder(push, pop, len));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//从上往下打印二叉树 
+				//思路: 利用队列
+				function printFromTopToBottom(root) {
+					if(!root) {
+						return;
+					}
+					var queue = [];
+					queue.push(root);
+					while(queue.length) {
+						//从头出栈
+						var node = queue.shift();
+						console.log("node:" + node.value);
+						if(node.left) {
+							queue.push(node.left);
+						}
+						if(node.right) {
+							queue.push(node.right);
+						}
+
+					}
+				}
+				var tree = {
+					value: '1',
+					left: {
+						value: '2',
+						left: {
+							value: '3'
+						}
+					},
+					right: {
+						value: '4'
+					}
+				}
+
+				printFromTopToBottom(tree);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//二叉搜索树的后续遍历序列
+				//判断数组是否是二叉搜索树(左<中<右)的后续遍历(数字不重复)
+				//比根节点小，左树，否则右树，依次递归
+
+				//前提-数字没有重复
+				function verifySquenceOfBST(sequence, begin, end) {
+					if(!sequence || !end) {
+						return false;
+					}
+					//找到根节点
+					var root = sequence[end - 1];
+
+					//找到左树
+					var i = begin;
+					for(; i < end - 1; i++) {
+						if(sequence[i] > root) {
+							//左树的值肯定小于根节点的
+							break;
+						}
+					}
+					//判断如果右侧的节点小于根节点，不符合条件
+					for(var j = i; j < end - 1; j++) {
+						if(sequence[j] < root) {
+							return false;
+						}
+					}
+					//判断左树是否是根节点
+					var isLeft = true;
+					if(i > begin) {
+						isLeft = verifySquenceOfBST(sequence, begin, i);
+					}
+
+					//判断右树是否是根节点
+					var isRight = true;
+					if(i < end - 1) {
+						isRight = verifySquenceOfBST(sequence, i, end - 1);
+					}
+
+					return(isLeft && isRight);
+				}
+				var arr = [5, 7, 6, 9, 11, 10, 8];
+				console.log(verifySquenceOfBST(arr, 0, 4));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//二叉树中和为某一值得路径
+				//思路:递归-路径必须到叶子节点才算
+
+				function findPath(root, expectedSum) {
+					if(!root) {
+						return;
+					}
+					var path = [];
+					var currentSum = 0;
+					findPathRecursely(root, expectedSum, path, currentSum);
+				}
+
+				function findPathRecursely(root, expectedSum, path, currentSum) {
+					currentSum += root.value;
+					path.push(root.value);
+					//如果是叶子节点，并且路径上节点的和等于输入的值，打印路径
+					var isLeaf = !root.left && !root.right;
+					if(isLeaf && currentSum === expectedSum) {
+						console.log("A Path is found");
+						var out = '';
+						for(var i = 0, len = path.length; i < len; i++) {
+							out += '->' + path[i];
+						}
+						console.log(out);
+					}
+
+					//如果不是叶子节点，递归遍历
+					if(root.left) {
+						findPathRecursely(root.left, expectedSum, path, currentSum);
+					}
+					if(root.right) {
+						findPathRecursely(root.right, expectedSum, path, currentSum);
+					}
+
+					//返回父节点前，在路径上删除当前节点
+					path.pop();
+				}
+
+				var tree = {
+					value: 1,
+					left: {
+						value: 2,
+						left: {
+							value: 3
+						}
+					},
+					right: {
+						value: 4,
+						left: {
+							value: 1
+						}
+					}
+				};
+				findPath(tree, 6);
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				// 复杂链表的复制
+				// 三步走，第一步赋值链表,链接sibling,拆分 O(N)
+				function cloneNodes(head) {
+					var node = head;
+					while(node != null) {
+						var clone = {
+							value: head.value,
+							next: head.next,
+							sibling: null
+						};
+						node.next = clone;
+						node = clone.next;
+					}
+				}
+				//赋值sibling节点
+				function connectSiblingNodes(head) {
+					var node = head;
+					while(node != null) {
+						var clone = node.next;
+						if(node.sibling != null) {
+							clone.sibling = node.sibling.next;
+						}
+						nodec = clone.next;
+					}
+				}
+
+				function reconnectNodes(head) {
+					var node = head;
+					var cloneHead = null;
+					var cloneNode = null;
+					if(node != null) {
+						cloneHead = node.next;
+						cloneNode = cloneHead;
+						node.next = cloneNode.next;
+						node = node.next;
+					}
+					while(node != null) {
+						cloneNode.next = node.next;
+						cloneNode = cloneNode.next;
+						node.next = cloneNode.next;
+						node = node.next;
+					}
+					return cloneHead;
+				}
+
+				function clone(head) {
+					cloneNodes(head);
+					connectSiblingNodes(head);
+					return reconnectNodes();
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				//二叉搜索树与双向链表 
+				function convert(root) {
+					var lastNodeInList = convertNode(root, null);
+
+					//lastNodeInList指向双向链表的尾节点
+					//我们需要返回头节点
+					var headOfList = lastNodeInList;
+					while(headOfList != null && headOfList.left != null) {
+						headOfList = headOfList.left;
+					}
+					return headOfList;
+
+				}
+
+				function convertNode(node, lastNodeInList) {
+					if(node == null) {
+						return;
+					}
+					var current = node;
+					if(current.left != null) {
+						lastNodeInList = convertNode(current.left, lastNodeInList);
+					}
+					current.left = lastNodeInList;
+					if(lastNodeInList != null) {
+						lastNodeInList.right = current;
+					}
+					lastNodeInList = current;
+
+					if(current.right != null) {
+						lastNodeInList = convertNode(current.right, lastNodeInList);
+					}
+					return lastNodeInList;
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				//字符串的排列
+				return;
+
+				function permutation(str) {
+					if(!str) {
+						return;
+					}
+					permutationRecursely(str, 0);
+				}
+
+				function permutationRecursely(str, begin) {
+					if(begin == str.length - 1) {
+						console.log(str.join(''));
+					} else {
+						for(var i = begin, len = str.length; i < len; i++) {
+							var tmp = str[i];
+							str[i] = str[begin];
+							str[begin] = tmp;
+							permutationRecursely(str, begin + 1);
+
+							tmp = str[i];
+							str[i] = str[begin];
+							str[begin] = tmp;
+						}
+					}
+
+				}
+
+				permutation(['a', 'b', 'c', 'd']);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				// 根据数组特点找出出现次数大于一半的数
+				// 保存次数，如果下一个数和保存的数字相同，则次数+1，如果不同，则次数减一
+				// O(N)
+				function moreThanHalfNum(arr) {
+					var result = arr[0];
+					var times = 1;
+					for(var i = 1, len = arr.length; i < len; i++) {
+						if(times === 0) {
+							result = arr[i];
+							times = 1;
+						} else if(arr[i] === result) {
+							times++;
+						} else {
+							times--;
+						}
+					}
+
+					return result;
+				}
+				console.log(moreThanHalfNum([1, 2, 2, 2, 2, 3, 4, 5]));
+			})();
+		</script>
+		<script>
+			(function() {
+				// 最小的k个数,需要用到二叉树
+				function getLastNumbers(data, leastNumbers, k) {
+					leastNumbers.clear();
+					if(k < 1 || data.size() < k) {
+						return;
+					}
+					for(var i = 0, len = data.length; i < len; i++) {
+						if(leastNumbers.length < k) {
+							leastNumbers.insert(data[i]);
+						} else {
+							var iterGreatest = leastNumbers.begin();
+
+							if(data[i] < iterGreatest) {
+								leastNumbers.erase(iterGreatest);
+								leastNumbers.insert(data[i]);
+							}
+						}
+					}
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				// 连续子数组的最大和-累加
+				// 可以用动态规划进行分析
+				function findMaxSumOfSubArray(arr) {
+					if(!arr) {
+						return -Infinity;
+					}
+					var sum = 0,
+						maxSum = -Infinity;
+					for(var i = 0, len = arr.length; i < len; i++) {
+						if(sum <= 0) {
+							sum = arr[i];
+						} else {
+							sum += arr[i];
+						}
+						if(sum > maxSum) {
+							maxSum = sum;
+						}
+					}
+					return maxSum;
+
+				}
+
+				console.log(findMaxSumOfSubArray([1, -2, 3, 10, -4, 7, 2, -5]));
+			})();
+		</script>
+		<script>
+			(function() {
+				//从1到n整数中1出现的次数 
+				// 简单粗暴做法
+				return;
+
+				function numberOf1(n) {
+					var number = 0;
+					while(n) {
+						if(n % 10 === 1) {
+							number++;
+						}
+						n = parseInt(n / 10);
+					}
+					return number;
+				}
+
+				function NumberOf1Between1AndN(n) {
+					var number = 0;
+					for(var i = 1; i <= n; i++) {
+						number += numberOf1(i);
+					}
+					return number;
+				}
+
+				//解法2,从数字规律下手
+				function NumberOf1Between1AndN2(n) {
+					if(n <= 0) {
+						return 0;
+					}
+					return numberOf12(n + '');
+				}
+
+				function numberOf12(n) {
+					//第一个字符
+					var strN = n.charAt(0);
+					if(!strN || strN < '0' || strN > 9) {
+						return 0;
+					}
+					var first = strN - '0';
+					var len = n.length;
+
+					if(len === 1 && first == 0) {
+						return 0;
+					}
+					if(len === 1 && first > 0) {
+						return 1;
+					}
+					//假设n是21345
+					// numFirstDigit是数字10000-19999的第一位中的数目
+					var numberFirstDigit = 0;
+					if(first > 1) {
+						numberFirstDigit = powBase10(len - 1);
+					} else if(first === 1) {
+						numberFirstDigit = parseInt(n.substr(1)) + 1;
+					}
+
+					// numOtherDigits是1346-21345除了第一位之外的数位中的数目
+					var numOtherDigits = first * (len - 1) * powBase10(len - 2);
+					// numRecursive是1-1345中的数目
+					var numRecursive = numberOf12(n.substr(1));
+
+					return numberFirstDigit + numOtherDigits + numRecursive;
+				}
+
+				function powBase10(n) {
+					var result = 1;
+					for(var i = 0; i < n; i++) {
+						result *= 10;
+					}
+					return result;
+				}
+
+				console.log(NumberOf1Between1AndN2(12));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//把数组排成最小的数 
+				//第一种方法，求全排列，不再赘述
+				//方法二，直接进行字符串数组排序
+				//排序规则，m与n 如果mn<nm 中m<n
+
+				function printMinNumber(arr) {
+					if(!arr) {
+						return;
+					}
+					//利用sort的快速排序规则
+					arr.sort(function(a, b) {
+						// ab < ba  则a应该在前面，这个值也会小于0
+						return(a + '' + b) - (b + '' + a)
+					});
+
+					console.log('最小的数组排序数:' + arr.join(''));
+				}
+				printMinNumber([3, 32, 321]);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//丑数 -只包含因子2,3,5的数，习惯上把1称为第一个丑数
+				//直观解法
+				function isUgly(number) {
+					while(number % 2 === 0) {
+						number /= 2;
+					}
+					while(number % 3 === 0) {
+						number /= 3;
+					}
+					while(number % 5 === 0) {
+						number /= 5;
+					}
+
+					return(number === 1) ? true : false;
+				}
+
+				function getUglyNumber(index) {
+					if(index <= 0) {
+						return 0;
+					}
+					var number = 0;
+					var uglyFound = 0;
+					while(uglyFound < index) {
+						number++;
+						if(isUgly(number)) {
+							uglyFound++;
+						}
+					}
+					return number;
+				}
+				//第二种方法，只计算丑数-空间换时间
+				//1500个丑数的数组，占空间大概6kb
+				function getUglyNumber2(index) {
+					if(index <= 0) {
+						return 0;
+					}
+					var uglyNumbers = [1];
+					var nextGulyNum = 1;
+					//index
+					var multiply2 = 0;
+					var multiply3 = 0;
+					var multiply5 = 0;
+					while(nextGulyNum < index) {
+						var min = Math.min.apply(null, [uglyNumbers[multiply2] * 2, uglyNumbers[multiply3] * 3, uglyNumbers[multiply5] * 5]);
+						uglyNumbers[nextGulyNum] = min;
+						while(uglyNumbers[multiply2] * 2 <= min) {
+							multiply2++;
+						}
+						while(uglyNumbers[multiply3] * 3 <= min) {
+							multiply3++;
+						}
+						while(uglyNumbers[multiply5] * 5 <= min) {
+							multiply5++;
+						}
+						nextGulyNum++;
+					}
+					var ugly = uglyNumbers[nextGulyNum - 1];
+
+					return ugly;
+
+				}
+				var num = 1500;
+				var begin = (new Date()).getTime();
+				console.log("第" + num + "个丑数:" + getUglyNumber(num));
+				var end = (new Date()).getTime();
+				console.log("耗费时间:" + (end - begin) / 1000 + '秒');
+
+				var begin2 = (new Date()).getTime();
+				console.log("方法2:第" + num + "个丑数:" + getUglyNumber(num));
+				var end2 = (new Date()).getTime();
+				console.log("方法2:耗费时间:" + (end2 - begin2) / 1000 + '秒');
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//第一个只出现一次的字符
+				//通过哈希表存值
+				// 复杂度O(N)
+				function findNotRepeatingChar(str) {
+					if(!str) {
+						return '';
+					}
+					var len = str.length;
+					var hashTable = {};
+					for(var i = 0; i < len; i++) {
+						if(!hashTable[str.charAt(i)]) {
+							hashTable[str.charAt(i)] = 1;
+						} else {
+							hashTable[str.charAt(i)]++;
+						}
+					}
+					//找出现一次的
+					for(var i = 0; i < len; i++) {
+						if(hashTable[str.charAt(i)] === 1) {
+							return str.charAt(i);
+						}
+					}
+
+					return '';
+				}
+
+				console.log(findNotRepeatingChar('abaccdeff'));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//数组中出现的逆序对，可以用归并排序求 -先分割，在归并
+				function inversePairs(arr) {
+					if(!arr) {
+						return 0;
+					}
+					var copy = arr.slice(0);
+					var count = inversePairsCore(arr, copy, 0, arr.length - 1);
+					return count;
+				}
+
+				function inversePairsCore(arr, copy, start, end) {
+					if(start === end) {
+						return 0;
+					}
+					var len = Math.floor((end - start) / 2);
+					// 注意，不能重复计算
+					var left = inversePairsCore(copy, arr, start, start + len);
+					var right = inversePairsCore(copy, arr, start + len + 1, end);
+					//i初始化为前半段最后一个数字的下标
+					var i = start + len;
+					// j 后半段，最后
+					var j = end;
+					var indexCopy = end;
+					var count = 0;
+					while(i >= start && j >= start + len + 1) {
+						if(arr[i] > arr[j]) {
+							copy[indexCopy--] = arr[i--];
+							count += j - start - len;
+						} else {
+							copy[indexCopy--] = arr[j--];
+						}
+					}
+					for(; i >= start; --i) {
+						copy[indexCopy--] = arr[i];
+					}
+					for(; j >= start + len + 1; --j) {
+						copy[indexCopy--] = arr[j];
+					}
+					return left + right + count;
+				}
+				console.log(inversePairs([7, 5, 6, 4]));
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//两个链表的第一个公告节点
+				//1.用栈，空间换时间-同时放入两个栈，然后出栈，最后一个相同的节点即是目标，因为拓扑结构为Y型
+				//2.首先遍历两个链表得到长度，第二次遍历时，在较长的链表上先走若干部，接着再同时遍历，找到的第一个相同节点就是他们的公告节点
+				function getListLen(head) {
+					var len = 0;
+					var node = head;
+					if(node != null) {
+						len++;
+						node = node.next;
+					}
+					return len;
+				}
+
+				function findFirstCommonNode(head1, head2) {
+					//得到两个链表的长度
+					var len1 = getListLen(head1);
+					var len2 = getListLen(head2);
+
+					var lenDif = len1 - len2;
+					var headLong = len1,
+						headShot = len2;
+					if(len2 > len1) {
+						lenDif = -lenDif;
+						headLong = head2;
+						headShot = len1;
+					}
+
+					//先在长链表上走几步
+					for(var i = 0; i < lenDif; i++) {
+						headLong = headLong.next;
+					}
+
+					while(headLong != null && headShot != null && headLong != headShot) {
+						headLong = headLong.next;
+						headShort = headShot.next;
+					}
+
+					//得到第一个公告节点
+					var firstCommonNode = headLong;
+
+					return firstCommonNode;
+				}
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				// 数字在排序数组中出现的次数 -二分查找
+				function getFirstK(data, k, start, end) {
+					if(!data || start > end || start < 0) {
+						return -1;
+					}
+					var middleIndex = parseInt((start + end) / 2);
+					var middleData = data[middleIndex];
+					var len = data.length;
+					if(middleData == k) {
+						if((middleIndex > 0 &&
+								data[middleIndex - 1] != k
+							) ||
+							middleIndex == 0
+						) {
+							return middleIndex;
+						} else {
+							end = middleIndex - 1;
+						}
+					} else if(middleData > k) {
+						end = middleIndex - 1;
+					} else {
+						start = middleIndex + 1;
+					}
+
+					return getFirstK(data, k, start, end)
+				}
+
+				function getLastK(data, k, start, end) {
+					if(!data || start > end || start < 0) {
+						return -1;
+					}
+					var middleIndex = parseInt((start + end) / 2);
+					var middleData = data[middleIndex];
+					var len = data.length;
+					if(middleData == k) {
+						if((middleIndex < len - 1 &&
+								data[middleIndex + 1] != k
+							) ||
+							middleIndex == len - 1
+						) {
+							return middleIndex;
+						} else {
+							start = middleIndex + 1;
+						}
+					} else if(middleData < k) {
+						start = middleIndex + 1;
+					} else {
+						end = middleIndex - 1;
+					}
+
+					return getLastK(data, k, start, end)
+				}
+
+				function getNumberOfK(data, k) {
+					var num = 0;
+					if(data != null && Array.isArray(data)) {
+						var first = getFirstK(data, k, 0, data.length - 1);
+						var last = getLastK(data, k, 0, data.length - 1);
+
+						if(first > -1 && last > -1) {
+							num = last - first + 1;
+						}
+					}
+
+					return num;
+				}
+				console.log(getNumberOfK([1, 2, 3, 3, 4], 3));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//二叉树的深度
+				//第一题:输入二叉树根节点，求树的深度(从根节点到业界点，最长路径为深度)
+				function treeDepth(root) {
+					if(root == null) {
+						return 0;
+					}
+					var left = treeDepth(root.left);
+					var right = treeDepth(root.right);
+					return(left > right) ? (left + 1) : (right + 1);
+				}
+
+				//第二题，进一步
+				//输入一颗二叉树的根节点，判断该树是否是平衡二叉树
+				//仍以节点的左右子树的深度相差不超过1，那么他就是一颗平衡二叉树
+				//方案一:继续递归
+
+				function isBalance(root) {
+					if(!root) {
+						//注意返回true
+						return true;
+					}
+					var left = treeDepth(root.left);
+					var right = treeDepth(root.right);
+					var diff = Math.abs(left - right);
+					if(diff > 1) {
+						return false;
+					}
+					return isBalance(root.left) && isBalance(root.right);
+				}
+
+				//方案二:优化，不查找重复节点,后续遍历
+				function isBalance2(root, depth) {
+					if(!root) {
+						depth.value = 0;
+						return true;
+					}
+					var left = {},
+						right = {};
+					if(isBalance2(root.left, left) && isBalance2(root.right, right)) {
+						var diff = Math.abs(left.value - right.value);
+						if(diff <= 1) {
+							depth.value = 1 + (left.value > right.value ? left.value : right.value);
+							return true;
+						}
+					}
+
+					return false;
+				}
+
+				function isBalence22(root) {
+					var depth = {};
+					return isBalance2(root, depth);
+				}
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				// 数组中只出现一次的数字，要求时间复杂度O(N),空间复杂度O(1)
+				// 需要将数组拆为两个子数组，并且异或操作，异或很关键
+				function findFirstBistIs1(num) {
+					var index = 0
+					//默认整形最大位,注意运算符的优先级，==优先级要高于&
+					while(((num & 1) == 0) && (index < 8 * 4)) {
+						num = num >> 1;
+						index++;
+					}
+					return index;
+				}
+
+				function isBit1(num, index) {
+					num = num >> index;
+					return(num & 1);
+				}
+
+				function findNumbersAppearOnce(data) {
+					if(!data) {
+						throw new Error('错误:数组格式不正确');
+					}
+					var resultExclusiveOR = 0,
+						len = data.length;
+					for(var i = 0; i < len; i++) {
+						resultExclusiveOR ^= data[i];
+					}
+					var indexOf1 = findFirstBistIs1(resultExclusiveOR);
+					var number1 = 0,
+						number2 = 0;
+					for(var i = 0; i < len; i++) {
+						if(isBit1(data[i], indexOf1)) {
+							number1 ^= data[i];
+						} else {
+							number2 ^= data[i];
+						}
+					}
+
+					return [number1, number2];
+				}
+
+				console.log("只出现一次的数字:" + findNumbersAppearOnce([2, 4, 3, 6, 3, 2, 5, 5]));
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//和为s的两个数字VS和为s的连续正数序列 
+				//题目一:输入一个递增排序的数组和一个数字s，在数组中查找两个数，使的他们的和正好是s，如果有多对数字的和等于s，输入任意一对
+				//利用两个指针，双向查找-因为已经排序
+				function findNumberWithSum(data, sum) {
+					if(!data) {
+						throw new Error('错误:数组格式不正确');
+					}
+					var len = data.length,
+						first = 0,
+						last = len - 1;
+					while(last > first) {
+						var currSum = data[first] + data[last];
+						if(currSum === sum) {
+							return [data[first], data[last]];
+						} else if(currSum > sum) {
+							last--;
+						} else {
+							first++;
+						}
+
+					}
+
+					throw new Error('错误:没有找到相应数字');
+				}
+
+				console.log(findNumberWithSum([1, 2, 4, 7, 11, 15], 15));
+
+				//题目二:输入一个正数s，打印所有的合为s的连续正数序列(至少含有两个数)
+				//例如输入15,由于1+2+3+4+5=4+5+6=7+8=15
+				//所以打印出三个序列  1-5,4-6,7-8
+				//一样使用双指针，只不过不再是first和last，而是small和big
+				//考察知识迁移
+				function findContinuousSequence(sum) {
+					if(sum < 3) {
+						throw new Error('错误:没有合适序列');
+					}
+					var small = 1,
+						big = 2,
+						middle = parseInt((sum + 1) / 2),
+						currSum = small + big;
+					//因为是整数数列，如果small=middle,那么big肯定大于middle，不会满足
+					while(small < middle) {
+						while(currSum > sum && small < middle) {
+							currSum -= small;
+							small++;
+						}
+						if(currSum == sum) {
+							printfContinuousSequence(small, big);
+						}
+						big++;
+						currSum += big;
+
+					}
+				}
+
+				function printfContinuousSequence(small, big) {
+					var msg = '一个序列:';
+					for(var i = small; i <= big; i++) {
+						msg += i + ',';
+					}
+					console.log(msg);
+				}
+
+				findContinuousSequence(15);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//翻转单词顺序VS左旋转字符串 
+				//题目一:输入一个英文句子，翻转句子中单词的顺序，但是单词内的字符顺序不变
+				//思路，两次反转即可
+				function replacePos(strObj, pos, replacetext) {
+					var str = '';
+					str = strObj.substr(0, pos) + replacetext + strObj.substring(pos + 1, strObj.length);
+					return str;
+				}
+
+				function reverse(str, begin, end) {
+					if(!str || begin < 0 || end > str.length - 1) {
+						return;
+					}
+					while(begin < end) {
+						var tmp = str.charAt(begin);
+						str = replacePos(str, begin, str.charAt(end));
+						str = replacePos(str, end, tmp);
+						begin++;
+						end--;
+					}
+					return str;
+				}
+
+				function reverseSentence(str) {
+					if(!str) {
+						return;
+					}
+					var begin = 0,
+						len = str.length,
+						end = len - 1;
+					//先反转整个句子
+					str = reverse(str, begin, end);
+					//反转句子中的每一个单词
+					begin = 0, end = 0;
+					while(begin < len - 1) {
+						if(str.charAt(begin) == ' ') {
+							//空、空格
+							begin++;
+							end++;
+						} else if(str.charAt(end) == ' ' || end == len - 1) {
+							//end = len-1时就不必再减了
+							str = reverse(str, begin, end == len - 1 ? (end) : (end - 1));
+							//end+1,begin=end
+							begin = ++end;
+
+						} else {
+							end++;
+						}
+					}
+					return str;
+				}
+				console.log(reverseSentence('ac bgg cd'));
+
+				//题目二:拓展，字符串的左旋转是把字符串前面的若干个字符转义到字符串的尾部
+				//请定义一个函数实现字符串左旋转功能
+				//例如abcdefg和2，结果cdefgab
+				//一样通过字符串翻转来实现
+				function leftRoateString(str, n) {
+					if(str && n > 0 && n < str.length) {
+						var firstStart = 0,
+							firstEnd = n - 1,
+							secondStart = n,
+							secondEnd = str.length - 1;
+						//翻转前面n个
+						str = reverse(str, firstStart, firstEnd);
+						//翻转后面
+						str = reverse(str, secondStart, secondEnd);
+						//翻转所有
+						str = reverse(str, firstStart, secondEnd);
+					}
+					return str;
+				}
+				console.log("~:" + leftRoateString('abcdefg', 6));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				var maxValue = 6;
+				// n个骰子的点数
+				//循环法，用两个数组来保存概率，时间性能好
+				function printProbability2(number) {
+					if(number < 1) {
+						return;
+					}
+
+					var probabilities = [];
+					probabilities[0] = [];
+					probabilities[1] = [];
+					//初始化概率
+					for(var i = 0; i < maxValue * number + 1; i++) {
+						probabilities[0][i] = 0;
+						probabilities[1][i] = 0;
+					}
+					var flag = 0;
+					//一面为1的情况
+					for(var i = 1; i <= maxValue; i++) {
+						probabilities[flag][i] = 1;
+					}
+					for(var k = 2; k <= number; k++) {
+						for(var i = 0; i < k; i++) {
+							probabilities[1 - flag][i] = 0;
+						}
+						for(var i = k; i <= maxValue * k; i++) {
+							for(var j = 1; j <= i && j <= maxValue; j++) {
+								probabilities[1 - flag][i] += probabilities[flag][i - j];
+							}
+
+						}
+
+						flag = 1 - flag;
+					}
+
+					var total = Math.pow(maxValue, number);
+					var html = '概率:';
+					for(var i = number; i <= maxValue * number; i++) {
+						var radio = probabilities[flag][i] / total;
+						html += i + ':' + radio + ',';
+					}
+					console.log(html);
+				}
+				//递归法,性能不好
+				function probability(original, current, sum, probalities) {
+					if(current == 1) {
+						probalities[sum - original]++;
+					} else {
+						for(var i = 1; i <= maxValue; i++) {
+							probability(original, current - 1, i + sum, probalities)
+						}
+					}
+				}
+
+				function probabilityS(number, probalities) {
+					for(var i = 1; i <= maxValue; i++) {
+						probability(number, number, i, probalities);
+					}
+				}
+
+				function printProbability(number) {
+					if(number < 1) {
+						return;
+					}
+					var maxSum = number * maxValue;
+					var probabilities = [];
+					for(var i = number; i <= maxSum; i++) {
+						probabilities[i - number] = 0;
+					}
+					probabilityS(number, probabilities);
+					var total = Math.pow(maxValue, number);
+					var html = '概率:';
+					for(var i = number; i <= maxSum; i++) {
+						var radio = probabilities[i - number] / total;
+						html += i + ':' + radio + ',';
+					}
+					console.log(html);
+				}
+				printProbability2(2);
+
+				printProbability(2);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//扑克牌的顺序
+				function isContinuous(arr) {
+					if(!arr) {
+						return;
+					}
+					arr.sort();
+					var numberOfZero = 0,
+						numberOfGap = 0,
+						len = arr.length;
+					//统计数组中0的个数
+					for(var i = 0; i < len && arr[i] === 0; i++) {
+						numberOfZero++;
+					}
+					//统计数组中的间隔数目
+					var small = numberOfZero;
+					var big = small + 1;
+					while(big < len) {
+						//两个数相等，对子肯定不是顺子
+						if(arr[small] == arr[big]) {
+							return false;
+						}
+						numberOfGap += arr[big] - arr[small] - 1;
+						small = big;
+						big++;
+					}
+					return(numberOfGap > numberOfZero) ? false : true;
+				}
+
+				console.log(isContinuous([0, 2, 3, 6]));
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//圆圈中最后剩下的数字   0,...,n-1个数字， 每次删除第m个，最后留下？
+				//经典解法-环形链表模拟O(mn),这里用数组模拟
+				function lastRemaining(n, m) {
+					if(n < 1 || m < 1) {
+						return -1;
+					}
+					var numbers = [];
+					for(var i = 0; i < n; i++) {
+						numbers.push(i);
+					}
+					var current = 0;
+					console.log("numbers:" + JSON.stringify(numbers));
+					while(numbers.length > 1) {
+						for(var i = 1; i < m; i++) {
+							current++;
+							if(current >= numbers.length) {
+								current = 0;
+							}
+						}
+						var next = current;
+						//下一位判断时，长度要-1
+						if(next >= numbers.length - 1) {
+							next = 0;
+						}
+						var slice = numbers.splice(current, 1);
+
+						current = next;
+					}
+					return numbers[0];
+
+				}
+
+				console.log(lastRemaining(5, 3));
+				//新颖解法:分析被删除数字的规律O(N)
+				//分析起来挺复杂的，有映射和逆映射,代码倒是简单
+				function lastRemaining2(n, m) {
+					if(n < 1 || m < 1) {
+						return -1;
+					}
+
+					var last = 0;
+					for(var i = 2; i <= n; i++) {
+						last = (last + m) % i;
+					}
+					return last;
+				}
+				console.log(lastRemaining2(5, 3));
+			})();
+		</script>
+		<script>
+			(function() {
+				return ;
+				// 求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。	
+				// 思路:递归&&短路原则
+
+				//js中使用递归
+				function Sum_Solution(n) {
+					var sum = n;
+					sum && (sum += Sum_Solution(n - 1));
+					return sum;
+				}
+
+
+				console.log(Sum_Solution(1));
+
+			})();
+		</script>
+		<script>
+(function() {
+	return ;
+    //写一个函数，求两个数之和，要求在函数体内不得使用+,-,*,/
+    // 思路: 二进制模拟加法
+    
+    // 利用二进制的进位特点
+    // 异或位是没有进位的，&位是有进位的，然后左移一位
+    function addFactory(num1,num2){
+    	if(num2 == 0) {
+    		return num1;
+    	}
+    	var sum = num1 ^ num2;
+    	var carry = (num1&num2)<<1;
+    	
+    	return addFactory(sum,carry);
+    }
+    
+    console.log(addFactory(5,2));
+})();			
+		</script>
+		<script>
+(function() {
+	return ;
+    //将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0 
+    //考虑正负号
+    function StrToInt(str){
+    	var maxNumber = Math.pow(2, 31) - 1;
+    	var minNumber = -(Math.pow(2, 31));
+    	var sum = 0,
+    		index=0,
+    		symble = 1,
+    		len = str.length;
+    	while(index < len) {
+    		var tmp = str.charAt(index);
+    		if(index === 0) {
+    			if(tmp == '-' || tmp == '+') {
+    				symble = (tmp == '-')?-1:1;
+    				index ++;
+    				continue;
+    			} 
+    		}
+    		if(tmp < '0' || tmp > '9') {
+    			//非数字
+    			return 0;
+    			break;
+    		}
+    		sum = sum*10 + (tmp - '0');
+    		index ++;
+    	}
+    	sum = sum*symble;
+    	if(sum >maxNumber || sum< minNumber) {
+    		return 0;
+    	}
+    	
+    	return sum;
+    }
+    
+    console.log(StrToInt('+2147483647'));
+    console.log(StrToInt('1a33'));
+    console.log(StrToInt('-2147483648'));
+})();			
+		</script>
+
+	</body>
+
+</html>
