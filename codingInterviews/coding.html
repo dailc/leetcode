@@ -1851,7 +1851,7 @@
 		</script>
 		<script>
 			(function() {
-				return ;
+				return;
 				// 求1+2+3+...+n，要求不能使用乘除法、for、while、if、else、switch、case等关键字及条件判断语句（A?B:C）。	
 				// 思路:递归&&短路原则
 
@@ -1862,72 +1862,308 @@
 					return sum;
 				}
 
-
 				console.log(Sum_Solution(1));
+
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//写一个函数，求两个数之和，要求在函数体内不得使用+,-,*,/
+				// 思路: 二进制模拟加法
+
+				// 利用二进制的进位特点
+				// 异或位是没有进位的，&位是有进位的，然后左移一位
+				function addFactory(num1, num2) {
+					if(num2 == 0) {
+						return num1;
+					}
+					var sum = num1 ^ num2;
+					var carry = (num1 & num2) << 1;
+
+					return addFactory(sum, carry);
+				}
+
+				console.log(addFactory(5, 2));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0 
+				//考虑正负号
+				function StrToInt(str) {
+					var maxNumber = Math.pow(2, 31) - 1;
+					var minNumber = -(Math.pow(2, 31));
+					var sum = 0,
+						index = 0,
+						symble = 1,
+						len = str.length;
+					while(index < len) {
+						var tmp = str.charAt(index);
+						if(index === 0) {
+							if(tmp == '-' || tmp == '+') {
+								symble = (tmp == '-') ? -1 : 1;
+								index++;
+								continue;
+							}
+						}
+						if(tmp < '0' || tmp > '9') {
+							//非数字
+							return 0;
+							break;
+						}
+						sum = sum * 10 + (tmp - '0');
+						index++;
+					}
+					sum = sum * symble;
+					if(sum > maxNumber || sum < minNumber) {
+						return 0;
+					}
+
+					return sum;
+				}
+
+				console.log(StrToInt('+2147483647'));
+				console.log(StrToInt('1a33'));
+				console.log(StrToInt('-2147483648'));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//树中两个结点的最低公共祖先
+				//思路:辅助内存，先得到路径，然后再找公共路径
+				function getNodePath(root, node) {
+					if(!root) {
+						return null;
+					}
+					var path = [];
+					findNodePathRecursive(root, node, path);
+					return path;
+				}
+
+				function findNodePathRecursive(root, node, path) {
+					path.push(root);
+					var isLef = root.left === null && root.right === null;
+					if(root == node) {
+						//路径找到了
+						return true;
+					}
+
+					//如果不是叶子节点
+					if(root.left != null) {
+						findNodePathRecursive(root.left, node, path);
+					}
+					if(root.right != null) {
+						findNodePathRecursive(root.right, node, path);
+					}
+
+					//返回父节点之前，删除当前节点
+					path.pop();
+				}
+
+				function getLastCommonNode(path1, path2) {
+					var last = null;
+					if(path1 && path2) {
+						for(var i = 0, len1 = path1.length, len2 = path2.length; i < len1 && i < len2; i++) {
+							if(path1[i] == path2[i]) {
+								last = path1[i];
+							}
+						}
+					}
+					return last;
+				}
+
+				function getLastCommonParent(root, node1, node2) {
+					if(!root || !node1 || !node2) {
+						return null;
+					}
+					var path1 = getNodePath(root, node1);
+					var path2 = getNodePath(root, node2);
+					return getLastCommonNode(path1, path2);
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				return ;
+				//数组中重复的数字
+				//在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。
+				//请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。
+
+				//原始方法O(n^2)
+				function findRepeatNum(arr, duplication) {
+					if(!arr || !duplication) {
+						return false; //-2
+					}
+					var len = arr.length;
+					for(var i = 0; i < len; i++) {
+						for(var j = i + 1; j < len; j++) {
+							if(arr[i] == arr[j]) {
+								duplication[0] = arr[i];
+								return true;
+							}
+						}
+					}
+					return false; //-1
+				}
+
+				//方法二，排序后在判断，O(N)-因为排序后只需要找到一个重复的而已（最优）
+				function findRepeatNum2(arr, duplication) {
+					if(!arr || !duplication) {
+						return false; //-2
+					}
+					arr.sort(); //排序
+					var len = arr.length;
+					for(var i = 0; i < len - 1; i++) {
+						if(arr[i] == arr[i+1]) {
+							duplication[0] = arr[i];
+							return true;
+						}
+					}
+					return false; //-1
+				}
+				
+				//方法3，使用hash表，O(N)
+				function findRepeatNum3(arr, duplication) {
+					if(!arr || !duplication) {
+						return false; //-2
+					}
+					var hash = {};
+					var len = arr.length;
+					for(var i = 0; i < len; i++) {
+						hash[arr[i]] = 0;
+					}
+					
+					for(var i = 0; i < len; i++) {
+						if(hash[arr[i]] == 0) {
+							hash[arr[i]] ++;
+						} else {
+							//找到了
+							duplication[0] = arr[i];
+							return true;
+						}
+					}
+					return false; //-1
+				}
+				var duplication = [];
+				console.log(findRepeatNum3([2,1,3,1,4], duplication));
+				console.log("重复:" + duplication);
 
 			})();
 		</script>
 		<script>
 (function() {
 	return ;
-    //写一个函数，求两个数之和，要求在函数体内不得使用+,-,*,/
-    // 思路: 二进制模拟加法
-    
-    // 利用二进制的进位特点
-    // 异或位是没有进位的，&位是有进位的，然后左移一位
-    function addFactory(num1,num2){
-    	if(num2 == 0) {
-    		return num1;
-    	}
-    	var sum = num1 ^ num2;
-    	var carry = (num1&num2)<<1;
-    	
-    	return addFactory(sum,carry);
-    }
-    
-    console.log(addFactory(5,2));
+     //构建乘积数组
+     //给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1]
+     //其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
+     //最暴力的方法是，每一次O(N)的，每一次都将i意外的元素相乘
+     
+     //使用两个辅助数组 空间复杂度O(n)，时间复杂度O(n)
+     function multiply(arr) {
+     	if(!arr) {
+     		return null;
+     	}
+     	//溢出问题暂不考虑
+     	//一个记录i之前的乘积
+     	//一个记录i之后的乘积
+     	var multiply1 = [],
+     		multiply2 = [],
+   			len = arr.length;
+   		//初始化值
+   		multiply1[0] = 1;
+   		multiply2[len-1] = 1;
+   		
+   		for(var i = 1; i < len; i++) {
+   			//i左侧
+   			multiply1[i] = multiply1[i-1]*arr[i-1];
+   			multiply2[len-i-1] = multiply2[len-i]*arr[len-i];
+   		}
+   		
+   		for(var i = 0; i < len; i++) {
+   			//i左侧
+   			multiply1[i] = multiply1[i]*multiply2[i];
+   		}
+   		return multiply1;
+     }
 })();			
 		</script>
 		<script>
 (function() {
-	return ;
-    //将一个字符串转换成一个整数，要求不能使用字符串转换整数的库函数。 数值为0或者字符串不是一个合法的数值则返回0 
-    //考虑正负号
-    function StrToInt(str){
-    	var maxNumber = Math.pow(2, 31) - 1;
-    	var minNumber = -(Math.pow(2, 31));
-    	var sum = 0,
-    		index=0,
-    		symble = 1,
-    		len = str.length;
-    	while(index < len) {
-    		var tmp = str.charAt(index);
-    		if(index === 0) {
-    			if(tmp == '-' || tmp == '+') {
-    				symble = (tmp == '-')?-1:1;
-    				index ++;
-    				continue;
-    			} 
-    		}
-    		if(tmp < '0' || tmp > '9') {
-    			//非数字
-    			return 0;
-    			break;
-    		}
-    		sum = sum*10 + (tmp - '0');
-    		index ++;
-    	}
-    	sum = sum*symble;
-    	if(sum >maxNumber || sum< minNumber) {
-    		return 0;
-    	}
-    	
-    	return sum;
-    }
-    
-    console.log(StrToInt('+2147483647'));
-    console.log(StrToInt('1a33'));
-    console.log(StrToInt('-2147483648'));
+     //表示数值的字符串
+     //请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。
+     //例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。
+     //但是"12e","1a3.14","1.2.3","+-5","12e3+1"和"12e+4.3"都不是
+     
+     //默认-.当成是-0.的缩写
+     //这段代码没有复杂的算法，有的是各种条件考虑清楚
+     function isNumeric(str) {
+     	if(!str) {
+     		return false;
+     	}
+     	var index = 0,
+     		len = str.length,
+     		isNum = false,
+     		isDecimal = false,
+     		isExponential = false,
+     		isExponentialSymbol = false;
+     	if(str.charAt(index) == '+' || str.charAt(index) == '-') {
+     		index ++;
+     	}
+     	while(index<len) {
+     		var tmp = str.charAt(index);
+     		if(!isExponential&&!isDecimal&&tmp=='.') {
+     			//e后面不能跟小数
+     			isDecimal = true;
+     			index++;
+     		} else if(tmp>='0'&&tmp<='9') {
+     			isNum = true;
+     			index ++;
+     		} else if(!isExponential&&(tmp == 'e'|| tmp == 'E')) {
+     			
+     			//如果不是末尾，否则  如12e 不是正确的
+     			if(index<len-1) {
+     				//指数部分
+     				isExponential = true;
+     				index ++;
+     			} else {
+     				return false;
+     			}
+     			
+     		} else if(isExponential&&!isExponentialSymbol) {
+     			//如果已经是指数了，可以跟一个符号,前提是不能e+  而是的e+1
+     			if((tmp=='+'||tmp=='-')
+     			&&(index+1<len&&(str.charAt(index+1)>='0'&&str.charAt(index+1)<='9'))
+     			&&(str.charAt(index-1)=='e'||str.charAt(index-1)=='E')) {
+     				isExponentialSymbol = true;
+     				index++;
+     			} else {
+     				return false;
+     			}
+     		} else {
+     			//直接错误
+     			return false;
+     		}
+     	}
+     	
+     	return isNum;
+     }
+     
+     console.log('+100'+isNumeric('+100'));
+     console.log('5e2'+isNumeric('5e2'));
+     console.log('-123'+isNumeric('-123'));
+     console.log('3.1416'+isNumeric('3.1416'));
+     console.log('-1E-16'+isNumeric('-1E-16'));
+     
+      console.log('12e'+isNumeric('12e'));
+      console.log('1a3.14'+isNumeric('1a3.14'));
+        console.log('1.2.3'+isNumeric('1.2.3'));
+         console.log('+-5'+isNumeric('+-5'));
+         console.log('12e+4.3'+isNumeric('12e+4.3'));
+         
+     console.log('12e22+3'+isNumeric('12e22+3'));
 })();			
 		</script>
 
