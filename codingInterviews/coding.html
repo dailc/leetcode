@@ -1987,7 +1987,7 @@
 		</script>
 		<script>
 			(function() {
-				return ;
+				return;
 				//数组中重复的数字
 				//在一个长度为n的数组里的所有数字都在0到n-1的范围内。 数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。
 				//请找出数组中任意一个重复的数字。 例如，如果输入长度为7的数组{2,3,1,0,2,5,3}，那么对应的输出是重复的数字2或者3。
@@ -2017,14 +2017,14 @@
 					arr.sort(); //排序
 					var len = arr.length;
 					for(var i = 0; i < len - 1; i++) {
-						if(arr[i] == arr[i+1]) {
+						if(arr[i] == arr[i + 1]) {
 							duplication[0] = arr[i];
 							return true;
 						}
 					}
 					return false; //-1
 				}
-				
+
 				//方法3，使用hash表，O(N)
 				function findRepeatNum3(arr, duplication) {
 					if(!arr || !duplication) {
@@ -2035,10 +2035,10 @@
 					for(var i = 0; i < len; i++) {
 						hash[arr[i]] = 0;
 					}
-					
+
 					for(var i = 0; i < len; i++) {
 						if(hash[arr[i]] == 0) {
-							hash[arr[i]] ++;
+							hash[arr[i]]++;
 						} else {
 							//找到了
 							duplication[0] = arr[i];
@@ -2048,122 +2048,493 @@
 					return false; //-1
 				}
 				var duplication = [];
-				console.log(findRepeatNum3([2,1,3,1,4], duplication));
+				console.log(findRepeatNum3([2, 1, 3, 1, 4], duplication));
 				console.log("重复:" + duplication);
 
 			})();
 		</script>
 		<script>
+			(function() {
+				return;
+				//构建乘积数组
+				//给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1]
+				//其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
+				//最暴力的方法是，每一次O(N)的，每一次都将i意外的元素相乘
+
+				//使用两个辅助数组 空间复杂度O(n)，时间复杂度O(n)
+				function multiply(arr) {
+					if(!arr) {
+						return null;
+					}
+					//溢出问题暂不考虑
+					//一个记录i之前的乘积
+					//一个记录i之后的乘积
+					var multiply1 = [],
+						multiply2 = [],
+						len = arr.length;
+					//初始化值
+					multiply1[0] = 1;
+					multiply2[len - 1] = 1;
+
+					for(var i = 1; i < len; i++) {
+						//i左侧
+						multiply1[i] = multiply1[i - 1] * arr[i - 1];
+						multiply2[len - i - 1] = multiply2[len - i] * arr[len - i];
+					}
+
+					for(var i = 0; i < len; i++) {
+						//i左侧
+						multiply1[i] = multiply1[i] * multiply2[i];
+					}
+					return multiply1;
+				}
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//表示数值的字符串
+				//请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。
+				//例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。
+				//但是"12e","1a3.14","1.2.3","+-5","12e3+1"和"12e+4.3"都不是
+
+				//默认-.当成是-0.的缩写
+				//这段代码没有复杂的算法，有的是各种条件考虑清楚
+				function isNumeric(str) {
+					if(!str) {
+						return false;
+					}
+					var index = 0,
+						len = str.length,
+						isNum = false,
+						isDecimal = false,
+						isExponential = false,
+						isExponentialSymbol = false;
+					if(str.charAt(index) == '+' || str.charAt(index) == '-') {
+						index++;
+					}
+					while(index < len) {
+						var tmp = str.charAt(index);
+						if(!isExponential && !isDecimal && tmp == '.') {
+							//e后面不能跟小数
+							isDecimal = true;
+							index++;
+						} else if(tmp >= '0' && tmp <= '9') {
+							isNum = true;
+							index++;
+						} else if(!isExponential && (tmp == 'e' || tmp == 'E')) {
+
+							//如果不是末尾，否则  如12e 不是正确的
+							if(index < len - 1) {
+								//指数部分
+								isExponential = true;
+								index++;
+							} else {
+								return false;
+							}
+
+						} else if(isExponential && !isExponentialSymbol) {
+							//如果已经是指数了，可以跟一个符号,前提是不能e+  而是的e+1
+							if((tmp == '+' || tmp == '-') &&
+								(index + 1 < len && (str.charAt(index + 1) >= '0' && str.charAt(index + 1) <= '9')) &&
+								(str.charAt(index - 1) == 'e' || str.charAt(index - 1) == 'E')) {
+								isExponentialSymbol = true;
+								index++;
+							} else {
+								return false;
+							}
+						} else {
+							//直接错误
+							return false;
+						}
+					}
+
+					return isNum;
+				}
+
+				console.log('+100' + isNumeric('+100'));
+				console.log('5e2' + isNumeric('5e2'));
+				console.log('-123' + isNumeric('-123'));
+				console.log('3.1416' + isNumeric('3.1416'));
+				console.log('-1E-16' + isNumeric('-1E-16'));
+
+				console.log('12e' + isNumeric('12e'));
+				console.log('1a3.14' + isNumeric('1a3.14'));
+				console.log('1.2.3' + isNumeric('1.2.3'));
+				console.log('+-5' + isNumeric('+-5'));
+				console.log('12e+4.3' + isNumeric('12e+4.3'));
+
+				console.log('12e22+3' + isNumeric('12e22+3'));
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//字符流中第一个不重复的字符
+				//请实现一个函数用来找出字符流中第一个只出现一次的字符。
+				//例如，当从字符流中只读出前两个字符"go"时，第一个只出现一次的字符是"g"。
+				//当从该字符流中读出前六个字符“google"时，第一个只出现一次的字符是"l"。
+				//如果当前字符流没有存在出现一次的字符，返回#字符。
+
+				var str;
+				var hash;
+				//Init module if you need
+				function Init() {
+					str = ''
+					hash = {}
+					// write code here
+				}
+				//Insert one char from stringstream
+				function Insert(ch) {
+					// write code here
+					str += ch;
+					if(!hash[ch]) {
+						hash[ch] = 1;
+					} else {
+						hash[ch]++;
+					}
+				}
+				//return the first appearence once char in current stringstream
+				function FirstAppearingOnce() {
+					for(var i = 0, len = str.length; i < len; i++) {
+						if(hash[str[i]] == 1) {
+							return str[i];
+						}
+					}
+					return '#';
+				}
+
+				var result = '';
+				Insert('h');
+				result += FirstAppearingOnce();
+				Insert('e');
+				result += FirstAppearingOnce();
+				Insert('l');
+				result += FirstAppearingOnce();
+				Insert('l');
+				result += FirstAppearingOnce();
+				Insert('o');
+				result += FirstAppearingOnce();
+
+				console.log("result:" + result);
+			})();
+		</script>
+		<script>
+			(function() {
+				return;
+				//链表中环的入口节点 -假设是单向链表
+				//一个链表中包含环，请找出该链表的环的入口结点。
+
+				/*function ListNode(x){
+				    this.val = x;
+				    this.next = null;
+				}*/
+
+				//假设每一个节点的val都不一样
+				function EntryNodeOfLoop(pHead) {
+					// write code here
+					if(pHead == null) {
+						return null;
+					}
+					var findEntrance = null;
+					var hash = {};
+
+					//找到了环形链表马上就会退出循环了
+					while(pHead != null && findEntrance == null) {
+						if(!hash[pHead.val]) {
+							hash[pHead.val] = true;
+						} else {
+							findEntrance = pHead;
+						}
+
+						pHead = pHead.next;
+					}
+
+					return findEntrance;
+				}
+
+				//思路2:两个指针
+				//一快一慢两节点(一个走两步，一个走一步)，如果有环，肯定会相遇，并且是环中节点
+				//我们可以从这个结点出发，一边继续向前移动一位一遍计数，当再次回到这个结点时，就可以得到环中的节点数了。
+				//如果链表中的环有n个结点，指针P1先在链表上向前移动n步，然后两个指针以相同速度向前移动。
+				//当第二个指针指向环的入口时，第一个指针已经围绕着环走了一圈又回到了入口结点
+				//优化:实际情况是，并不需要计算n，只需相遇时，另一个节点再从头部出发即可
+
+				function EntryNodeOfLoop2(pHead) {
+					if(pHead == null || pHead.next == null) {
+						return null;
+					}
+					var slow = pHead.next;
+					var fast = pHead.next.next;
+					while(slow != fast) {
+						if(fast && fast.next) {
+							slow = slow.next;
+							fast = fast.next.next;
+						} else {
+							throw '链表不是环形链表';
+						}
+
+					}
+					fast = pHead;
+					while(fast != null) {
+						if(fast == slow) {
+							return fast;
+						}
+						slow = slow.next;
+						fast = fast.next;
+					}
+					return slow;
+				}
+				var circle5 = {
+					val: 5,
+					next: null
+				};
+				var circle4 = {
+					val: 4,
+					next: circle5
+				};
+				var circle3 = {
+					val: 3,
+					next: circle4
+				};
+				//circle5.next = circle3;
+				var circle2 = {
+					val: 2,
+					next: circle3
+				};
+				var circle1 = {
+					val: 1,
+					next: circle2
+				};
+
+				var entrance = EntryNodeOfLoop2(circle1);
+				console.log("入口:" + entrance.val);
+			})();
+		</script>
+		<script>
+			(function() {
+				return ;
+				//删除链表中重复的节点 
+				//在一个排序的链表中，存在重复的结点，请删除该链表中重复的结点，重复的结点不保留，返回链表头指针。
+				//例如，链表1->2->3->3->4->4->5 处理后为 1->2->5
+
+				//思路，由于是排序的，只需要与上一个相比即可
+				//不考虑环形链表
+				function deleteDuplication(pHead) {
+					if(pHead == null) {
+						return null;
+					}
+					var tmp = pHead;
+					var preNode = null;
+					//重复节点hash
+					var hash = {};
+					while(tmp&&tmp.next) {
+						if(tmp.next.val == tmp.val) {
+							//记录重复节点
+							hash[tmp.val] = true;
+							//删除下一个节点
+							tmp.next = tmp.next.next;
+						}
+
+						//当前节点是hash表中的重复节点
+						if(hash[tmp.val]) {
+							//删除当前节点
+							//如果是头节点重复
+							if(preNode==null) {
+								pHead = tmp.next;
+								tmp = pHead;
+								//更好了首节点后必须跳到下一个循环
+								continue;
+							} else {
+								//有preNode
+								preNode.next = tmp.next;
+								tmp = preNode;
+							}
+						}
+						preNode = tmp;
+						tmp = tmp.next;
+					}
+					
+					//得判断当前头节点不是重复的
+					return (pHead&&hash[pHead.val])?null:pHead;
+				}
+				
+				//方案2:递归，不用hash
+				function deleteDuplication2(pHead) {
+					if(pHead == null) {
+						return null;
+					}
+					if(pHead != null && pHead.next == null) {
+						return pHead;
+					}
+					var current = null;
+					if(pHead.next.val == pHead.val) {
+						current = pHead.next.next;
+						while(current!=null&&current.val==pHead.val) {
+							 current=current.next;
+						}
+						return deleteDuplication2(current);          
+					} else {
+						current = pHead.next;
+						pHead.next = deleteDuplication2(current);
+						return pHead;
+					}
+				}
+
+				var list = {
+					val: 1,
+					next: {
+						val: 1,
+						next: {
+							val: 3,
+							next: {
+								val: 3,
+								next: {
+									val: 4,
+									next: {
+										val: 4,
+										next: {
+											val: 5,
+											next: {
+												val:5,
+												next:null
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+
+				console.log(JSON.stringify(deleteDuplication2(list)));
+			})();
+		</script>
+		<script>
 (function() {
 	return ;
-     //构建乘积数组
-     //给定一个数组A[0,1,...,n-1],请构建一个数组B[0,1,...,n-1]
-     //其中B中的元素B[i]=A[0]*A[1]*...*A[i-1]*A[i+1]*...*A[n-1]。不能使用除法。
-     //最暴力的方法是，每一次O(N)的，每一次都将i意外的元素相乘
-     
-     //使用两个辅助数组 空间复杂度O(n)，时间复杂度O(n)
-     function multiply(arr) {
-     	if(!arr) {
-     		return null;
-     	}
-     	//溢出问题暂不考虑
-     	//一个记录i之前的乘积
-     	//一个记录i之后的乘积
-     	var multiply1 = [],
-     		multiply2 = [],
-   			len = arr.length;
-   		//初始化值
-   		multiply1[0] = 1;
-   		multiply2[len-1] = 1;
-   		
-   		for(var i = 1; i < len; i++) {
-   			//i左侧
-   			multiply1[i] = multiply1[i-1]*arr[i-1];
-   			multiply2[len-i-1] = multiply2[len-i]*arr[len-i];
-   		}
-   		
-   		for(var i = 0; i < len; i++) {
-   			//i左侧
-   			multiply1[i] = multiply1[i]*multiply2[i];
-   		}
-   		return multiply1;
-     }
+    //二叉树 的下一个结点
+    //给定一颗二叉树和其中一个节点，如何找出中序遍历顺序的下一个结点
+    //树中的节点除了有两个分别指向左右子节点的指针以外，还有一个指向父节点的指针
+      function getNext(pNode) {
+      	if(pNode==null) {
+      		return null;
+      	}
+      	var pNext = null;
+      	//第一种情况，如果节点有右子树，那么它的下一个节点就是右子树的最小节点
+      	if(pNode.right!=null) {
+      		var pRight = pNode.right;
+      		while(pRight.right!=null) {
+      			pRight = pRight.left;
+      		}
+      		pNext = pRight;
+      	} else if(pNode.parent!=null) {
+      		//存在父节点
+      		//1.没有右子树，而且该节点是它父节点的左节点，则下一个节点就是父节点
+      		//2.没有右子树，而且是父节点的左节点，
+      		//沿着父指针往上走，知道找到一个节点是它父节点的子节点，则下一个就是父节点
+      		//和1一样
+      		var pCurrent = pNode;
+      		var pParent = pNode.parent;
+      		while(pParent!=null&&pCurrent == pParent.right) {
+      			pCurrent = pParent;
+      			pParent = pParent.parent;
+      		}
+      		pNext = pParent;
+      	}
+      	
+      	return pNext;
+      }
+
 })();			
 		</script>
 		<script>
 (function() {
-     //表示数值的字符串
-     //请实现一个函数用来判断字符串是否表示数值（包括整数和小数）。
-     //例如，字符串"+100","5e2","-123","3.1416"和"-1E-16"都表示数值。
-     //但是"12e","1a3.14","1.2.3","+-5","12e3+1"和"12e+4.3"都不是
-     
-     //默认-.当成是-0.的缩写
-     //这段代码没有复杂的算法，有的是各种条件考虑清楚
-     function isNumeric(str) {
-     	if(!str) {
-     		return false;
-     	}
-     	var index = 0,
-     		len = str.length,
-     		isNum = false,
-     		isDecimal = false,
-     		isExponential = false,
-     		isExponentialSymbol = false;
-     	if(str.charAt(index) == '+' || str.charAt(index) == '-') {
-     		index ++;
-     	}
-     	while(index<len) {
-     		var tmp = str.charAt(index);
-     		if(!isExponential&&!isDecimal&&tmp=='.') {
-     			//e后面不能跟小数
-     			isDecimal = true;
-     			index++;
-     		} else if(tmp>='0'&&tmp<='9') {
-     			isNum = true;
-     			index ++;
-     		} else if(!isExponential&&(tmp == 'e'|| tmp == 'E')) {
-     			
-     			//如果不是末尾，否则  如12e 不是正确的
-     			if(index<len-1) {
-     				//指数部分
-     				isExponential = true;
-     				index ++;
-     			} else {
-     				return false;
-     			}
-     			
-     		} else if(isExponential&&!isExponentialSymbol) {
-     			//如果已经是指数了，可以跟一个符号,前提是不能e+  而是的e+1
-     			if((tmp=='+'||tmp=='-')
-     			&&(index+1<len&&(str.charAt(index+1)>='0'&&str.charAt(index+1)<='9'))
-     			&&(str.charAt(index-1)=='e'||str.charAt(index-1)=='E')) {
-     				isExponentialSymbol = true;
-     				index++;
-     			} else {
-     				return false;
-     			}
-     		} else {
-     			//直接错误
-     			return false;
-     		}
-     	}
-     	
-     	return isNum;
-     }
-     
-     console.log('+100'+isNumeric('+100'));
-     console.log('5e2'+isNumeric('5e2'));
-     console.log('-123'+isNumeric('-123'));
-     console.log('3.1416'+isNumeric('3.1416'));
-     console.log('-1E-16'+isNumeric('-1E-16'));
-     
-      console.log('12e'+isNumeric('12e'));
-      console.log('1a3.14'+isNumeric('1a3.14'));
-        console.log('1.2.3'+isNumeric('1.2.3'));
-         console.log('+-5'+isNumeric('+-5'));
-         console.log('12e+4.3'+isNumeric('12e+4.3'));
-         
-     console.log('12e22+3'+isNumeric('12e22+3'));
+	return ;
+    //对称的二叉树 
+    //请实现一个函数，用来判断一颗二叉树是不是对称的
+    //如果一颗二叉树和它的镜像一样，则对称
+    //考虑前序遍历以及前序遍历的镜像(考虑null节点)
+    
+    function isSymmetrical(root) {
+    	return isSymmetricalRecursive(root,root)
+    }
+    
+    function isSymmetricalRecursive(root1,root2) {
+    	if(root1==null&&root2==null) {
+    		return true;
+    	}
+    	if(root1==null||root2==null) {
+    		return false;
+    	}
+    	if(root1.value!=root2.value) {
+    		return false;
+    	}
+    	return isSymmetricalRecursive(root1.left,root2.right)
+    		&& isSymmetricalRecursive(root1.right,root2.left);
+    }
+})();			
+		</script>
+		<script>
+(function() {
+	return ;
+    //把二叉树打印成多行 
+    //从上到下按层打印二叉树，同一层的节点按照从左到右的顺序打印，每一层打印到第一行
+    function print(root) {
+    	if(root==null) {
+    		return ;
+    	}
+    	var nodes = [];
+    	nodes.push(root);
+    	var nextLevel = 0;
+    	var toBePrinted = 1;
+    	var html = '';
+    	while(nodes.length) {
+    		//先进先出，用 shift
+    		var node = nodes.shift();
+    		toBePrinted --;
+    		html += node.val + ',';
+    		
+    		if(node.left) {
+    			nodes.push(node.left);
+    			nextLevel ++;
+    		}
+    		if(node.right) {
+    			nodes.push(node.right);
+    			nextLevel ++;
+    		}
+    		
+    		if(toBePrinted == 0) {
+    			console.log(html);
+    			html = '';
+    			toBePrinted = nextLevel;
+    			nextLevel = 0;
+    		}
+    	}
+    }
+    var tree = {
+    	val:1,
+    	left:{
+    		val:2,
+    		left:{
+    			val:4
+    		},
+    		right:{
+	    		val:5
+	    	}
+    	},
+    	right:{
+    		val:3,
+    		left:{
+    			val:6
+    		},
+    		right:{
+	    		val:7
+	    	}
+    	}
+    };
+    
+    print(tree);
 })();			
 		</script>
 
