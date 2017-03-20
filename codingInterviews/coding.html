@@ -2537,6 +2537,246 @@
     print(tree);
 })();			
 		</script>
+		<script>
+(function() {
+	return ;
+	"use strict";
+    // 按之字形顺序打印二叉树
+    //请实现一个函数按照之字形打印二叉树，即第一行按照从左到右的顺序打印，
+    //第二层按照从右至左的顺序打印，第三行按照从左到右的顺序打印，其他行以此类推。
+     function print(root) {
+    	if(root==null) {
+    		return ;
+    	}
+    	//两个层级循环来装数据
+    	var nodes = [];
+    	nodes[0] = [];
+    	nodes[1] = [];
+    	//二叉树层级
+    	var current = 0;
+    	//下一层级
+    	var next = 1;
+    	var html = '';
+    	nodes[current].push(root);
+		while(nodes[0].length||nodes[1].length) {
+			//出栈即可
+			var node = nodes[current].pop();
+			html += node.val + ',';
+			if(current==0) {
+				//从左到又进栈
+				if(node.left) {
+	    			nodes[next].push(node.left);
+	    		}
+	    		if(node.right) {
+	    			nodes[next].push(node.right);
+	    		}
+			} else　{
+				//从右到左进栈
+				if(node.right) {
+	    			nodes[next].push(node.right);
+	    		}
+	    		if(node.left) {
+	    			nodes[next].push(node.left);
+	    		}
+			}
+			//当一个栈为空时，换另外一个栈来使用  
+			if(!nodes[current].length) {
+				console.log(html);
+    			html = '';
+    			//奇数和偶数互换
+    			current = 1-current;  
+            	next= 1-next;  
+			}
+		}
+    	
+    }
+    var tree = {
+    	val:1,
+    	left:{
+    		val:2,
+    		left:{
+    			val:4
+    		},
+    		right:{
+	    		val:5
+	    	}
+    	},
+    	right:{
+    		val:3,
+    		left:{
+    			val:6
+    		},
+    		right:{
+	    		val:7
+	    	}
+    	}
+    };
+    
+    print(tree);
+})();			
+		</script>
+		<script>
+(function() {
+	return ;
+    //序列化二叉树
+    //请实现两个函数，分别用来序列化和反序列化二叉树
+    //这里序列化定义(只需要一个自定义规则即可)，所以这里定义前序遍历二叉树，null用#表示,每一个数值以,隔开
+    
+    function Serialize(root) {
+    	var str = '';
+    	if(root==null) {
+    		str += '#,';
+    		return str;
+    	}
+    	str += root.val + ',';
+    	str += Serialize(root.left);
+    	str += Serialize(root.right);
+    	return str;
+    }
+    
+    //反序列化
+    //采用先序遍历的思想每次读取一个结点，如果读取到NULL结点的标识符号“#”，则忽略它。
+    //如果读取到结点数值，则插入到当前结点，然后遍历左孩子和右孩子。
+    function Deserialize(str) {
+    	if(!str) {
+    		return null;
+    	}
+    	// 节点在序列中的索引
+    	var index = -1;
+    	var DeserializeRecursive = function(str) {
+    		index ++;
+    		var len = str.length;
+    		
+    		
+    		if(index > len) {
+    			return null;
+    		}
+    		var strArray = str.split(",");
+    		var node = null;
+    		if(strArray[index]!='#') {
+    			//有值
+    			node = {
+    				val:strArray[index]
+    			};
+    			node.left = DeserializeRecursive(str);
+    			node.right = DeserializeRecursive(str);
+    		}
+    		return node;
+    	}
+    	return DeserializeRecursive(str);
+    }
+    var tree = {
+    	val:1,
+    	left:{
+    		val:2,
+    		left:{
+    			val:4
+    		},
+    		right:{
+	    		val:5
+	    	}
+    	},
+    	right:{
+    		val:3,
+    		left:{
+    			val:6
+    		},
+    		right:{
+	    		val:7
+	    	}
+    	}
+    };
+    
+    var serializeStr = Serialize(tree);
+    var nodes = Deserialize(serializeStr);
+    console.log(serializeStr);
+    console.log(JSON.stringify(nodes));
+    
+})();			
+		</script>
+		<script>
+(function() {
+	return ;
+    //二叉搜索树的第k个结点
+    //给定一颗二叉搜索树，请找出其中的第k大的结点。
+    //例如， 5 / \ 3 7 /\ /\ 2 4 6 8 中，按结点数值大小顺序第三个结点的值为4。
+    
+    //数组法
+    var count = 0;
+    function KthNode2(root,k) {
+    	if(count>k || root==null) {
+    		return null;
+    	}
+    	var stack = [];
+    	var tmp = root;
+    	var kNode = null;
+    	while(tmp!=null||stack.length) {
+    		//栈是先进后出
+    		while(tmp!=null) {
+    			stack.push(tmp);
+    			tmp = tmp.left;
+    		}
+    		var node = stack.pop();
+    		count ++;
+    		if(count==k) {
+    			kNode = node;
+    			break;
+    		}
+    		tmp = node.right;
+    	}
+    	return kNode;
+    }
+    
+    
+    //关键，中序遍历
+    var count = 0;
+    function KthNode(root,k) {
+    	var target = null;
+    	//先从左树中找
+    	if(root.left!=null) {
+    		target = KthNode(root.left,k);
+    	}
+    	//如果左树没有
+    	if(target == null) {
+    		count++;
+    		// 说明当前的根结点是所要找的结点
+    		if(count==k) {
+    			target = root;
+    		} 
+    		
+    	}
+    	// 根结点以及根结点的右子结点都没有找到，则找其右子树
+    	if(target == null&&root.right!=null) {
+    		target = KthNode(root.right,k);
+    	}
+    	return target;
+    }
+    var tree = {
+    	val:5,
+    	left:{
+    		val:3,
+    		left:{
+    			val:2
+    		},
+    		right:{
+	    		val:4
+	    	}
+    	},
+    	right:{
+    		val:7,
+    		left:{
+    			val:6
+    		},
+    		right:{
+	    		val:8
+	    	}
+    	}
+    };
+    
+    console.log(KthNode(tree,3));
+    
+})();			
+		</script>
 
 	</body>
 
