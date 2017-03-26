@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Merge-k-Sorted-Lists" name="Keywords">
+		<meta content="leetcodeJS大法之Merge-k-Sorted-Lists" name="description">
+		<title>leetcodeJS大法之Merge-k-Sorted-Lists</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="Merge-k-Sorted-Lists.js" ></script>
+		<script>
+		var list1 = {
+			val:1,
+			next:{
+				val:4,
+				next:{
+					val:7
+				}
+			}
+		};
+		var list2 = {
+			val:2,
+			next:{
+				val:5,
+				next:{
+					val:8
+				}
+			}
+		};
+		var list3 = {
+			val:3,
+			next:{
+				val:6,
+				next:{
+					val:9
+				}
+			}
+		};
+		var result = LeetCode.mergeKLists([list1,list2,list3]);
+		console.log(JSON.stringify(result));
+		</script>
+	</body>
+</html>
