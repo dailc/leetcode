@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Insert-Interval" name="Keywords">
+		<meta content="leetcodeJS大法之Insert-Interval" name="description">
+		<title>leetcodeJS大法之Insert-Interval</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="Insert-Interval.js" ></script>
+		<script>
+		//2147483647 83647
+		var result = LeetCode.insert3([{
+			start:1,
+			end:3
+		},{
+			start:6,
+			end:9
+		}],{
+			start:2,
+			end:5
+		});
+		
+		console.log(JSON.stringify(result));
+		</script>
+	</body>
+</html>
