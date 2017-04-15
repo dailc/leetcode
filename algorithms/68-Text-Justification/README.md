@@ -26,3 +26,5 @@ css中的一个文本算法，例如，给定:
 
 * 1.纯粹的字符操作
 	* `count`计数记录当前长度
+	
+	http://www.cnblogs.com/springfor/p/3896168.html
