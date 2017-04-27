@@ -30,6 +30,9 @@
 		if(start>end) {
 			res.push(null);
 			return res;
+		} else if(start==end) {
+			res.push(new TreeNode(start));
+			return res;
 		}
 		for( var k = start; k <= end; k ++ ) {
 			var leftChild = helper(start,k-1);
