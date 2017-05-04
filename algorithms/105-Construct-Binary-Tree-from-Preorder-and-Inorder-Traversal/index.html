@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" name="Keywords">
+		<meta content="leetcodeJS大法之Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal" name="description">
+		<title>leetcodeJS大法之Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="Construct-Binary-Tree-from-Preorder-and-Inorder-Traversal.js"></script>
+		<script>
+			var preorder = [1,2,4,5,3,6,7];
+			var inorder = [4,2,5,1,6,3,7];
+//			var preorder = [1,2];
+//			var inorder = [1,2];
+			var result = LeetCode.buildTree2(preorder,inorder);
+
+			console.log(JSON.stringify(result));
+		</script>
+	</body>
+
+</html>
