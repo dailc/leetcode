@@ -18,3 +18,7 @@ race a car
 ### 思路
 
 * 1.双指针遍历，分别从头和尾向中间遍历(遇到特殊字符则跳过)
+
+拓展: Manacher算法(线性时间寻找最大子回文数)
+
+http://blog.csdn.net/dyx404514/article/details/42061017
