@@ -18,6 +18,11 @@
 	* 然后得到所有的结果后再取一个最小值
 	* 结果是超时
 * 2.动态规划
+	* D[i,n] = 区间[i,n]之间最小的cut数，n为字符串长度
+	* D[i,n] = min(D[i, j] + D[j+1,n])  i<=j <n
+	* 就可以转换为
+	* D[i] = 区间[i,n]之间最小的cut数，n为字符串长度， 则,
+	* D[i] = min(1+D[j+1] )    i<=j <n
 	
 	http://www.cnblogs.com/ganganloveu/p/3982561.html
 	http://blog.csdn.net/doc_sgl/article/details/13418125
