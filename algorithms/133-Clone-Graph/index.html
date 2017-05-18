@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Clone-Graph" name="keywords">
+		<meta content="leetcodeJS大法之Clone-Graph" name="description">
+		<title>leetcodeJS大法之Clone-Graph</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="Clone-Graph.js"></script>
+		<script>
+			// abbab 
+			var UndirectedGraphNode = LeetCode.UndirectedGraphNode;
+			
+			var first = new UndirectedGraphNode(0);
+			var second = new UndirectedGraphNode(1);
+			var third = new UndirectedGraphNode(2);
+			
+			first.neighbors = [second,third];
+			second.neighbors = [third];
+			third.neighbors = [third];
+			
+			var result = LeetCode.cloneGraph(first);
+			
+			
+			console.log(JSON.stringify(result.label));
+		</script>
+	</body>
+
+</html>
