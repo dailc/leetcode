@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Copy-List-with-Random-Pointer" name="keywords">
+		<meta content="leetcodeJS大法之Copy-List-with-Random-PointerI" name="description">
+		<title>leetcodeJS大法之Copy-List-with-Random-Pointer</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="Copy-List-with-Random-Pointer.js"></script>
+		<script>
+			var head = {
+				label:1,
+				next:{
+					label:2
+				},
+				random: {
+					label:2
+				}
+			};
+			
+			var result = LeetCode.copyRandomList(head);
+			
+			
+			console.log(JSON.stringify(result));
+		</script>
+	</body>
+
+</html>
