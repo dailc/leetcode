@@ -1,8 +1,8 @@
 /* 作者: dailc
  * 时间: 2017-05-24
- * 描述: Binary-Tree-Preorder-Traversal
+ * 描述: Binary-Tree-Postorder-Traversal
  * 
- * 来自: https://leetcode.com/problems/binary-tree-preorder-traversal
+ * 来自: https://leetcode.com/problems/binary-tree-postorder-traversal
  */
 (function(exports) {
 
@@ -11,29 +11,33 @@
 	 * @param {TreeNode} root
 	 * @return {number[]}
 	 */
-	exports.preorderTraversal = function(root) {
+	exports.postorderTraversal = function(root) {
 		if(!root) {
 			return [];
 		}
 		var result = [];
 		var stack = [];
-		var tmp = root;
-		while(tmp || stack.length) {
-			while(tmp) {
-				result.push(tmp.val);
-				stack.push(tmp);
-				tmp = tmp.left;
+		stack.push(root);
+		
+		while(stack.length) {
+			var tmp = stack.pop();
+			result.push(tmp.val);
+			// 入栈顺序和出栈顺序是反的
+			// 入栈时是左-右，出栈是是右-左
+			if(tmp.left) {
+				stack.push(tmp.left);
 			}
-			tmp = stack.pop();
-
-			tmp = tmp.right;
+			if(tmp.right) {
+				stack.push(tmp.right);
+			}
 		}
+		result.reverse();
 
 		return result;
 
 	};
 
-	exports.preorderTraversal2 = function(root) {
+	exports.postorderTraversal2 = function(root) {
 		if(!root) {
 			return [];
 		}
@@ -66,5 +70,6 @@
 		}
 		return result;
 	};
+	
 
 })(window.LeetCode = window.LeetCode || {});
