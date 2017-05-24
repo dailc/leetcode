@@ -55,12 +55,15 @@
 				}
 				// 要画图协助理解
 				if(!pre.right) {
+					result.push(cur.val);
 					pre.right = cur;
 					cur = cur.left;
 					// 如果左节点遍历完毕后，会回到最上面，通过右节点指向，回到父节点
 				} else {
 					// 如果这个左节点已经遍历过的(这时候右节点是指向父节点的)
 					// 就需要松绑
+					// 后续的时候，打印头节点
+					result.push(pre.right.val);
 					pre.right = null;
 					cur = cur.right;
 				}
