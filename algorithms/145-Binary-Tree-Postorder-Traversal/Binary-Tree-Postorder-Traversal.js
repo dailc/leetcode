@@ -47,7 +47,6 @@
 
 		while(cur) {	
 			if(!cur.left) {
-				result.push(cur.val);
 				cur = cur.right;
 			} else {
 				pre = cur.left;
@@ -57,7 +56,6 @@
 				// 要画图协助理解
 				if(!pre.right) {
 					pre.right = cur;
-					result.push(cur.val);
 					cur = cur.left;
 					// 如果左节点遍历完毕后，会回到最上面，通过右节点指向，回到父节点
 				} else {
