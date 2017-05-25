@@ -30,7 +30,7 @@
 		if(!node) {
 			return -1;
 		}
-		// 将node放到头部
+		// 将node放到尾部
 		this.linkList.moveToTail(node);
 		return node.value;
 	};
@@ -50,7 +50,7 @@
 			this.linkList.append(newNode);
 			this.count ++;
 			if(this.count > this.capacity) {
-				// 大于了
+				// 大于容量了，将头节点移除-最久没有使用的
 				var head = this.linkList.popHead();
 				this.cache[head.key] = undefined;
 				this.count --;
@@ -131,7 +131,7 @@
 	};
 	/**
 	 * @description moveToTail
-	 * @param {Node} 将这个node移动到顶点
+	 * @param {Node} 将这个node移动到尾节点-最新使用
 	 */
 	LinkList.prototype.moveToTail = function(node) {
 		this.remove(node);
@@ -139,7 +139,7 @@
 	};
 	/**
 	 * @description popTail
-	 * @param {Node} 移除头节点
+	 * @param {Node} 移除头节点-最久没有使用
 	 */
 	LinkList.prototype.popHead = function(node) {
 		var res = this.head;
