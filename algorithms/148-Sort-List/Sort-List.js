@@ -30,6 +30,7 @@
             slow = slow.next;
 		}
 		var mid = slow.next;
+		// 需要将head指针切断
 		slow.next = null;
 		
 		var list1 = sortListRecurse(head);
