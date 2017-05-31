@@ -19,19 +19,41 @@
 		var left = 0,
 			right = len - 1;
 		while(left < right) {
-			if(nums[left] < nums[right]) {
-				return nums[left];
-			}
 			var mid = ~~((left + right)/2);
-			if( nums[mid] > nums[right]) {
+			
+			if(nums[mid] > nums[right]) {
 				left = mid + 1;
-			} else {
+			} else if(nums[mid] < nums[right]){
 				right = mid;
+			} else {
+				// 当mid和right相同时
+				right --;
 			}
 		}
 		
 		return nums[left];
 	}
+	
+	LeetCode.findMin2 = function(nums) {
+		if(!nums) {
+			return 0;
+		}
+		var len = nums.length;
+		var left = 0,
+			right = nums.length;
+		while(left < right) {
+			var mid = ~~((left + right)/2);
+			if(nums[mid] > nums[right]) {
+				left = mid + 1;
+			} else if(nums[mid] < nums[right]){
+				right = mid;
+			} else {
+				// 当mid和right相同时
+				right --;
+			}
+		}
+		return nums[left];
+	};
 	
 
 
