@@ -18,7 +18,30 @@
 		<script>
 			var ListNode = LeetCode.ListNode;
 			
+			var nodeA1 = new ListNode('a1');
+			var nodeA2 = new ListNode('a2');
+			var nodeC1 = new ListNode('c1');
+			var nodeC2 = new ListNode('c2');
+			var nodeC3 = new ListNode('c3');
+			var nodeB1 = new ListNode('b1');
+			var nodeB2 = new ListNode('b2');
+			var nodeB3 = new ListNode('b3');
 			
+			nodeC1.next = nodeC2;
+			nodeC2.next = nodeC3;
+			
+			nodeA1.next = nodeA2;
+			nodeA2.next = nodeC1;
+			
+			nodeB1.next = nodeB2;
+			nodeB2.next = nodeB3;
+			nodeB3.next = nodeC1;
+			
+			var headA = nodeA1;
+			var headB = nodeB1;
+			var result = LeetCode.getIntersectionNode(headA,headB);
+			
+			console.log(result.val);
 		</script>
 	</body>
 
