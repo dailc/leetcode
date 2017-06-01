@@ -58,5 +58,23 @@
 		
 		return null;
 	};
+	
+	LeetCode.getIntersectionNode2 = function(headA, headB) {
+		if(!headA || !headB) {
+			return null;
+		}
+		var tmpA = headA;
+		var tmpB = headB;
+		
+		// if a & b have different len, then we will stop the loop after second iteration
+		while(tmpA != tmpB) {
+			// for the end of first iteration
+			// we just reset the pointer to the head of another linkedlist
+			tmpA = (tmpA == null)? headB: tmpA.next;
+			tmpB = (tmpB == null)? headA: tmpB.next;
+		}
+		
+		return tmpA;
+	};
 
 })(window.LeetCode = window.LeetCode || {});
