@@ -27,6 +27,25 @@
 		return major;
 	};
 	
+	LeetCode.majorityElement2 = function(nums) {
+		var major = 0,
+			len = nums.length;
+		for( var i = 0, mask = 1; i < 32; i ++, mask <<= 1 ) {
+			var bitCounts = 0;
+			for( var j = 0; j < len; j ++ ) {
+				if(nums[j] & mask) {
+					bitCounts ++;
+				}
+				if(bitCounts > len / 2) {
+					major |= mask;
+					break;
+				}
+			}
+		}
+		
+		return major;
+	};
+	
 	
 	
 	
