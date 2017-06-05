@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Factorial-Trailing-Zeroes" name="keywords">
+		<meta content="leetcodeJS大法之Factorial-Trailing-Zeroes" name="description">
+		<title>leetcodeJS大法之Factorial-Trailing-Zeroes</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="Factorial-Trailing-Zeroes.js"></script>
+		<script>
+			var result = LeetCode.trailingZeroes(30);
+			
+			function test(n) {
+				if(n == 1) {
+					return n;
+				}
+				return n * test(n - 1);
+			}
+			console.log(result);
+			console.log(test(30));
+		</script>
+	</body>
+
+</html>
