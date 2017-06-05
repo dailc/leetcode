@@ -19,7 +19,17 @@
 	function trailingZeroesRecurse(n) {
 		return n == 0 ? 0 : (~~(n/5) + trailingZeroesRecurse(~~(n/5)));
 	}
-
+	
+	
+	LeetCode.trailingZeroes2 = function(n) {
+		var res = 0;
+		
+		for( var i = 5; ~~(n / i) > 0; i *= 5 ) {
+			res += ~~(n / i);
+		}
+		
+		return res;
+	};
 	
 	
 	
