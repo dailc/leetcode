@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+		<meta name="renderer" content="webkit" />
+		<!-- 移动端的响应式特性 -->
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta content="leetcode,算法,Binary-Search-Tree-Iterator" name="keywords">
+		<meta content="leetcodeJS大法之Binary-Search-Tree-Iterator" name="description">
+		<title>leetcodeJS大法之Binary-Search-Tree-Iterator</title>
+		<link rel="stylesheet" href="../../css/common/reset.css" />
+	</head>
+
+	<body>
+		<script type="text/javascript" src="Binary-Search-Tree-Iterator.js"></script>
+		<script>
+			var TreeNode = LeetCode.TreeNode;
+			var BSTIterator = LeetCode.BSTIterator;
+			
+			var node1 = new TreeNode(1);
+			var node2 = new TreeNode(2);
+			var node3 = new TreeNode(3);
+			var node4 = new TreeNode(4);
+			var node5 = new TreeNode(5);
+			var node6 = new TreeNode(6);
+			var node7 = new TreeNode(7);
+			
+			node4.left = node2;
+			node4.right = node6;
+			node2.left = node1;
+			node2.right = node3;
+			node6.left = node5;
+			node6.right = node7;
+			
+			var bstIte = new BSTIterator(node4);
+			var arr = [];
+			
+			while(bstIte.hasNext()) {
+				arr.push(bstIte.next());
+			}
+			console.log(JSON.stringify(arr));
+			
+		</script>
+	</body>
+
+</html>
