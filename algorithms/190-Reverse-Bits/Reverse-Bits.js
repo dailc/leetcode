@@ -23,7 +23,7 @@
 	   
 	};
 	
-	
+	// 暂时还有问题
 	LeetCode.reverseBits2 = function(n) {
 	    // 约束为32为数
         n = (n >> 16) | (n << 16);
