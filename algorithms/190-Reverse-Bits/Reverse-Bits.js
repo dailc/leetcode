@@ -12,26 +12,26 @@
      * @return {number} - a positive integer
 	 */
 	LeetCode.reverseBits = function(n) {
-	     n &= 0xffffffff;
-        console.log(n);
+	   
         var res = 0;
         for( var i = 0; i < 32; i ++ ) {
-            res |= ((n >> i) & 1) << (31 - i);
-        }
-        return Math.abs(res);
+            // 取出输入的最后一位加入 result，其他位依次左移
+            res = (res << 1) | (n & 1);
+            n = n >> 1;
+        } 
+        return res >>> 0;
 	   
 	};
 	
 	
 	LeetCode.reverseBits2 = function(n) {
 	    // 约束为32为数
-        n &= 0xffffffff;
         n = (n >> 16) | (n << 16);
         n = ((n & 0xff00ff00) >> 8) | ((n & 0x00ff00ff) << 8);
         n = ((n & 0xf0f0f0f0) >> 4) | ((n & 0x0f0f0f0f) << 4);
         n = ((n & 0xcccccccc) >> 2) | ((n & 0x33333333) << 2);
         n = ((n & 0xaaaaaaaa) >> 1) | ((n & 0x55555555) << 1);
-        return n;
+        return n >>> 0;
 	};
 	
 
