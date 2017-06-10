@@ -12,7 +12,19 @@
      * @return {number}
 	 */
 	LeetCode.rob = function(nums) {
+	   if(!nums || !nums.length) {
+	       return 0;
+	   }
+	   // 不用数组，直接用变量
+	   var moneyUnRober = 0;
+	   var moneyRober = nums[0];
 	   
+	   for( var i = 1, len = nums.length; i < len; i ++ ) {
+	       var tmp = moneyUnRober;
+	       moneyUnRober = Math.max(moneyUnRober, moneyRober);
+	       moneyRober = tmp + nums[i];
+	   }
+	   return Math.max(moneyUnRober, moneyRober);
 	};
 	
 	
