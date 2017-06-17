@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Add-and-Search-Word-Data-structure-design" name="keywords">
+        <meta content="leetcodeJS大法之Add-and-Search-Word-Data-structure-design" name="description">
+        <title>leetcodeJS大法之Add-and-Search-Word-Data-structure-design</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Add-and-Search-Word-Data-structure-design.js"></script>
+        <script>
+            var WordDictionary = LeetCode.WordDictionary;
+            
+            var dict = new WordDictionary();
+            
+            dict.addWord('a');
+            dict.addWord('a');
+            dict.addWord('a');
+            
+            console.log(dict.search('.'));
+            console.log(dict.search('a'));
+            console.log(dict.search('aa'));
+            console.log(dict.search('a'));
+            console.log(dict.search('.a'));
+            console.log(dict.search('a.'));
+            
+            console.log('~~~~~');
+            
+            dict.addWord('bad');
+            dict.addWord('dad');
+            dict.addWord('mad');
+            
+             console.log(dict.search('pad'));
+            console.log(dict.search('bad'));
+            console.log(dict.search('.ad'));
+            console.log(dict.search('b..'));
+        </script>
+    </body>
+
+</html>
