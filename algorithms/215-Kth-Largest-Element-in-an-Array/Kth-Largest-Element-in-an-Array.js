@@ -21,7 +21,8 @@
         }
 
         var m = partition(nums, i, j);
-
+        
+        // 这里一直在基于m的值进行分区，有点类似于快排
         if (m == k) {
             return nums[m];
         } else if (m < k) {
@@ -32,7 +33,7 @@
     }
 
     function partition(nums, i, j) {
-        // 确保x是当前分区最小的值
+        // 确保m是当前第m小值,所以m是从0开始
         var x = nums[i],
             m = i,
             n = i + 1;
@@ -44,7 +45,7 @@
 
             n++;
         }
-        // 这次的交换让i变成了当前分区最小值，可以画图理解
+        // 这次的交换让m变成了第m小值
         swap(nums, i, m);
 
         return m;
