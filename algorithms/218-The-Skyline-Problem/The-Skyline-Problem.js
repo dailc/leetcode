@@ -53,7 +53,11 @@
 
         for (var index in height) {
             var h = height[index];
-            
+            console.log("~~~~~~~~~~~~~~~~~~~~~");
+            console.log(heap.queue);
+            console.log("!!");
+            console.log(JSON.stringify(res));
+            console.log(pre);
             if (h.type == TYPE_LEFT) {
                 heap.push(h.y);
             } else {
