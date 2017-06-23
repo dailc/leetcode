@@ -31,34 +31,48 @@
     };
 
     LeetCode.containsNearbyDuplicate2 = function(nums, k, t) {
-        if (!nums) {
+        if (!nums || k < 1 || t < 0) {
             return false;
         }
 
-        var set = new TreeSet(),
+        var mp = {},
             len = nums.length,
-            j = 0;
+            MIN_VALUE = -2147483648;
 
         for (var i = 0; i < len; i++) {
-            var n = nums[i];
-
-            if ((set.floor(n) != null && n <= t + set.floor(n)) ||
-                (set.ceiling(n) != null && set.ceiling(n) <= t + n)) {
+            var remappedNum = nums[i] - MIN_VALUE;
+            var bucket = ~~(remappedNum / (t + 1));
+            
+            if (mp[bucket] != null
+            ||  (mp[bucket - 1] != null && remappedNum - mp[bucket - 1] <= t)
+            ||  (mp[bucket + 1] != null && mp[bucket + 1] - remappedNum <= t)
+            ) {
                 return true;
             }
-                
-            set.add(n);
             
-            if (i >= k) {
-                set.remove(nums[i - k]);
+            if (getLen(mp) >= k) {
+                var lastBucket = ~~((nums[i - k] - MIN_VALUE) / (t + 1));
+                
+                mp[lastBucket] = undefined;
             }
             
-            return false;
+            mp[bucket] = remappedNum;
         }
+        
+        return false;
     };
-
-    function TreeSet() {
-
+    
+    function getLen(obj) {
+        var size = 0;
+        
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                size ++;
+            }
+        }
+        
+        return size;
     }
+
 
 })(window.LeetCode = window.LeetCode || {});

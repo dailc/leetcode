@@ -14,10 +14,8 @@
 
 - 双重循环判断
 
-- 通过红黑树(平衡二叉树)实现
-    
-    http://www.cnblogs.com/jiajiaxingxing/p/4572871.html
+- 通过map+桶实现
     
     
     
-__红黑树部分待续__
+__部分待续__
