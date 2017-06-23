@@ -17,12 +17,11 @@
             return false;
         }
 
-        var hash = {},
-            len = nums.length;
+        var len = nums.length;
 
         for (var i = 0; i < len; i++) {
             for (var j = 0; j < len; j++) {
-                if (i!=j && Math.abs(i - j) <= k && Math.abs(nums[i] - nums[j]) <= t) {
+                if (i != j && Math.abs(i - j) <= k && Math.abs(nums[i] - nums[j]) <= t) {
                     return true;
                 }
             }
@@ -30,5 +29,36 @@
 
         return false;
     };
+
+    LeetCode.containsNearbyDuplicate2 = function(nums, k, t) {
+        if (!nums) {
+            return false;
+        }
+
+        var set = new TreeSet(),
+            len = nums.length,
+            j = 0;
+
+        for (var i = 0; i < len; i++) {
+            var n = nums[i];
+
+            if ((set.floor(n) != null && n <= t + set.floor(n)) ||
+                (set.ceiling(n) != null && set.ceiling(n) <= t + n)) {
+                return true;
+            }
+                
+            set.add(n);
+            
+            if (i >= k) {
+                set.remove(nums[i - k]);
+            }
+            
+            return false;
+        }
+    };
+
+    function TreeSet() {
+
+    }
 
 })(window.LeetCode = window.LeetCode || {});
