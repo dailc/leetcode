@@ -23,13 +23,14 @@
         if (!root) {
             return 0;
         }
-        // +1是补全根节点自己
+        // +1是为了方便计算总节点数量
         var l = getLeft(root) + 1;
         var r = getRight(root) + 1;
         
         if (l == r) {
             return (2 << (l - 1)) - 1;
         } else {
+            // +1 是为了补全根节点自己
             return countNodesRecurse(root.left) + countNodesRecurse(root.right) + 1;
         }
     }
