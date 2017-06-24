@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Maximal-Square" name="keywords">
+        <meta content="leetcodeJS大法之Maximal-Square" name="description">
+        <title>leetcodeJS大法之Maximal-Square</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Maximal-Square.js"></script>
+        <script>
+            
+            var matrix = [
+                [1, 0, 1, 0, 0],
+                [1, 0, 1, 1, 1],
+                [1, 1, 1, 1, 1],
+                [1, 0, 0, 1, 0]
+            ];
+            
+            var result = LeetCode.maximalSquare(matrix);
+
+            console.log(JSON.stringify(result));
+        </script>
+    </body>
+
+</html>
