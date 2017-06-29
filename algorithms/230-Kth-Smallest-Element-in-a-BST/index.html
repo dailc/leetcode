@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Kth-Smallest-Element-in-a-BST" name="keywords">
+        <meta content="leetcodeJS大法之Kth-Smallest-Element-in-a-BST" name="description">
+        <title>leetcodeJS大法之Kth-Smallest-Element-in-a-BST</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Kth-Smallest-Element-in-a-BST.js"></script>
+        <script>
+            var TreeNode = LeetCode.TreeNode;
+            
+            var node1 = new TreeNode(2);
+            var node2 = new TreeNode(1);
+            
+            node1.left = node2;
+
+            var result = LeetCode.kthSmallest2(node1, 1);
+            
+            console.log(JSON.stringify(result));
+        </script>
+    </body>
+
+</html>
