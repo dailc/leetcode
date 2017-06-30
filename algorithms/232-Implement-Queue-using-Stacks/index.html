@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Implement-Queue-using-Stacks" name="keywords">
+        <meta content="leetcodeJS大法之Implement-Queue-using-Stacks" name="description">
+        <title>leetcodeJS大法之Implement-Queue-using-Stacks</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Implement-Queue-using-Stacks.js"></script>
+        <script>
+            
+            var MyQueue = LeetCode.MyQueue;
+            
+            var queue = new MyQueue();
+            
+            queue.push(1);
+            queue.push(2);
+            queue.push(3);
+
+            console.log(queue.peek());
+            console.log(queue.pop());
+            console.log(queue.peek());
+            
+        </script>
+    </body>
+
+</html>
