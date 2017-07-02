@@ -34,5 +34,55 @@
     };
 
     exports.isPalindrome = isPalindrome;
+    
+    var isPalindrome2 = function(head) {
+        if (!head || !head.next) {
+            return true;
+        }
+        // 快慢指针寻找中心
+        var slow = head,
+            fast = head;
+            
+        while (fast && fast.next) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        
+        if (fast) {
+            // 奇数的链表数
+            slow.next = reverseList(slow.next);
+            slow = slow.next;
+        } else {
+            // 偶数
+            slow = reverseList(slow);
+        }
+        
+        while (slow) {
+            if (head.val != slow.val) {
+                return false;
+            }
+            slow = slow.next;
+            head = head.next;
+        }
+        
+        return true;
+    };
+    
+    function reverseList(head) {
+        var prev = null;
+        
+        while (head) {
+            var next = head.next;
+            
+            head.next = prev;
+            
+            prev = head;
+            head = next;
+        }
+        
+        return prev;
+    }
+    
+    exports.isPalindrome2 = isPalindrome2;
 
 })(window.LeetCode = window.LeetCode || {});
