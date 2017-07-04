@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Lowest-Common-Ancestor-of-a-Binary-Tree" name="keywords">
+        <meta content="leetcodeJS大法之Lowest-Common-Ancestor-of-a-Binary-Tree" name="description">
+        <title>leetcodeJS大法之Lowest-Common-Ancestor-of-a-Binary-Tree</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Lowest-Common-Ancestor-of-a-Binary-Tree.js"></script>
+        <script>
+            var TreeNode = LeetCode.TreeNode;
+            
+            var node1 = new TreeNode(6);
+            var node2 = new TreeNode(2);
+            var node3 = new TreeNode(8);
+            var node4 = new TreeNode(0);
+            var node5 = new TreeNode(4);
+            
+            node1.left = node2;
+            node1.right = node3;
+            
+            node2.left = node4;
+            node2.right = node5;
+            
+            var result = LeetCode.lowestCommonAncestor(node1, node4, node2);
+
+            console.log(JSON.stringify(result));
+            
+        </script>
+    </body>
+
+</html>
