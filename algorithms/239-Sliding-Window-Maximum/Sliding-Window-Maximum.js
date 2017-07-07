@@ -26,11 +26,14 @@
             //存储第一个窗口的最大值
             queue.push(i);
         }
+        // 这样可以每一次取一个最大窗口值
         for (var i = size; i < len; i++) {
             maxStack.push(nums[queue[0]]);
+            // 如果新的值比以前的窗口值要大，以前的要剔除
             while (queue.length && nums[i] >= nums[queue[queue.length - 1]]) {
                 queue.pop();
             }
+            // 如果最大的那个值已经过期了，不再当前窗口了，也要剔除
             if (queue.length && queue[0] <= (i - size)) {
                 queue.shift();
             }
