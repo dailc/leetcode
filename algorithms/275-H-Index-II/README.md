@@ -12,3 +12,5 @@
     - 对于引用数`citations[i]`，大于等于该引用数文献的数量是`citations.length - i`
     
     - 而当前的`H-Index`则是`Math.min(citations[i], citations.length - i)`
+    
+- 二分法优化
