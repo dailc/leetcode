@@ -33,3 +33,9 @@
     - 最后，如果都不符合，默认返回`3`
     
 `   - http://www.cnblogs.com/grandyang/p/4800552.html
+
+- 动态规划
+
+    - `dp[i]`表示正数`i`能至少由多少个完全平方根组成
+    
+    - https://segmentfault.com/a/1190000003768736
