@@ -74,8 +74,29 @@
             }
         }
     };
+    
+    var moveZeroes2 = function(nums) {
+        if (!nums) {
+            return ;
+        }
+        var len = nums.length,
+            cur = 0;
+        
+        for (var i = 0; i < len; i++) {
+            if (nums[i] != 0) {
+                nums[cur] = nums[i];
+                cur ++;
+            }
+        }
+        
+        // 后面元素全部补0
+        for (var i = cur; i < len; i++) {
+            nums[i] = 0;
+        }
+    };
    
 
     exports.moveZeroes = moveZeroes;
+    exports.moveZeroes2 = moveZeroes2;
 
 })(window.LeetCode = window.LeetCode || {});
