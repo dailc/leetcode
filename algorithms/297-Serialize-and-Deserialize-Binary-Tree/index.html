@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Serialize-and-Deserialize-Binary-Tree" name="keywords">
+        <meta content="leetcodeJS大法之Serialize-and-Deserialize-Binary-Tree" name="description">
+        <title>leetcodeJS大法之Serialize-and-Deserialize-Binary-Tree</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Serialize-and-Deserialize-Binary-Tree.js"></script>
+        <script>
+            var serialize = LeetCode.serialize;
+            var deserialize = LeetCode.deserialize;
+
+            var tree = {
+                val: 1,
+                left: {
+                    val: 2,
+                    left: {
+                        val: 4
+                    },
+                    right: {
+                        val: 5
+                    }
+                },
+                right: {
+                    val: 3,
+                    left: {
+                        val: 6
+                    },
+                    right: {
+                        val: 7
+                    }
+                }
+            };
+            tree = {
+                val: 1
+            };
+            
+
+            var serializeStr = serialize(tree);
+            var nodes = deserialize(serializeStr);
+            
+            console.log(serializeStr);
+            console.log(JSON.stringify(nodes));
+        </script>
+    </body>
+
+</html>
