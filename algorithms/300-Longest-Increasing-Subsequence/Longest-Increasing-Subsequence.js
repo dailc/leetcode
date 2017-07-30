@@ -15,22 +15,22 @@
             return 0;
         }
         
-        var list = [],
+        var dp = [],
             max = 0,
             len = nums.length;
             
         for (var i = 0; i < len; i++) {
             var localMax = 0;
-            // 找出当前点之前的最大上升序列长度
+            // 找出当前点之前的最大上升序列长度，因为是非连续，所以要连续找
             for (var j = 0; j < i; j++) {
-                if (list[j] > localMax && nums[j] < nums[i]) {
-                    localMax = list[j];
+                if (dp[j] > localMax && nums[j] < nums[i]) {
+                    localMax = dp[j];
                 }
             }
             // 当前点则是该局部最大上升长度加1
-            list[i] = localMax + 1;
+            dp[i] = localMax + 1;
             // 用当前点的长度更新全局最大长度
-            max = Math.max(max, list[i]);
+            max = Math.max(max, dp[i]);
         }
         
         return max;
