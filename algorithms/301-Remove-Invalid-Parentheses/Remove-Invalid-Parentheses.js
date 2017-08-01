@@ -33,6 +33,7 @@
             }
             
             if (found) {
+                // found确保只会去除一次最小的情况
                 continue;
             }
             
@@ -46,7 +47,6 @@
                 }
                 var next = tmp.substr(0, i) + tmp.substr(i + 1);
                 if (!visited[next]) {
-                    console.log(next);
                     queue.unshift(next);
                     visited[next] = 1;
                 }
