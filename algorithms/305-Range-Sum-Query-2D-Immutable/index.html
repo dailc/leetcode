@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Range-Sum-Query-2D-Immutable" name="keywords">
+        <meta content="leetcodeJS大法之Range-Sum-Query-2D-Immutable" name="description">
+        <title>leetcodeJS大法之Range-Sum-Query-2D-Immutable</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Range-Sum-Query-2D-Immutable.js"></script>
+        <script>
+            
+            
+            var NumMatrix = LeetCode.NumMatrix;
+            
+            var matrix = new NumMatrix([
+  [3, 0, 1, 4, 2],
+  [5, 6, 3, 2, 1],
+  [1, 2, 0, 1, 5],
+  [4, 1, 0, 1, 7],
+  [1, 0, 3, 0, 5]
+]);
+            
+            console.log(matrix.sumRegion(2, 1, 4, 3));
+
+            console.log(matrix.sumRegion(1, 1, 2, 2));
+
+            console.log(matrix.sumRegion(1, 2, 2, 4));
+            
+        </script>
+    </body>
+
+</html>
