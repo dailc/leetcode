@@ -22,4 +22,6 @@ Given nums = [1, 3, 2, 2, 3, 1], one possible answer is [2, 3, 1, 3, 1, 2]
 
 - 需要用到一个寻找`k`小值的算法
 
+- 然后再用低位指针和高位指针映射，代表当前已经走到哪一个位置了，映射公式`(2*i+1)%(len|1)`
+
 - https://discuss.leetcode.com/topic/32929/o-n-o-1-after-median-virtual-indexing/2
