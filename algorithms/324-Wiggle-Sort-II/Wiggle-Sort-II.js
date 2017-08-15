@@ -16,12 +16,14 @@
         if (m == k) {
             return nums[m];
         } else if (m < k) {
+            // m小值的前面肯定是排序过的
             return findK(nums, k, m + 1, j);
         } else {
             return findK(nums, k, i, m - 1);
         }
     }
-
+    
+    // 分区算法可以找一个第  i 小值  然后根据i与k的大小再决定是继续从左还是从右算，每次可以丢掉一部分
     function partition(nums, i, j) {
         // 确保m是当前第m小值,所以m是从0开始
         var x = nums[i],
