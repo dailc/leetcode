@@ -21,3 +21,7 @@ The three ranges are : [0, 0], [2, 2], [0, 2] and their respective sums are: -2,
 - 先求出全局的前`n`个元素的和
 
 - 未来需要把它完成
+
+http://blog.csdn.net/qq508618087/article/details/51435944
+
+http://www.cnblogs.com/jdneo/p/5388501.html
