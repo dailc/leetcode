@@ -35,3 +35,4 @@ Return 0.
 - 贪心算法
 
 http://blog.csdn.net/murmured/article/details/50596403
+http://blog.csdn.net/happyaaaaaaaaaaa/article/details/50899547
