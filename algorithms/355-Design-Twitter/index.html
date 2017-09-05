@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Design-Twitter" name="keywords">
+        <meta content="leetcodeJS大法之Design-Twitter" name="description">
+        <title>leetcodeJS大法之Design-Twitter</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Design-Twitter.js"></script>
+        <script>
+            var Twitter = LeetCode.Twitter;
+
+            var twitter = new Twitter();
+
+            // User 1 posts a new tweet (id = 5).
+            twitter.postTweet(1, 4);
+            
+            twitter.postTweet(1, 5);
+
+            // User 1's news feed should return a list with 1 tweet id -> [5].
+            console.log(twitter.getNewsFeed(1));
+
+            // User 1 follows user 2.
+            twitter.follow(1, 1);
+            twitter.follow(1, 2);
+
+            // User 2 posts a new tweet (id = 6).
+            twitter.postTweet(2, 6);
+            twitter.postTweet(2, 7);
+
+            // User 1's news feed should return a list with 2 tweet ids -> [6, 5].
+            // Tweet id 6 should precede tweet id 5 because it is posted after tweet id 5.
+             console.log(twitter.getNewsFeed(1));
+
+            // User 1 unfollows user 2.
+            twitter.unfollow(1, 2);
+
+            // User 1's news feed should return a list with 1 tweet id -> [5],
+            // since user 1 is no longer following user 2.
+             console.log(twitter.getNewsFeed(1));
+
+        </script>
+    </body>
+
+</html>
