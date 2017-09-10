@@ -29,3 +29,5 @@ Result: 1024
 - 当`b`是偶数时，还可以转化为`a^(b/2)然后再平方`
 
 http://blog.csdn.net/mebiuw/article/details/51853673
+
+http://www.cnblogs.com/grandyang/p/5651982.html

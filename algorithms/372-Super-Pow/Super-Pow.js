@@ -57,8 +57,55 @@
         return res;
     };
     
+    var superPow2 = function(a, b) {
+        var MOD_VALUE = 1337;
+        var Mul = function(x, y) {
+            var res = 0;
+            
+            while (y > 0) {
+                if (y & 1) {
+                    res += x;
+                    res %= MOD_VALUE;
+                }
+                
+                x <<= 1;
+                y >>= 1;
+                x %= MOD_VALUE;
+            }
+            
+            return res;
+        };
+        var Pow = function(x, y) {
+            var res = 1;
+            
+            while (y > 0) {
+                if (y & 1) {
+                    res = Mul(res, x);
+                    
+                }
+                x = Mul(x, x);
+                y >>= 1;
+                x %= MOD_VALUE;
+            }
+            
+            return res;
+        };
+        
+        var res = 1;
+        
+        a %= MOD_VALUE;
+        
+        while (b && b.length) {
+            res = Mul(res, Pow(a, b.pop()));
+            a = Pow(a, 10);
+        }
+        
+        return res;
+    };
+    
     
 
     exports.superPow = superPow;
+    exports.superPow2 = superPow2;
 
 })(window.LeetCode = window.LeetCode || {});
