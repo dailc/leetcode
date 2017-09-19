@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta content="leetcode,算法,Linked-List-Random-Node" name="keywords">
+        <meta content="leetcodeJS大法之Linked-List-Random-Node" name="description">
+        <title>leetcodeJS大法之Linked-List-Random-Node</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Linked-List-Random-Node.js"></script>
+        <script>
+            var Solution = LeetCode.Solution;
+            var ListNode = LeetCode.ListNode;
+            
+            var head = new ListNode(1);
+            
+            head.next = new ListNode(2);
+            
+            head.next.next = new ListNode(3);
+
+            var solution  = new Solution(head);
+           
+            console.log(solution.getRandom());
+        </script>
+    </body>
+
+</html>
