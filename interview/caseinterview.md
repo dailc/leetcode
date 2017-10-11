@@ -125,16 +125,67 @@ JS引擎解析和执行JS来实现网页的动效，最开始渲染引擎和JS�
 
 ### html5有哪些新特性、移除了那些元素？如何处理HTML5新标签的浏览器兼容问题？如何区分 HTML 和 HTML5？
 
+不再是`SGML`的子集。增加了一些图像，位置，存储，多任务等功能的增加
+
+增加
+
+```js
+canvas
+sessionStorage
+localStorage
+webworker
+websocket
+Geolocation
+video
+audio
+标签元素
+article
+nav
+footer
+section
+header
+calendar
+date
+url
+search
+```
+
 移除了一些
 
 ```js
+表现型
+basefont
+big
 center
+font
+s
+strike
+tt
+u
+可用型
 frame
+frameset
+noframes
 等
 ```
 
 ```js
 如canvas，一般会加一句当前浏览器不支持canvas，用来提示用户
+IE8/IE7/IE6支持通过document.createElement方法产生的标签，
+可以利用这一特性让这些浏览器支持HTML5新标签，
+浏览器支持新标签后，还需要添加标签默认的样式
+
+也可以直接使用成熟的框架、比如html5shim;
+<!--[if lt IE 9]>
+    <script> src="http://html5shim.googlecode.com/svn/trunk/html5.js"</script>
+<![endif]-->
+```
+
+```js
+doctype声明
+结构元素
+功能元素
+可区分html5
 ```
 
 ### 简述一下你对HTML语义化的理解？
@@ -146,22 +197,39 @@ frame
 一般的语义化标签
 
 ```js
-header
-nav
-footer
-ins
-code
-p
-等
+用正确的标签做正确的事情
+html语义化让页面内容结构化，结构更清晰，便于浏览器解析，搜索引擎解析
+而且即使丢失css，也能保持基本格式
+搜索引擎依赖于html标记来确定上下文和关键字权重，利于seo
+同样，阅读源码时也更容易将网站分块，便于阅读维护理解
 ```
 
 ### HTML5的离线储存怎么使用，工作原理能不能解释一下？
 
-`sessionStorage与localStorage`，离线存储存的是客户端本地
+在用户没有联网时可以正常访问站点或应用，联网时再更新机器上的缓存
 
-`sessionStorage`是会话级别的，会话结束后即消除（同一个tab内，切换tab后无效）
+原理：
+html5离线缓存是基于.appcache文件的缓存机制（不是存储技术）
+通过这个文件的解析清单离线存储资源
+这些资源就像cookie一样会被存储下来，处于离线状态时浏览器会展示离线缓存数据
 
-`localStorage`是本地持久化存储，一般有一些浏览器会有不能大于`5m`的要求
+使用
+
+```js
+1、页面头部像下面一样加入一个manifest的属性；
+2、在cache.manifest文件的编写离线存储的资源；
+    CACHE MANIFEST
+    #v0.11
+    CACHE:
+    js/app.js
+    css/style.css
+    NETWORK:
+    resourse/logo.png
+    FALLBACK:
+    / /offline.html
+3、在离线状态时，操作window.applicationCache进行需求实现。
+http://yanhaijing.com/html/2014/12/28/html5-manifest/
+```
 
 ## CSS
 
