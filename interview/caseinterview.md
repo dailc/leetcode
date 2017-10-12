@@ -341,23 +341,64 @@ margin: 0 auto;
 
 ### position的值relative和absolute定位原点是？
 
-父级元素中，最近的一个非`static`布局的元素
+```js
+absolute
+生成绝对定位元素，相对于值不为static的第一个父元素进行定位
+
+fixed
+绝对定位，相对于浏览器窗口进行定位
+
+relative
+生成相对定位，相对于其正常位置进行定位
+
+static
+默认值，没有定位,元素出现在正常流中(文档流)，忽略top,bottom,left,right,z-index等声明
+
+inherit
+从父元素集成position值
+```
 
 ### CSS3有哪些新特性？
 
 ```js
-anination
-keyframe
-border-shadow
-translate动画
-:before
-:after
+新增各种css选择器
+： not(.input)   所有class不是input的节点
+
+圆角
+border-radius:6px
+
+多列布局
+multi-column layout
+
+阴影与反射
+shadow/reflect
+
+文字特效
+text-shadow
+
+文字渲染
+text-decoration
+
+线性渐变
+gradient
+
+旋转，平移等变化
+rotate transform
 ```
 
 
 ### 请解释一下CSS3的Flexbox（弹性盒布局模型）,以及适用场景？
 
-适应于复杂的自适应布局
+```js
+一个用于页面布局的全新css3功能
+flexbox可以把列表放在同一个方向（从上到下或左到右），并让列表延伸到占用可用的空间
+
+采用flex布局的元素位flex容器,它的所有子元素都是容器成员（flex item）
+
+常规布局是基于块和内联流方向，而flex布局是基于flex-flow流，可以很方便的用来对不同屏幕大小进行适应
+布局上比以前更灵活
+
+```
 
 ## JS
 
