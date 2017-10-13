@@ -507,9 +507,52 @@ var obj = new Object();
 new XXX();
 ```
 
+3.工厂等产生
+
+```js
+var obj = xxx();
+```
+
 ### Javascript作用链域?
 
+```js
+全局函数无法查看局部函数的内部细节
+局部函数可以查看上层的函数细节，直至全局细节
+
+当需要从局部函数查找某一属性或方法时，
+如果当前作用域没有找到，就会上溯到上层作用域查找
+直至全局函数- 作用域链
+```
+
+http://www.cnblogs.com/lhb25/archive/2011/09/06/javascript-scope-chain.html
 
 ### 谈谈This对象的理解。
 
+```js
+this总指向函数的直接调用者(而非间接调用者)
+譬如 
+var ajax = Util.ajax();
+ajax();
+此时this指向window，而不是util
+
+
+如果有new关键字，this指向new出来的那个对象
+
+在事件中，this指向触发这个事件的对象
+特殊（ie中的attachevent的this总是指向全局对象window）
+```
+
 ### eval是做什么的？
+
+```js
+作用是把对应的字符串解析成js代码并运行
+
+尽量避免使用eval，不安全而且耗性能
+
+一次解析成js语句，一次执行
+
+在以前，常有人用
+var obj =eval('('+ str +')');
+
+来将json字符串解析成json，但是h5中可以用JSON.stringify
+```
