@@ -231,6 +231,56 @@ html5离线缓存是基于.appcache文件的缓存机制（不是存储技术）
 http://yanhaijing.com/html/2014/12/28/html5-manifest/
 ```
 
+### 描述下cookies,sessionStorage,localStorage的区别
+
+```js
+cookie是网站为了标志用户身份而存储在用户本地终端上的数据（会有加密）
+cookie在同源的http请求中总是会携带（即使不需要），跨域的ajax请求需要开启`xhr`的`withCredentials`为`true`
+很多情况下都是服务端读取cookie中的jsessionid，然后根据服务端的session判断是那一个用户
+
+sessionStorage和localStorage仅本地保留，不会发送给服务端
+
+大小限制：
+
+cookie一般不能超过4k
+sessionStorage和localStorage一般是5m左右
+
+时间限制：
+
+localStorage: 持久化，永久保存，除非主动删除
+sessionStorage: 当前浏览器窗口关闭后删除
+cookie: 设置的cookie过期时间之前一直有效，即使窗口或浏览器关闭
+```
+
+### iframe有哪些缺点
+
+```js
+iframe会阻塞页面的onload事件
+搜索引擎的检索程序无法解读这种页面，不利于seo
+
+iframe和主页面共享连接池，而浏览器对相同域的链接有限制，所以会影响页面的并行加载
+
+如果一定要用iframe，最好是通过js动态给iframe添加src
+```
+
+### label的作用是什么？如何用
+
+```js
+label标签用来定义表单控制间的关系
+当用户选择该标签时，浏览器自动将焦点转到和标签相关的表单控件上
+
+  <label for="Name">Number:</label>
+  <input type="text" name="Name" id="Name"/>
+
+  <label>Date:<input type="text" name="B"/></label>
+```
+
+### HTML5的form如何关闭自动完成功能
+
+```js
+给不想提示的form或某个input设置为autocomplete=off
+```
+
 ## CSS
 
 ### 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？
