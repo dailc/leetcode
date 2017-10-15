@@ -666,3 +666,37 @@ var obj =eval('('+ str +')');
 
 来将json字符串解析成json，但是h5中可以用JSON.stringify
 ```
+
+### 什么是window对象? 什么是document对象?
+
+```js
+window对象指浏览器打开的窗口
+document是当前窗口中Document对象的一个只读引用（属于window对象的一个属性）
+```
+
+### null，undefined 的区别？
+
+```js
+null表示一个“为空”的值
+undefined表示一个变量声明了但是没有初始化（缺省值）
+
+typeof null 为 object
+typeof undefined 为 undefined
+
+原型链的尽头是null
+
+null == undefined // true
+null === undefined // false
+
+null转数字时为0
+undefined转数字时为NAN
+
+JS最初只有一个null表示无，根据c语言传统，可以自动转为0
+但是js设计者觉得这样还不够
+
+- null在java中被当初一个对象，但是js中分为原始型和合成类型，作者觉得无的值最好不是对象
+
+- 最初js中没有错误处理机制，发生数据类型不匹配时，往往会自动转换类型或失败，但是如果null自动转成0时，不容易找出这个错误
+
+因此又设计了一个undefined
+```
