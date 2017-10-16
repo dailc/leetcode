@@ -1,22 +1,16 @@
-/**
- * 作者: dailc
- * 时间: 2016-12-10
- * 描述:  add two number
- * 分别实现了几种方案:
- * 1.js链表方式实现
- * 
- * 来自:https://leetcode.com/problems/add-two-numbers/
+/* 
+ * 一刷时间: 2016-12-10
+ * 二刷时间：2017-10-16
+ * 来自: https://leetcode.com/problems/add-two-numbers/description/
  */
 (function(exports) {
-	/**
-	 * @description Definition for singly-linked list.
-	 * @param {Object} val
-	 */
 	function ListNode(val) {
 		this.val = val;
 		this.next = null;
-	};
+	}
+	
 	exports.ListNode = ListNode;
+	
 	/**
 	 * @description 拓展打印的方法
 	 */

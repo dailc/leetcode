@@ -700,3 +700,17 @@ JS最初只有一个null表示无，根据c语言传统，可以自动转为0
 
 因此又设计了一个undefined
 ```
+
+### ["1", "2", "3"].map(parseInt) 答案是多少？
+
+```js
+parseInt(val, radix)
+
+radix的参数范围是[2,36]
+
+map传了三个参数(element, index, array)
+
+所以分别是`10机制的1-传0相当于默认值`，`进制非法，radix超出范围`，`2进制的3，不合法的解析`
+
+结果: [1, NAN, NAN]
+```
