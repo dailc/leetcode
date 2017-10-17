@@ -714,3 +714,48 @@ map传了三个参数(element, index, array)
 
 结果: [1, NAN, NAN]
 ```
+
+### 事件是？IE与火狐的事件机制有什么区别？ 如何阻止冒泡？
+
+```js
+譬如在网页点击一个按钮时会产生一个事件，做xxx操作时也可能会产生xxx事件(有的操作对应多个事件)，这种事件可以被js监听到
+
+一般有两种事件模型：捕获型和冒泡型
+
+ie中支持冒泡型，火狐中两种都支持（默认为事件捕获）
+
+阻止冒泡：event.stopPropagation();(符合W3C标准)
+(旧版IE用event.cancelBubble = true)-IE8及以下，但其实chrome和firefox中也支持（只是考虑到非标准，后续迟早要移除）
+```
+
+### 什么是闭包(closure)，为什么要用它？
+
+```js
+闭包是指有权访问另一个函数作用域中的变量的函数
+
+创建闭包的最常用方式：在一个函数内创建另一个函数，通过另一个函数访问这个函数的局部变量
+利用闭包可以突破作用域链，将函数内部的变量和方法传递到外部
+不过也经常会容易造成内存泄漏问题（无法自动回收）
+
+特性：
+1.函数内再嵌套函数
+2.内部函数引用外层的参数和变量
+3.参数和变量不会被垃圾回收机制回收
+
+譬如
+
+function sayHello() {
+    // 函数内部变量
+    var word = 'hello,world!';
+    var index = 0;
+    
+    return function() {
+        console.log(word + (index++));  
+    };
+}
+
+var say = sayHello();
+
+say(); // hello,world!0
+say(); // hello,world!1
+```

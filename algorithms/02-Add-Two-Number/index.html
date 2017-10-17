@@ -1,31 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<!-- 移动端的响应式特性 -->
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<title>leetcodeJS大法之Add-Two-Number</title>
-		<link rel="stylesheet" href="../../css/common/reset.css" />
-	</head>
-	<body>
-		<script type="text/javascript" src="Add-Two-Number.js" ></script>
-		<script>
-			var list1 = new LeetCode.ListNode(1);
-			var list2 = new LeetCode.ListNode(2);
-			
-			list1.append(2).append(3).append(4).append(5);
-			list2.append(1).append(7).append(4).append(5);
-			console.log("原始数据:");
-			console.log(list1.print());
-			console.log(list2.print());
-			
-			console.time('addTwoNumber');
-			var result = LeetCode.addTwoNumber1(list1,list2);
-			console.timeEnd('addTwoNumber');
-			console.log('result:'+result.print());
-			
-			//可以试试用这个取整
-			console.log(~~1.8);
-		</script>
-	</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>leetcodeJS大法之Add-Two-Number</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Add-Two-Number.js"></script>
+        <script>
+            const addTwoNumbers = LeetCode.addTwoNumbers;
+            const ListNode = LeetCode.ListNode;
+            
+            const list1 = new LeetCode.ListNode(1);
+            const list2 = new LeetCode.ListNode(2);
+
+            list1.append(2).append(3).append(4).append(5);
+            list2.append(1).append(7).append(4).append(5);
+            console.log("原始数据:");
+            console.log(list1.print());
+            console.log(list2.print());
+
+            const result = addTwoNumbers(list1, list2);
+            console.log('result:' + result.print());
+        </script>
+    </body>
+
 </html>
