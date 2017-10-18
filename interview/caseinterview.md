@@ -759,3 +759,40 @@ var say = sayHello();
 say(); // hello,world!0
 say(); // hello,world!1
 ```
+
+### javascript中的`"user strict";`是什么意思？使用它区别是什么？
+
+```js
+use strict是ECMAscript 5中的严格允许模式，这种模式下js在严格条件下运行
+
+严格模式中消除了一些语法的不合法不合理处，减少了一些怪异行为
+譬如不能用with,不能给未声明的全局变量赋值，不能callee，不允许直接操作argument等
+
+严格模式消除了一些不合理不安全之处，使得代码相对更合理，而且还可以提供编译器效率，增加运行速度
+
+最重要的是，为未来的js标准化做铺垫，未来可以认为是全部基于严格模式的（譬如es6）
+```
+
+### 如何判断一个对象是否属于某个类？
+
+```js
+譬如
+
+a instanceof Date
+
+const getClassName = (object) => Object.prototype.toString.call(object).match(/^\[object\s(.*)\]$/)[1];
+
+getClassName('sss') === 'String'; // true
+```
+
+### new操作符具体干了什么呢？
+
+```js
+1.创建一个空对象，并且this变量引用该对象，同时继承该对象的原型
+2.属性和方法被加入到this引用的对象中
+2.新创建的对象由this引用，并且最后隐式返回this
+
+var obj = {};
+obj.__proto__ = Base.prototype;
+Base.call(obj);
+```
