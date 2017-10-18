@@ -1,11 +1,7 @@
-/**
- * 作者: dailc
- * 时间: 2016-12-12
- * 描述: longest-substring-without-repeating-characters
- * 分别实现了几种方案:
- * 1.
- * 
- * 来自:https://leetcode.com/problems/longest-substring-without-repeating-characters/
+/* 
+ * 一刷时间: 2016-12-11
+ * 二刷时间：2017-10-18
+ * 来自: https://leetcode.com/problems/longest-substring-without-repeating-characters/
  */
 (function(exports) {
 
