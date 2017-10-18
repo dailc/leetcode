@@ -16,4 +16,4 @@ Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer 
 
 ### 思路
 
-- O(N)遍历
+- O(N)遍历,用一个tmp字符串记录当前的值
