@@ -283,6 +283,41 @@ label标签用来定义表单控制间的关系
 默认整个表单是默认开启（自动补全字段-根据以前输入）
 ```
 
+### 如何实现浏览器内多个标签页之间的通信
+
+```js
+WebSocket（简单场景不建议使用）
+
+websocket建立链接，多个页面可以交互
+
+localstorage API，它被添加，修改或删除时会触发一个事件
+
+window.addEventListener("storage", function(e){  
+  console.log('key:', e.key); // "abc"
+  console.log('oldValue:', e.oldValue); // null
+  console.log('newValue:', e.newValue); // 123
+});
+
+（无痕模式下，localStorage可能会有问题）
+
+通过SharedWorker
+
+// main.html
+var worker = new SharedWorker('shared.js');
+// note: not worker.onmessage!
+worker.port.onmessage = function(e) {
+    // e.data
+};
+
+// shared.js
+onconnect = function(e) {
+  var port = e.ports[0];
+  port.postMessage('Hello World!');
+};
+页面必须同域
+两个页面可以链接一个shareworker，页面A存储的数据页面B可以取出
+```
+
 ## CSS
 
 ### 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？

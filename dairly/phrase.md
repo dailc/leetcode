@@ -17,3 +17,6 @@ We teach people how to remember, we never teach them how to grow.
 
 Happiness is to find someone who can give you warm and share your life togethor.
 幸福就是找一个温暖的人过一辈子
+
+The greatest ideal man can set before himself is self-perfection
+最好莫过于自我完善
