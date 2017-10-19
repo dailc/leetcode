@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,javascript,Median-of-Two-Sorted-Arrays" name="Keywords">
-		<meta content="leetcodeJS大法之Median-of-Two-Sorted-Arrays" name="description">
 		<title>leetcodeJS大法之Median-of-Two-Sorted-Arrays</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -36,9 +34,9 @@
 			</code>				
 			</pre>
 		</div>
-		<script type="text/javascript" src="median-of-two-sorted-arrays.js"></script>
+		<script type="text/javascript" src="Median-of-Two-Sorted-Arrays.js"></script>
 		<script>
-			init();
+			// init();
 			document.getElementById('refresh').addEventListener('click', function() {
 				init();
 			});
@@ -92,6 +90,10 @@
 				}
 				dom.innerHTML = html;
 			}
+			
+			const findMedianSortedArrays = LeetCode.findMedianSortedArrays;
+			
+			console.log(findMedianSortedArrays([3], [1, 2]));
 		</script>
 	</body>
 
