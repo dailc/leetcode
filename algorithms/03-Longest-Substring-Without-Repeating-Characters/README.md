@@ -14,6 +14,6 @@ Given "bbbbb", the answer is "b", with the length of 1.
 Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ```
 
-### 思路
+## 思路
 
 - O(N)遍历,用一个tmp字符串记录当前的值
