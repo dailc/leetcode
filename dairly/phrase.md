@@ -20,3 +20,6 @@ Happiness is to find someone who can give you warm and share your life togethor.
 
 The greatest ideal man can set before himself is self-perfection
 最好莫过于自我完善
+
+Knowledge is a treasure but practice is the key to it.
+知识是宝贵的财富，但是实践才能找到通往财富的路

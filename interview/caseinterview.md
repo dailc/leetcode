@@ -318,6 +318,40 @@ onconnect = function(e) {
 两个页面可以链接一个shareworker，页面A存储的数据页面B可以取出
 ```
 
+### webSocket如何兼容低版本浏览器
+
+```js
+IE >= 10 才支持websocket
+
+1.用Adobe Flash Socket
+2.Active HTMLFile(IE的控件)
+3.基于multipart编码发送XHR（流化，服务器会维护一个持续更新和保持打开的开放响应，除非超时或主动关闭）
+    需要浏览器支持才行
+4.基于长轮询的XHR(keep-alive, 如果没数据，会一直挂起，知道等到数据，有数据会返回，然后结束后再次向服务器请求)
+    建立多个长连接可能会造成阻塞，要考虑性能
+```
+
+### 页面可见性（visibility）可以有哪些用途？
+
+```js
+通过visibilityState的值检测页面当前是否可见，以及打开网页的时间等
+
+在页面被切换到其它后台进程时，自动暂停音乐或视频的播放
+
+document.visibilityState返回当前页面的可见性，有以下值
+
+- hidden
+
+- visible
+
+- prerender，预渲染
+
+- preview，预览（如win7鼠标放底部预览时）
+
+
+visibilityChange: 当可见性状态改变时触发的事件
+```
+
 ## CSS
 
 ### 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？
