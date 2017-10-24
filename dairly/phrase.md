@@ -23,3 +23,9 @@ The greatest ideal man can set before himself is self-perfection
 
 Knowledge is a treasure but practice is the key to it.
 知识是宝贵的财富，但是实践才能找到通往财富的路
+
+Knowledge is a treasure but practice is the key to it.
+知识是宝贵的财富，但是实践才能找到通往财富的路
+
+if you focus on what you left behind you will never see what lies ahead!
+如果你只顾回头，那么永远也看不见前方有什么。

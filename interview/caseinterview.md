@@ -627,6 +627,48 @@ L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
 把字符大小设为0，就没有空格了
 ```
 
+### 为什么要初始化CSS样式
+
+```js
+浏览器兼容问题，不同浏览器对有些标签的默认值不同，如果没对CSS初始化，往往会出现浏览器之家的页面显示差异
+
+最简单的初始化（非常不建议）
+* {padding: 0; margin: 0;}
+
+或者采用淘宝的样式初始化
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td { margin:0; padding:0; }
+  body, button, input, select, textarea { font:12px/1.5tahoma, arial, \5b8b\4f53; }
+  h1, h2, h3, h4, h5, h6{ font-size:100%; }
+  address, cite, dfn, em, var { font-style:normal; }
+  code, kbd, pre, samp { font-family:couriernew, courier, monospace; }
+  small{ font-size:12px; }
+  ul, ol { list-style:none; }
+  a { text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  sup { vertical-align:text-top; }
+  sub{ vertical-align:text-bottom; }
+  legend { color:#000; }
+  fieldset, img { border:0; }
+  button, input, select, textarea { font-size:100%; }
+  table { border-collapse:collapse; border-spacing:0; }
+```
+
+### absolute的containing block(容器块)计算方式跟正常流有什么不同？
+
+```js
+absolute中的定位都会找到其祖先position不为static的元素，然后判断
+1.若此元素为inline元素，则containing block就是
+    能包含这个元素生成的第一个和最后一个inline box的padding box(除margin,border外的区域)的最小矩形
+2.否则，则由这个祖先元素的padding box构成
+
+如果都找不到，则为 initial containing block
+
+supplement:
+1.static/relative: 简单的说就是它的父元素的内容框（去掉padding部分）
+2.absolute: 向上找最近的定位不为static
+3.fixed:它的containing block一律为跟元素(html/body)，跟元素也是initial containing block
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
@@ -912,4 +954,21 @@ getClassName('sss') === 'String'; // true
 var obj = {};
 obj.__proto__ = Base.prototype;
 Base.call(obj);
+```
+
+### JS中有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？
+
+```js
+hasOwnProperty
+
+js中hasOwnProperty函数是返回一个布尔值，
+指出一个对象是否具有指定名称的属性
+此方法无法检查该对象的原型链中是否具有该属性
+该属性必须是该对象本身的成员，不能是原型链上的
+
+使用：
+Object.hasOwnProperty.call(object, proName);
+object必须是对象，proName必须，是属性名称的字符串形式
+
+有则返回true,否则false
 ```
