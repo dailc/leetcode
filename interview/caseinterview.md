@@ -579,6 +579,54 @@ flexbox可以把列表放在同一个方向（从上到下或左到右），并�
 }
 ```
 
+### 经常遇到的浏览器的兼容性有哪些？原因以及解决方法是什么？常用hack技巧？
+
+```js
+png24位的图片在IE6浏览器上出现背景，解决方案是做成png8
+
+浏览器默认的margin和padding不同。解决方案是加一个全局的
+*{margin:0;padding:0;}来统一
+
+IE6双边距bug: 块属性标签float后，又有横行的margin的情况，在ie6显示margin比设置的大
+浮动IE产生的双倍距离
+box{ float:left; width:10px; margin:0 0 0 10px;}
+这种情况之下IE会产生20px的距离，解决方案是在float的标签样式控制中加入 ——
+display:inline;将其转化为行内属性。(这个符号只有ie6会识别)
+
+渐进识别，利用`\9`标记将IE浏览器分离出来
+然后，再使用'+'将IE8和IE7，IE6分离开
+
+.bb{
+    background-color:red;/*所有识别*/
+    background-color:#00deff\9; /*IE6、7、8识别*/
+    +background-color:#a200ff;/*IE6、7识别*/
+    _background-color:#1e0bd1;/*IE6识别*/
+}
+
+IE下，可以获取常规属性的方法来获取自定义属性
+也可以使用getAttribute()获取自定义属性
+Firefox下，只能使用getAttribute()获取自定义属性。
+解决：统一使用getAttribute()
+
+IE下，event对象有x,y属性，但是没有pageX,pageY属性
+Firefox下，有pageX,pageY，但没有x,y
+
+Chrome中文界面默认会将小于12px的文本强制按照12px显示
+可以css中加入
+-webkit-text-size-adjust: none; 解决。
+
+超链接访问过后hover属性不见了，被点击访问的超链接样式不再具有hover和active了解决方法是改变CSS属性的排列顺序
+L-V-H-A :  a:link {} a:visited {} a:hover {} a:active {}
+```
+
+### li与li之间有看不见的空白间隙是什么原因引起的？有什么解决办法？
+
+```js
+行框的排列会受到中间空白（回车，空格）的影响，
+因为空格也属于字符，这些空白也会被应用样式，占据空间，所以会有间隔
+把字符大小设为0，就没有空格了
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
