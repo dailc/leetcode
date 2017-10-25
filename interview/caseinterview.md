@@ -669,6 +669,30 @@ supplement:
 3.fixed:它的containing block一律为跟元素(html/body)，跟元素也是initial containing block
 ```
 
+### CSS里的visibility属性有一个collapse属性值时干嘛的?在不同浏览器下有什么区别？
+
+```js
+对于普通元素visibility:collapse;会将元素完全隐藏，不占据页面布局空间
+标准w3c呈现效果为元素隐藏，但是占据空间，Firefox下隐藏并不占空间，IE下不起作用
+
+
+如果目标元素为table,
+可以隐藏对应的行或列（跟display:none一样）
+```
+
+### position跟display, margin, collapse, overflow, float这些特性相互叠加会怎么样？
+
+```js
+如果元素的display为none，那么元素不被渲染，position,float不起作用
+
+如果元素拥有position:absolute或者position:fixed属性
+那么元素将为绝对定位，float不起作用，
+
+如果元素float不是none，元素会脱离文档流根据float属性值来显示，
+
+有浮动，绝对定位，inline-block属性的元素，margin不会和垂直方向上的其它元素margin折叠
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
