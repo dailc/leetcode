@@ -352,6 +352,72 @@ document.visibilityState返回当前页面的可见性，有以下值
 visibilityChange: 当可见性状态改变时触发的事件
 ```
 
+### 如何在页面实现一个圆形的可点击区域？
+
+```js
+1.border-radius 属性矩形区域变成圆形
+
+2.圆形的svg
+
+3.使用map+area，img标签usemap，area区域约定圆形区域
+
+<img src="xxx.png" width="1366" height="768" border="0" usemap="#Map" />  
+<map name="Map" id="Map">  
+<area shape="circle" coords="100,100,50" href="https://www.baidu.com" target="_blank" />  
+</map>
+
+map + area可以让一张图片拥有多个超链接(也可以监听实现自定义事件)
+
+4.纯JS实现，譬如获取鼠标坐标，通过算法判断是否在目标圆形之内（不建议）
+```
+
+### 实现不使用border画出1px高的线，在不同浏览器的标准模式和怪异模式下都能保持一致的效果
+
+```js
+使用div
+
+<div style="height:1px;overflow:hidden;background:black"></div>
+
+如果兼容性没有这么多要求的话，方式更多
+
+譬如after可以插入伪元素（较常用），然后定义高度为1px，content为''，可以进行绝对定位，再设置背景色
+```
+
+### 网页验证码是干嘛的，是为了解决什么安全问题？
+
+```js
+主要作用是：区分是计算机程序自动操作还是人为手工操作
+
+可以防止恶意破解密码，刷票，论坛灌水等
+
+在国内，最早应该是为了防止暴力穷举密码，最主要是防止机器人
+```
+
+### title与h1的区别，b与strong的区别，i与em的区别？
+
+```js
+title的属性没有明确意义，只表示是一个标题，h1则表示层次明确的标题，对页面的抓取也有影响
+
+title是每一个页面必须要的属性
+
+其它主要是： 语义化与自然样式的区别
+
+语义化标签strong,em更利于SEO，一些特殊设备也会处理（如朗读）譬如
+
+strong，标明的重点内容，有语气加强的含义，也同样会加粗，使用阅读设备时，会中毒
+b仅展示强调内容（譬如加粗）
+
+i内容为斜体，em表示强调的文本，也同样会斜
+
+自然样式标签
+b,i,u,s,pre
+
+语义样式标签
+strong,em,ins,del,code
+
+正常来说应该使用最符合的语义化标签（但是请勿滥用）
+```
+
 ## CSS
 
 ### 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？

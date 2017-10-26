@@ -29,3 +29,6 @@ Knowledge is a treasure but practice is the key to it.
 
 if you focus on what you left behind you will never see what lies ahead!
 如果你只顾回头，那么永远也看不见前方有什么。
+
+The shortest distance between two people is a smile.
+人与人之间最近的距离就是微笑
