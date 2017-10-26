@@ -1,10 +1,13 @@
-/* 作者: dailc
- * 时间: 2017-05-01
- * 描述: Same-Tree
- * 
+/* 
+ * 一刷时间: 2017-05-01
+ * 二刷时间：2017-10-25
  * 来自: https://leetcode.com/problems/same-tree
  */
 (function(exports) {
+    
+    function isSameTree() {
+        
+    }
 
 	/**
 	 * @description isSameTree
