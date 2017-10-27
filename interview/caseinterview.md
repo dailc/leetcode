@@ -759,6 +759,34 @@ supplement:
 有浮动，绝对定位，inline-block属性的元素，margin不会和垂直方向上的其它元素margin折叠
 ```
 
+### 对BFC规范（块级格式化上下文：block formatting context）的理解？
+
+```js
+W3C CSS2.1规范中的一个概念，它是一个独立容器，决定了元素如何对其内容进行定位，以及与其它元素的关系和相互作用
+一个页面是有很多个Box组成的，元素的类型和display属性决定了这个Box的类型
+
+不同类型的Box会参与不同的Formatting Context（决定如何渲染文档的容器）
+因此Box内的元素会以不同的方式渲染
+也就是说BFC内部的元素和外部的元素互不影响
+
+触发BFC的条件:
+float的值不为none
+overflow的值不为visible
+display的值为inline-block,table-cell,table-caption
+position的值为absolute或fixed
+
+而display:table，有这个属性时会默认生成一个匿名的table-cell，所以也会间接的生成BFC
+
+BFC中相邻的块级元素垂直外边界会折叠
+BFC不会与float的元素区域重叠（如果浮动元素后有一个BFC，它不会和前面的浮动元素折叠）
+计算高度时，浮动元素也参与
+每个元素的margin box的左边， 与包含块border box的左边相接触（对于从左往右的格式化，否则相反）
+
+默认可以是认为处于body的bfc中
+
+http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。

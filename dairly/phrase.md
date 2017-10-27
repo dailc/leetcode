@@ -32,3 +32,6 @@ if you focus on what you left behind you will never see what lies ahead!
 
 The shortest distance between two people is a smile.
 人与人之间最近的距离就是微笑
+
+I was well beaten myself, and I am better for it.
+我自己也被打败过，但我因此变得更好
