@@ -35,3 +35,6 @@ The shortest distance between two people is a smile.
 
 I was well beaten myself, and I am better for it.
 我自己也被打败过，但我因此变得更好
+
+Excellence is a continuous process and not an accident.
+优秀不是偶然事件，而是一个持续的过程

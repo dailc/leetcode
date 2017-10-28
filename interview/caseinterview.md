@@ -1090,3 +1090,53 @@ object必须是对象，proName必须，是属性名称的字符串形式
 
 有则返回true,否则false
 ```
+
+### JSON的了解？
+
+```js
+JSON(JavaScript Object Notation)是一种轻量级的数据交换方式
+
+它是基于JavaScript的一个子集。
+数据格式简单，易于读写，占用带宽小
+
+例如
+{"name": "zhangsan", "age": "18"}
+
+JSON字符串转JSON对象
+eval('(' + str + ')')
+str.parseJSON
+JSON.parse(str)
+
+JSON转字符串
+obj.toJSONString()
+JSON.stringify(obj)
+```
+
+### JS延迟加载的方式有哪些?
+
+```js
+1.创建脚本时（或动态创建时），设置async属性（H5中的异步支持）
+
+2.动态创建DOM(用的最多)，手动创建dom添加到页面中
+
+3.或者XHR Injection，XHR Eval，Script In Iframe,Script defer属性,document.write(script tag)等
+
+XHR Injection(XHR 注入)：通过XMLHttpRequest来获取javascript，然后创建一个script元素插入到DOM结构中
+
+XHR Eval：与XHR Injection对responseText的执行方式不同，直接把responseText放在eval()函数里面执行
+
+Script In Irame：在父窗口插入一个iframe元素，然后再iframe中执行加载JS的操作
+
+defer属性：IE4.0就出现。defer属声明脚本中将不会有document.write和dom修改。浏览器会并行下载其他有defer属性的script。而不会阻塞页面后续处理。
+注：所有的defer脚本必须保证按顺序执行的。
+
+async属性：HTML5新属性。脚本将在下载后尽快执行，作用同defer，但是不能保证脚本按顺序执行。他们将在onload事件之前完成
+
+对于支持HTML5的浏览器，实现JS的异步加载只需要在script元素中加上async属性，
+为了兼容老版本的IE还需加上defer属性；
+对于不支持HTML5的浏览器(IE可以用defer实现)，
+可以采用以上几种方法实现。
+原理基本上都是向DOM中写入script或者通过eval函数执行JS代码，
+你可以把它放在匿名函数中执行，也可以在onload中执行，
+也可以通过XHR注入实现，也可以创建一个iframe元素，然后在iframe中执行插入JS代码。
+```
