@@ -1140,3 +1140,35 @@ async属性：HTML5新属性。脚本将在下载后尽快执行，作用同defe
 你可以把它放在匿名函数中执行，也可以在onload中执行，
 也可以通过XHR注入实现，也可以创建一个iframe元素，然后在iframe中执行插入JS代码。
 ```
+
+### Ajax是什么，如何创建一个Ajax?
+
+```js
+全称： Asynchronous JavaScript And XML
+异步传输 + js + xml
+也就是向服务器发送请求时，不必等待结果，而是可以同时做其他事情
+等到有结果了它会自己根据设定进行后续操作
+于此同时，页面不会整体刷新，提高了用户体验
+
+创建：
+1.创建一个XMLHttpRequest对象，也就是创建一个异步调用对象
+2.创建一个新的Http请求，并指定该HTTP请求的方法，url以及验证信息
+3.设置响应HTTP请求状态变化的函数
+4.发送HTTP请求
+5.获取异步调用返回的数据
+6.使用js和dom实现局部刷新
+```
+
+### Ajax如何解决浏览器缓存问题？
+
+```js
+ajax请求中，只有get请求会有缓存
+
+解决方案
+
+1.ajax请求前加上:ajaxObj.setRequestHeader('If-Modified-Since', '0');
+2.ajax请求前加上:ajaxObj.setRequestHeader('Cache-Control', 'no-cache');
+3.在URL后面加上一个随机数: "random=" + Math.random();
+4.同理在url后面加上时间戳: "nowtime=" + (new Date()).getTime();
+5.jq中，可以: $.ajaxSetup({cache: false});
+```

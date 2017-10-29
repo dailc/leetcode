@@ -38,3 +38,7 @@ I was well beaten myself, and I am better for it.
 
 Excellence is a continuous process and not an accident.
 优秀不是偶然事件，而是一个持续的过程
+
+The more decisions that you are forced to make alone,
+the more you are aware of your freedom to choose.
+你自己做的决定越多，你越能体会你可以自由选择
