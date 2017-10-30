@@ -792,6 +792,7 @@ http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
 ```js
 权重规则：
 标签权重1，class 10, id 100,如下
+style的权重是1000
 
 /*1*/
 div {}
@@ -813,7 +814,7 @@ div {}
 
 如果权重相同，最后定义的样式会起作用
 
-!important代表最高权重(100W)
+!important代表最高权重(据说是100W)
 ```
 
 ### 请解释下为什么需要浮动？清除浮动的方式
