@@ -42,3 +42,6 @@ Excellence is a continuous process and not an accident.
 The more decisions that you are forced to make alone,
 the more you are aware of your freedom to choose.
 你自己做的决定越多，你越能体会你可以自由选择
+
+We excuse our sloth under the pretext of difficulty.
+我们常以困难为由，作为懒惰的借口。

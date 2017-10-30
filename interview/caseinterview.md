@@ -787,6 +787,79 @@ BFC不会与float的元素区域重叠（如果浮动元素后有一个BFC，它
 http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
 ```
 
+### css定义的权重
+
+```js
+权重规则：
+标签权重1，class 10, id 100,如下
+
+/*1*/
+div {}
+
+/*10*/
+.class1 {}
+
+/*100*/
+#id1 {}
+
+/*100+1*/
+#id1 div {}
+
+/*10+1*/
+.class1 div {}
+
+/*10+10+1*/
+.class1 .class2 div {}
+
+如果权重相同，最后定义的样式会起作用
+
+!important代表最高权重(100W)
+```
+
+### 请解释下为什么需要浮动？清除浮动的方式
+
+```js
+清除浮动主要是为了清除浮动元素产生的影响
+浮动的元素，高度会坍塌，高度坍塌使得页面后面的布局不能正常显示
+
+方法：
+
+overflow:hidden触发bfc,bfc会计算浮动元素高度
+父级div定义height
+父级的div也一起浮动
+clear:both属性
+.clearfix::before, .clearfix::after {
+	content: " ";
+	display: table;
+}
+.clearfix::after {
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+
+sass中
+&::after,&::before{
+  	    content: " ";
+          visibility: hidden;
+          display: block;
+          height: 0;
+          clear: both;
+  	}
+原理：
+display:block 使得元素以块级元素显示，占满剩余空间
+height：0 避免生成内容破坏原有布局的高度
+visibility:hidden 使生成的内容不可见，并允许可能被生成内容盖住的内容可以进行点击和交互;
+通过 content:"."生成内容作为最后一个元素，至于content里面是点还是其他都是可以的，
+例如oocss里面就有经典的 content:".",有些版本可能content 里面内容为空,一丝冰凉是不推荐这样做的,
+firefox直到7.0 content:”" 仍然会产生额外的空隙；
+zoom：1 触发IE hasLayout。
+除了clear：both用来闭合浮动的，其他代码无非都是为了隐藏掉content生成的内容，
+这也就是其他版本的闭合浮动为什么会有font-size：0，line-height：0。
+
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
