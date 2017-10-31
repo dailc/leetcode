@@ -1,115 +1,81 @@
-/**
- * 作者: dailc
- * 时间: 2017-03-23
- * 描述: 3Sum
- * 
+/* 
+ * 一刷时间: 2017-03-23
+ * 二刷时间：2017-10-31
  * 来自: https://leetcode.com/problems/3sum
  */
 (function(exports) {
 
-	/**
-	 * @description 暴力解法O(N3)
-	 * 这种解法不能被AC的
-	 * @param {number[]} nums
-	 * @return {number[][]} 
-	 */
-	exports.threeSum = function(nums) {
-		if(!nums||nums.length<3) {
-			return [];
-		}
-		var result = [];
-		var len = nums.length;
-		for(var i = 0; i < len; i++) {
-			for(var j = i + 1; j < len; j++) {
-				for(var k = j + 1; k < len; k++) {
-					//而且不能有重复的
-					if(nums[i]+nums[j]+nums[k] === 0) {
-						result.push([nums[i],nums[j],nums[k]]);
-					}
-				}
-			}
-		}
-		len = result.length;
-		//hash表方便去重
-		var hash = {};
-		//去重后的数组
-		var finalResult = [];
-		//重新排序并去重复
-		for(var i = 0; i　<　len; i++) {
-			result[i].sort();
-			if(!hash[result[i].join()]) {
-				hash[result[i].join()] = true
-				finalResult.push(result[i]);
-			} 
-		}
-		
-		
-		return finalResult;
-	};
 	
 	/**
-	 * @description O(N2)的解法
 	 * @param {number[]} nums
-	 * @return {number[][]} 
+	 * @return {number[][]}
 	 */
-	exports.threeSum2 = function(nums) {
-		if(!nums||nums.length<3) {
+	function threeSum(nums) {
+		if (!nums || nums.length < 3) {
 			return [];
 		}
-		//先排序-普通的sort负数排的不对
-		nums.sort(function(a,b) {
+		
+		// 先排序
+		nums.sort(function(a, b) {
 			return a - b;
 		});
-		console.log(JSON.stringify(nums));
-		var result = [];
-		var len = nums.length;
-		for(var i = 0; i < len-2; i++) {
-			if (i > 0 && nums[i] == nums[i-1]) {
-				//防止重复数
+		
+		let res = [];
+		const len = nums.length;
+		
+		for (let i = 0; i < len - 2; i += 1) {
+			if (i > 0 && nums[i] === nums[i - 1]) {
+				// 防止重复数
 				continue;
 			}
-			var twoSums = twoSum2(nums,i+1,len-1,nums[i]);
-			if(twoSums) {
-				for(var j = 0; j < twoSums.length; j ++) {
-					result.push(twoSums[j]);
-				}	
-				
-			}
 			
+			const twoSums = twoSum(nums, i + 1, len - 1, nums[i]);
+			
+			if (twoSums) {
+				res = res.concat(twoSums);
+			}
 		}
 		
-		return result;	
-	};
+		return res;
+	}
 	
-	function twoSum2(nums,begin,end, target) {
-		var result = [];
-		var len = nums.length,left = begin,right = end;
-		while(left<right){
-			var sum = nums[left]+nums[right]+target;
-			if(sum===0){
-				//可能有多个满足条件的值
-				result.push([nums[left],nums[right],target]);
+	exports.threeSum = threeSum;
+
+
+	function twoSum(nums, begin, end, target) {
+		if(!nums) {
+			return [];
+		}
+
+		const res = [];
+		let left = begin;
+		let right = end;
+
+		while (left < right) {
+			const sum = nums[left] + nums[right] + target;
+			
+			if (sum === 0) {
+				// 可能会有多个满足条件的值
+				res.push([nums[left], nums[right], target]);
 				
-				//去除可能的重复数
-				while (left<right && nums[left] == nums[left+1]) {
+				// 去除可能的重复数
+				while (left < right && nums[left] === nums[left + 1]) {
 					left++;
 				}
-                while (left<right && nums[right] == nums[right-1]) {
+				while (left < right && nums[right] === nums[right - 1]) {
 					right--;
 				}
-                left++;
+				left++;
 				right--;
-				
-			}else if(sum>0){
+			} else if (sum > 0) {
 				right--;
-			}else {
-				//小于
+			} else {
 				left++;
 			}
 		}
-		return result;
-	};
-	
-	
+
+		return res;
+	}
+
 
 })(window.LeetCode = window.LeetCode || {});

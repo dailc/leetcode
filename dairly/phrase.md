@@ -45,3 +45,6 @@ the more you are aware of your freedom to choose.
 
 We excuse our sloth under the pretext of difficulty.
 我们常以困难为由，作为懒惰的借口。
+
+Only someone who is well-prepared has the opportunity to improvise
+只有充分准备的人能够即兴表演
