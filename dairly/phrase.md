@@ -48,3 +48,6 @@ We excuse our sloth under the pretext of difficulty.
 
 Only someone who is well-prepared has the opportunity to improvise
 只有充分准备的人能够即兴表演
+
+If you remember me,then I don't care if everyone else forgets.
+只要你记得我，我不介意全世界把我遗忘
