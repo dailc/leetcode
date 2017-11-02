@@ -1,6 +1,9 @@
-## Letter-Combinations-of-a-Phone-Number
+# Letter-Combinations-of-a-Phone-Number
 
 ## 说明
+
+给一个数字字符串，根据数字与字符的映射表，返回所有可能的字符组合
+
 题目的映射表如下:
 
 ```
@@ -28,4 +31,13 @@ case '9':
 }
 ```
 
-分析题目，可以得知应该由递归方案来做，需要一个辅助栈，真正用到递归后倒并不是特别复杂
+示例
+
+```js
+Input:Digit string "23"
+Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
+```
+
+### 思路
+
+dfs深搜，需要一个辅助栈
