@@ -969,6 +969,41 @@ padding隔开元素与内容的间距（让内容与包裹之间有一段空）
 table的边框同设等
 ```
 
+### 元素竖向的百分比设定是相对于容器的高度吗？
+
+```js
+元素的竖向百分比设定是基于容器的宽度而不是高度
+
+可以自行测试一旦修改容器宽度，发现竖向百分比对于的值也增加了
+http://www.webhek.com/post/vertical-percentages-are-relative-to-container-width-not-height.html
+```
+
+### 全屏滚动的原理是什么？用到了css的哪些属性？
+
+```js
+多个页面，每一个页面分别占据页面的100%高度，每次切换页面时全屏滚动
+
+它的原理和图片轮播一样，都是基于css的transform属性
+每一个页面初始化时的y值不同(间隔一个屏幕高度)
+然后页面切换时，切换到不同的y值
+
+一般会使用transform,transition等属性，分别用来设置坐标，设置过渡时间等
+有时候还可以用其它过渡效果，如透明度，颜色渐变等
+```
+
+### 什么是响应式设计？响应式设计的原理是什么？如何兼容低版本的IE
+
+```js
+页面根据不同的设备环境进行相应调整，譬如兼容手机和pad(一个页面多个终端，而不是每一个终端一个特定版本)
+
+核心原理是使用css media query，通过媒体查询去检测不同设备的尺寸
+页面头部必须加上声明viewport
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”>
+
+兼容ie可以使用js来判断并兼容（ie不支持媒体查询）
+ie肯定只是pc端展示，因此更多的是pc端兼容问题，而不是不同设备的响应式
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。

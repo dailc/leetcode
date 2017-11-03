@@ -50,7 +50,10 @@ Only someone who is well-prepared has the opportunity to improvise
 只有充分准备的人能够即兴表演
 
 If you remember me,then I don't care if everyone else forgets.
-只要你记得我，我不介意全世界把我遗忘
+只要你记得我，我不介意全世界把我遗忘。
 
 My life is in these books. Read these and know my heart.
 我的人生就在这些书中，读完它们就能读懂我的心。
+
+Only I can change my life. No one can do it for me.
+我的命运我做主。
