@@ -57,3 +57,6 @@ My life is in these books. Read these and know my heart.
 
 Only I can change my life. No one can do it for me.
 我的命运我做主。
+
+Yesterday is not ours to recover, but tomorrow is ours to win or lose.
+我们无法重拾昨天，但可以赢得或输掉明天。

@@ -993,15 +993,67 @@ http://www.webhek.com/post/vertical-percentages-are-relative-to-container-width-
 
 ### 什么是响应式设计？响应式设计的原理是什么？如何兼容低版本的IE
 
-```js
+```html
 页面根据不同的设备环境进行相应调整，譬如兼容手机和pad(一个页面多个终端，而不是每一个终端一个特定版本)
 
 核心原理是使用css media query，通过媒体查询去检测不同设备的尺寸
 页面头部必须加上声明viewport
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”>
+name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no”
 
 兼容ie可以使用js来判断并兼容（ie不支持媒体查询）
 ie肯定只是pc端展示，因此更多的是pc端兼容问题，而不是不同设备的响应式
+```
+
+### 视差滚动效果，如何给每页做不同动画？（回到顶部，向下滑动要再次出现，和只出现一次分别怎么做？）
+
+```js
+视差滚动：多层背景以不同速度移动，形成立体的运动效果，带来出色的视觉体验
+
+一般会有背景层，内容层，贴图（悬浮）层，滚动时，不同速度移动
+
+一般原理是：各个页面是fixed布局，然后监听滚动（譬如滚轮），
+在滚动的不同距离以此移动对于图层的top值
+```
+
+### ::before和:after中双冒号和单冒号有什么区别？解释下这两个伪元素的作用？
+
+```js
+双冒号是css3规范中引入的
+正常来说，单冒号用于伪类，双冒号用于伪元素
+不过浏览器会支持单冒号表示伪元素的写法
+
+伪元素譬如：(代表会新增东西)
+::first-line（特殊样式加到文本首行）
+::before
+::after
+伪类譬如：(代表特定状态)
+:active
+:link
+```
+
+### 如何修改chrome记住密码后自动填充表单的黄色背景？
+
+```js
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
+    background-color: rgb(250, 255, 189); /* #FAFFBD; */
+    background-image: none;
+    color: rgb(0, 0, 0);
+}
+  
+主要是 -webkit-autofill 样式
+```
+
+### 对line-height是如何理解的？
+
+```js
+指定了一行字的高度，定义是同一个元素中（比如同一个p）两个文本行基线之间的距离
+如果div没有高度，但是里面有文字，那么它会被文字的line-height默认撑开
+
+line-height只影响行内元素，并不能直接应用与块级元素
+具有可继承性，块级元素的子元素会继承该特性，并在行内元素上生效
+
+
+譬如，简单的把height设置和行高一样的话，可以实现单行文本居中
 ```
 
 ## JS
