@@ -60,3 +60,6 @@ Only I can change my life. No one can do it for me.
 
 Yesterday is not ours to recover, but tomorrow is ours to win or lose.
 我们无法重拾昨天，但可以赢得或输掉明天。
+
+Champions have the courage to keep turning the pages because they know a better chapter lies ahead.
+冠军有不断翻页的勇气，因为他们知道下一个章节会更好。

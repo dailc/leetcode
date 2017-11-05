@@ -1056,6 +1056,56 @@ line-height只影响行内元素，并不能直接应用与块级元素
 譬如，简单的把height设置和行高一样的话，可以实现单行文本居中
 ```
 
+### 设置元素浮动后，该元素的display值是什么?
+
+```js
+浮动后的display值自动变为了display:block
+```
+
+### 怎么让chrome支持小于12px的文字？
+
+```js
+使用小于12px的字体，非chrome可以不考虑兼容，chrome中加上
+-webkit-text-size-adjust: none
+有一个后果，就是如果放大了网页，字体不会随着一起放大（所以不建议全局使用，而是特定需要兼容的使用）
+
+其他障眼法
+如用图片替代文字
+```
+
+### 让页面里的字体变清晰，用css怎么做？
+
+```js
+-webkit-font-smoothing: antialiased
+加上抗锯齿渲染（非标准）
+
+另外有人总结过只在macOS 的webkit中有效
+https://segmentfault.com/q/1010000000467910
+```
+
+### font-style属性可以让它赋值为"oblique"，什么意思？
+
+```js
+倾斜的字体样式
+
+和italic的区别：
+italic是斜体
+oblique是倾斜的文字排版（模仿的斜体，但不是斜体）
+```
+
+### display:inline-block什么时候会显示间隙？
+
+```js
+换行或空格会占据一定的位置，从而产生间隙
+
+解决方法：
+去除空格
+使用margin负值
+使用font-size：0（本质也是去除了空格的占位）
+letter-spacing,word-spacing
+譬如letter-spaceing:-4px
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
