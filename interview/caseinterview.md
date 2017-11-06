@@ -1106,6 +1106,107 @@ letter-spacing,word-spacing
 譬如letter-spaceing:-4px
 ```
 
+### position:fixed在手机上无效怎么处理？
+
+```js
+fixed是基于整个页面固定，而某些场景下滑动的是整个viewport,
+网页并没有滑动，所以fixed看起来跟没有固定一样(实际上它并没有动，只是不是相对手机屏幕的固定而已)
+
+一般是没有加viewport声明的缘故，加上即可
+meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+
+另外，iOS下自带的回弹也可能造成问题
+或者iOS下fixed被输入框弹出(原理是body被滚动，改成absolute，或者监听focus时临时改)
+
+还有人的做法是使得fixed布局的父元素(body)不出现滚动，将滚动内容移到其他div内部
+这样弹出后，页面本身不会滚动，不会有这个问题
+
+还有一种是页面上同时添加了滑动事件，如：overflow：auto/scroll等，就会出现这样的BUG：
+当滑动页面时，input框（fixed）就会掉下来，fixed属性失效。
+解决是使用iscroll等插件（不使用overflow：auto/scroll，iScroll内部是自己用的translate动画-低版本也是js模拟动态修改top）
+```
+
+### 如果需要手写动画，你认为最小间隔是多久，为什么？
+
+```js
+很多显示器的频率仍然是： 60HZ，所以理论上是
+1/60*1000ms = 16.7ms
+```
+
+### overflow:scroll不能平滑滚动的问题
+
+```js
+特别是iOS下
+
+1.需要-webkit-overflow-scrolling： touch开启硬件加速
+(底层用了一个原生控件来显示的)
+
+2.或者类似于iScroll一样，自己内部用translate动画模拟
+```
+
+### 有一个高度自适应的div，里面有两个div，一个高度100px,希望另一个填满剩下的高度
+
+```js
+1.box-sizing方案
+外层box-sizing:border-box;同时设置padding:100px 0 0
+内层100像素高的元素向上移动100像素，或者使用absolute布局防止占据空间
+另一个元素直接height:100%
+
+2.absolute布局
+外层position:relative
+百分百自适应元素直接position: absolute; top: 100px; bottom: 0; left: 0s
+
+3.或者纯js解法
+```
+
+### png、jpg、gif这些图片格式解释一下，分别什么时候用。有没有了解过webp？
+
+```js
+GIF：
+Graphics Interchange format（图形交换格式）
+是一种索引颜色格式，在颜色数很少时，产生的文件极小
+优点：
+1.支持背景透明
+2.支持动画
+3.支持图形渐进
+4.支持无损压缩
+5.水平扫描
+最大的缺点是最多只有256中颜色
+
+jpeg：
+Joint Photograhic Experts Group（联合图像专家组）
+优点：
+1.支持上百万中颜色
+2.使用更有效的有损压缩，文件体积更小
+3.更适合与照片
+缺点是会损失一些细节（如艺术线条），而且有损压缩不可逆，另外就是不支持图形渐进和背景透明
+
+png:
+(Portable Network Graphic Format，PNG)流式网络图形格式
+目的是企图替代GIF和tiff格式
+优点：
+1.存储灰度图像时，深度可多达16位
+2.存储彩色图像时，深度多达48位
+3.还可存储16位的透明通道
+4.从LZ77派生的无损数据压缩算法。
+缺点是体积相对jpg较大，对于普通图片来说，保留了过多的无用细节
+
+一般色彩较少的纯色背景小图标等可用gif
+有透明度要求的色彩丰富的可用png
+其他用jpg(特别适合与普通的图片-要求不高的)
+
+webp:（同时支持有损和无损）
+google开发的一种旨在加快图片加载速度的图片格式
+
+当有损压缩，相比较与jpg，编码同样质量的webp文件需占用更多的计算资源（体积更小，比jpg小40%）
+
+它具有更优的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量；
+同时具备了无损和有损的压缩模式、Alpha 透明以及动画的特性，
+在 JPEG 和 PNG 上的转化效果都相当优秀、稳定和统一。
+
+chrome中基本都支持webp
+```
+
 ## JS
 
 ### 介绍JavaScript的基本数据类型。
@@ -1506,4 +1607,35 @@ ajax请求中，只有get请求会有缓存
 一轮循环  a -> c
 
 循环结束后 b触发回调
+```
+
+### 连等号赋值顺序
+
+```js
+var a = {n: 1}
+var b = a;
+a.x = a = {n: 2}
+console.log(a); // {n: 2}
+console.log(a.x); // undefined
+console.log(b); // {n: 1, x: {n: 2}}
+console.log(b.x) // {n: 2}
+
+因为连等号这个语句中会先确定所有遍历的指针，然后才会去对于赋值
+
+其中
+a.x = a = {n: 2} 
+指针确定如下
+a.x的指针已经确定了，指向了原始a的（因为原始a没有x，因此创建了一个指向null的指针）
+a指向也是原始a
+
+赋值如下
+a重新指向到了新的地址 {n: 2}（栈中的指针指向了堆中新的对象）
+原始a.x的指向到了 {n: 2}
+
+因此最后
+a指向到了新的{n: 2}
+a.x为undefined
+
+b指向原始a
+b.x = {n: 2}
 ```

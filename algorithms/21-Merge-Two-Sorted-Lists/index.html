@@ -6,34 +6,33 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Merge-Two-Sorted-Lists" name="Keywords">
-		<meta content="leetcodeJS大法之Merge-Two-Sorted-Lists" name="description">
 		<title>leetcodeJS大法之Merge-Two-Sorted-Lists</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
 	<body>
 		<script type="text/javascript" src="Merge-Two-Sorted-Lists.js" ></script>
 		<script>
-		var list1 = {
-			val:1,
-			next:{
-				val:3,
-				next:{
-					val:5
-				}
-			}
-		};
-		var list2 = {
-			val:2,
-			next:{
-				val:4,
-				next:{
-					val:6
-				}
-			}
-		};
-		var result = LeetCode.mergeTwoLists(list1,list2);
-		console.log(JSON.stringify(result));
+		    const mergeTwoLists = LeetCode.mergeTwoLists;
+        		var list1 = {
+        			val:1,
+        			next:{
+        				val:3,
+        				next:{
+        					val:5
+        				}
+        			}
+        		};
+        		var list2 = {
+        			val:2,
+        			next:{
+        				val:4,
+        				next:{
+        					val:6
+        				}
+        			}
+        		};
+
+            console.log(mergeTwoLists(list1, list2));
 		</script>
 	</body>
 </html>
