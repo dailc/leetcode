@@ -63,3 +63,6 @@ Yesterday is not ours to recover, but tomorrow is ours to win or lose.
 
 Champions have the courage to keep turning the pages because they know a better chapter lies ahead.
 冠军有不断翻页的勇气，因为他们知道下一个章节会更好。
+
+Perserance is not a long race; it is many short races one after another.
+坚持不是一个长跑，它是很多一个接一个的短跑。
