@@ -1695,3 +1695,37 @@ b.x = {n: 2}
 
 另外window.postMessage也可跨域跨窗口传递消息
 ```
+
+### 立即执行函数，不暴露私有成员
+
+```js
+var module1 = (function() {
+    var count = 1;
+    
+    function change() {
+        count++;
+    }
+    
+    return {
+        change: change,
+    };
+)();
+```
+
+### AMD(Modules/Asynchronous-Definition)、CMD(Common-Module-Definition)规范的区别?
+
+```js
+AMD:
+异步模块定义，所有模块异步加载，模块加载不影响后续运行，所以依赖模块的语句必须写在回调函数中
+提前执行
+依赖前置
+主要应用于require.js
+一个当多个用
+cmd：
+同步加载
+延迟执行
+依赖就近
+as lazy as possible
+主要应用于sea.js
+推荐每一个模块职责单一
+```

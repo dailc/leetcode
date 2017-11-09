@@ -1,84 +1,61 @@
-/**
- * 作者: dailc
- * 时间: 2017-03-26
- * 描述: Merge-k-Sorted-Lists
- * 
+/*
+ * 一刷时间: 2017-03-26
+ * 二刷时间：2017-11-08
  * 来自: https://leetcode.com/problems/merge-k-sorted-lists
  */
 (function(exports) {
 
-	/**
-	 * @description 合并k个已排序的单向链表，并分析整个算法的复杂度。
-	 * @param {ListNode[]} lists
- 	 * @return {ListNode}
-	 */
-	exports.mergeKLists = function(lists) {
-		if(!lists || !lists.length) {
-			return null;
-		}
-		var len = lists.length;
-		if(len == 1) {
-			return lists[0];
-		}
-		var mid = Math.floor((len - 1)/2);
-		//slice start end
-		var list1 = exports.mergeKLists(lists.slice(0,mid + 1));  
-		var list2 = exports.mergeKLists(lists.slice(mid + 1,len)); 
-		
-		return mergeTwoLists(list1,list2);
-	};
-	
-	/**
-	 * @description 合并k个已排序的单向链表，并分析整个算法的复杂度。
-	 * 是、不用递归用循环
-	 * @param {ListNode[]} lists
- 	 * @return {ListNode}
-	 */
-	exports.mergeKLists2 = function(lists) {
-		if(!lists || !lists.length) {
-			return null;
-		}
-		var len = lists.length;
-		if(len == 1) {
-			return lists[0];
-		}
-		while(len > 1) {
-			var k = Math.floor((len+1 )/2);
-			var mid = Math.floor((len)/2);
-			for(var i = 0; i < mid; i ++) {
-				 lists[i] = mergeTwoLists(lists[i], lists[i + k]);    
-			}
-			len = k;
-		}
-		
-		
-		return lists[0];
-	};
-	
-	/**
-	 * @param {ListNode} l1
- 	 * @param {ListNode} l2
- 	 * @return {ListNode}
-	 */
-	function mergeTwoLists(list1, list2) {
-		if(list1 == null) {
-			return list2;
-		}
-		if(list2 == null) {
-			return list1;
-		}
-		var mergeHead;
-		if(list1.val < list2.val) {
-			mergeHead = list1;
-			mergeHead.next = mergeTwoLists(list1.next, list2);
-		} else {
-			mergeHead = list2;
-			mergeHead.next = mergeTwoLists(list1, list2.next);
-		}
-		return mergeHead;
-		
-	};
-	
-	
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    /**
+     * @param {ListNode[]} lists
+     * @return {ListNode}
+     */
+    function mergeKLists(lists) {
+        if (!lists || !lists.length) {
+            return null;
+        }
+        let len = lists.length;
+
+        while (len > 1) {
+            const k = Math.floor((len + 1) / 2);
+            const mid = Math.floor((len) / 2);
+
+            for (let i = 0; i < mid; i++) {
+                lists[i] = mergeTwoList(lists[i], lists[i + k]);
+            }
+
+            len = k;
+        }
+
+        return lists[0];
+    };
+
+    function mergeTwoList(list1, list2) {
+        if (!list1) {
+            return list2;
+        }
+
+        if (!list2) {
+            return list1;
+        }
+
+        let mergeHeader;
+
+        if (list1.val < list2.val) {
+            mergeHeader = list1;
+            mergeHeader.next = mergeTwoList(list1.next, list2);
+        } else {
+            mergeHeader = list2;
+            mergeHeader.next = mergeTwoList(list2.next, list1);
+        }
+
+        return mergeHeader;
+    }
 
 })(window.LeetCode = window.LeetCode || {});

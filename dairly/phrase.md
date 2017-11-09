@@ -66,3 +66,6 @@ Champions have the courage to keep turning the pages because they know a better 
 
 Perserance is not a long race; it is many short races one after another.
 坚持不是一个长跑，它是很多一个接一个的短跑。
+
+The only thing predictable about life is its unpredictability.
+人生唯一可以预知的就是它的变幻莫测
