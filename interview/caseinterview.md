@@ -1729,3 +1729,27 @@ as lazy as possible
 主要应用于sea.js
 推荐每一个模块职责单一
 ```
+
+### documen.write和 innerHTML的区别
+
+```js
+document.write只能重绘整个页面
+innerHtml可以重绘页面的一部分
+```
+
+### requireJS的核心原理是什么？（如何动态加载的，如何避免多次加载，如何缓存？）
+
+```js
+核心是js的加载模块，通过正则匹配模块以及模块间的依赖关系，保证文件的先后加载顺序
+根据文件路径对加载过的文件进行缓存
+
+http://www.cnblogs.com/yexiaochai/p/3961291.html
+```
+
+### JS模块加载器的轮子怎么造，也就是如何实现一个模块加载器？
+
+```js
+http://www.jianshu.com/p/0505b1718dab
+https://www.zhihu.com/question/21157540
+http://annn.me/how-to-realize-cmd-loader/
+```

@@ -69,3 +69,6 @@ Perserance is not a long race; it is many short races one after another.
 
 The only thing predictable about life is its unpredictability.
 人生唯一可以预知的就是它的变幻莫测
+
+There was another life that I might have had, but I am having this one.
+我明明可以过另一种生活，却在过这种生活
