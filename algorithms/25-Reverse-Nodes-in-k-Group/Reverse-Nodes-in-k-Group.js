@@ -1,7 +1,7 @@
 /*
  * 一刷时间: 2017-03-27
- * 二刷时间：2017-11-10
- * 来自: https://leetcode.com/problems/remove-duplicates-from-sorted-array
+ * 二刷时间：2017-11-11
+ * 来自: https://leetcode.com/problems/reverse-nodes-in-k-group
  */
 (function(exports) {
 

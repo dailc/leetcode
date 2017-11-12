@@ -1753,3 +1753,43 @@ http://www.jianshu.com/p/0505b1718dab
 https://www.zhihu.com/question/21157540
 http://annn.me/how-to-realize-cmd-loader/
 ```
+
+### 谈谈对ECMAScript6的理解？
+
+```js
+ECMA：
+ 1996年11月，JavaScript的创造者Netscape公司，决定将JavaScript提交给国际标准化组织ECMA，
+ 希望这种语言能够成为国际标准。
+ 次年，ECMA发布262号标准文件（ECMA-262）的第一版，规定了浏览器脚本语言的标准
+ ，并将这种语言称为ECMAScript。这个版本就是ECMAScript 1.0版。
+
+又名ECMAScript2015，于2015年6月份发布
+是继ECMAScript5（2009年发布）后的新一代标准
+
+增加了很多特性，例如Maps,Sets,Promise,Generators等
+let,const等声明
+箭头函数等用法
+Class等语法糖
+而且等同于默认使用了严格模式
+
+像TypeScript也实现了ECMAScript6标准，它是JavaScript的超集
+```
+
+### ECMAScript6 怎么写class么，为什么会出现class这种东西?
+
+```js
+class XXX {
+    constructor() {
+    }
+    
+    foo1() {
+    }
+    
+    static foo2() {
+    }
+}
+
+它本质只是一个语法糖（并不是全新的东西），可以让有面向对象思想的人更快速上手
+
+本质仍然是原型链直接的继承
+```

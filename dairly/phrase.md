@@ -72,3 +72,6 @@ The only thing predictable about life is its unpredictability.
 
 There was another life that I might have had, but I am having this one.
 我明明可以过另一种生活，却在过这种生活
+
+When you're eighteen your emotions are violent, but they're not durable.
+18岁时，激情由于而耐心不足

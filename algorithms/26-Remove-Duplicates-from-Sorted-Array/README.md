@@ -1,20 +1,24 @@
-## Reverse-Nodes-in-k-Group
+# Remove-Duplicates-from-Sorted-Array
 
 ## 说明
-这个是前面的`Swap-Nodes-in-Pairs`的升级版
 
-前面是交换相邻的两个结点，而现在是反转相邻的k个节点，最后剩余的数如果小于k，则不进行反转，保留原值
+给出一个已排序数组，去重，并返回新数组的长度
 
-* 空间复杂度要求O(1)
-* 不能改变Node的值，只能进行指针交换
+- 不能使用额外空间
 
-例如: `1->2->3->4->5`
+- 只能in-place替换
 
-* `k = 2`, return: `2->1->4->3->5`
-* `k = 3`, return: `3->2->1->4->5`
+示例
 
-### 思路
+```js
+Given nums = [1,1,2],
 
-* 1.递归+辅助数组(k大小，所以视为常数)-这是原始的想法
-* 2.进一步优化，发现是可以去除辅助数组的，改用递归+循环即可
+Your function should return length = 2, with the first two elements of nums being 1 and 2 respectively.
+It doesn't matter what you leave beyond the new length.
+```
 
+## 思路
+
+由于不能使用额外空间，所以最简洁的hashmap方法不行
+
+因为已排序，所以直接相邻比较，如果有重复，就直接指向下一个
