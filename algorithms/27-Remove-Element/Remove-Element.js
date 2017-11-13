@@ -1,35 +1,32 @@
-/**
- * 作者: dailc
- * 时间: 2017-03-28
- * 描述: Remove-Element
- * 
+/*
+ * 一刷时间: 2017-03-28
+ * 二刷时间：2017-11-13
  * 来自: https://leetcode.com/problems/remove-element
  */
 (function(exports) {
 
-	/**
-	 * @description removeElement
-	 * @param {number[]} nums
- 	 * @param {number} val
- 	 * @return {number}
-	 */
-	exports.removeElement = function(nums, val) {
-		if(!nums) {
-			return 0;
-		}
-		var len = nums.length,
-			count = 0;
-		for(var i = 0; i < len; i ++) {
-			if(nums[i]!=val) {
-				nums[count++] = nums[i];
-			}
-		}
-		return count;
-	};
-	
-	
-	
-	
-	
+    /**
+     * @param {number[]} nums
+     * @param {number} val
+     * @return {number}
+     */
+    function removeElement(nums, val) {
+        if (!nums) {
+            return 0;
+        }
+
+        const len = nums.length;
+        let index = 0;
+
+        for (let i = 0; i < len; i += 1) {
+            if (nums[i] !== val) {
+                nums[index++] = nums[i];
+            }
+        }
+
+        return index;
+    };
+
+    exports.removeElement = removeElement;
 
 })(window.LeetCode = window.LeetCode || {});

@@ -75,3 +75,6 @@ There was another life that I might have had, but I am having this one.
 
 When you're eighteen your emotions are violent, but they're not durable.
 18岁时，激情由于而耐心不足
+
+No Matter how hard the past is, you can always begin again.
+不管过去有多么困难，你都可以重新开始

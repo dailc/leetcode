@@ -1793,3 +1793,76 @@ class XXX {
 
 本质仍然是原型链直接的继承
 ```
+
+### DOM操作，怎么添加、移除、移动、复制、创建和查找节点？
+
+```js
+1.创建
+createDocumentFragment() // 创建一个dom片段
+createElement() // 创建一个具体元素
+createTextNode() // 创建一个文本节点
+
+2.添加，移除，替换，插入
+appendChild()
+removeChild()
+replaceChild()
+insertBefore()
+
+3.查找
+getElementsByTagName()
+getElementsByClassName()
+getElementsByName()
+getElementById()
+document.querySelector()
+```
+
+### .call()和.apply()的区别？
+
+```js
+这两个方法都可以替换context
+
+区别是
+.call(context, param1, param2, ...)
+.apply(context, [param1, param2, ...])
+```
+
+### 数组和对象有哪些原生方法，列举一下?
+
+```js
+数组：
+push
+pop
+shift
+unshift
+splice
+slice
+reverse
+sort
+concat
+join
+toString
+indexOf
+lastIndexOf
+forEach
+map
+filter
+every
+some
+reduce
+reduceRight
+length
+
+Object:
+hasOwnProperty
+isPrototypeOf
+provertyIsEnumerable
+toString // {}.toString()返回[object Object]
+// 主要区别，一个数组中
+// toString访问的是每一个对象的toString方法
+// toLocalString(本地环境字符串,会根据机器环境返回字符串)访问的是对象每一个元素的toLocalString
+// 两个方法都可以被重写
+toLocalString // {}.toLocalString()返回[object Object]
+valueOf // 返回的是原始值(对象本身的值)，例如{}.valueOf();返回的是{}对象
+call
+apply
+```
