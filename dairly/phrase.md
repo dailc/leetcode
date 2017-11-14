@@ -78,3 +78,6 @@ When you're eighteen your emotions are violent, but they're not durable.
 
 No Matter how hard the past is, you can always begin again.
 不管过去有多么困难，你都可以重新开始
+
+People always want to lead an active life, and is not it?
+人们总要乐观生活，不是吗？

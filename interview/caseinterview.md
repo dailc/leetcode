@@ -1866,3 +1866,77 @@ valueOf // 返回的是原始值(对象本身的值)，例如{}.valueOf();返回
 call
 apply
 ```
+
+### js怎么实现一个类。怎么示例化这个类？
+
+```js
+最经典的。
+
+function ABC() {...}
+
+ABC.prototype.xxx = function() {...}
+
+new ABC();
+
+或者
+
+function createObj() {
+    var obj = new Object();
+    
+    obj.xxx = function() {...}
+    
+    return obj;
+}
+
+createObj();
+
+很多种...
+```
+
+### JavaScript中的作用域与变量声明提升?
+
+```js
+ES6之前没有块级作用域，var等声明会提前
+
+例如
+console.log(a); // undefined
+console.log(b); // ReferenceError
+var a = 1;
+let b = 2;
+等同于：
+var a;
+console.log(a); // undefined
+console.log(b); // ReferenceError
+a = 1;
+let b = 2; 
+
+另外
+function xxx() {}
+函数声明也会提升
+
+如果函数声明和变量声明一致，
+变量若没有赋值函数声明会覆盖变量声明
+变量若已经赋值，函数无法覆盖变量
+var myName;
+function myName () {...};
+console.log(typeof myName); // function
+
+var myName = 'hello';
+function myName () {...};
+console.log(typeof myName); // String
+```
+
+### 如何编写高性能的Javascript？
+
+```js
+不要用for-in，用for循环
+对对象进行缓存，特别是dom
+不要在函数内过度嵌套
+避免循环引用，防止内存泄露(无法回收)
+避免过多使用全局变量
+注意作用域
+字符串链接时可以用数组优化
+对象失效后及时去除引用，以便于垃圾回收器回收
+慎用闭包
+页面绘制时尽量减少回流或重绘
+```
