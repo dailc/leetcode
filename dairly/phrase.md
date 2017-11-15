@@ -81,3 +81,6 @@ No Matter how hard the past is, you can always begin again.
 
 People always want to lead an active life, and is not it?
 人们总要乐观生活，不是吗？
+
+Knowledge is weightless, a treasure you can always carry easily.
+知识没有重量，它是可以随意携带的珍宝
