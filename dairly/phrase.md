@@ -84,3 +84,6 @@ People always want to lead an active life, and is not it?
 
 Knowledge is weightless, a treasure you can always carry easily.
 知识没有重量，它是可以随意携带的珍宝
+
+The secret of success is to do the common things uncommonly well.
+成功的秘诀是把平凡的事情做的异常出色

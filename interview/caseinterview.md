@@ -1957,3 +1957,46 @@ console.log(typeof myName); // String
 dom子字元素持有引用不置空也容易造成
 
 ```
+
+### JQuery的源码看过吗？能不能简单概况一下它的实现原理？
+
+```js
+核心是对`DOM`操作进行的封装，以避免单独实现不同浏览器的兼容代码
+
+譬如里面的代理就用的很巧妙。
+通过代理对象，给不同的对象监听事件。进行管理
+
+同时它的可拓展性也是它的突出优点
+```
+
+### 如何判断当前脚本运行在浏览器还是node环境？
+
+```js
+this === window ? 'browser' : 'node';
+ 通过判断Global对象是否为window，如果不为window，当前脚本没有运行在浏览器中
+```
+
+### 移动端最小触控区域是多大？
+
+```js
+目前基本是达成了共识
+
+苹果推荐的：44pt*44pt
+
+「具体看 WWDC 14」
+https://developer.apple.com/ios/human-interface-guidelines/visual-design/layout/
+
+Android的最小点击区域尺寸是48x48dp，
+这就意味着在xhdpi的设备上，按钮尺寸至少是96x96px。而在xxhdpi设备上，则是144x144px。
+```
+
+### 把 Script 标签 放在页面的最底部的body封闭之前 和封闭之后有什么区别？浏览器会如何解析它们？
+
+```js
+标准规定应该是放在body封闭之前
+
+但实际上浏览器也是能正常解析的
+但是这时候的解析规则是：
+“body标签闭合之后”后再出现script或任何元素的开始标签，
+都是parse error，浏览器会忽略之前的</body>，即视作仍旧在body内。所以实际效果和写在“body标签闭合之前”之前是没有区别的。
+```
