@@ -87,3 +87,9 @@ Knowledge is weightless, a treasure you can always carry easily.
 
 The secret of success is to do the common things uncommonly well.
 成功的秘诀是把平凡的事情做的异常出色
+
+It does not do to dwell on dreams and forget to live.
+整天沉溺于梦想而忘记如何好好生活，毫无意义
+
+Do not pray for an easy life, pray for the strength to endure a difficult one.
+不要祈求安逸的人生，祈求拥有渡过艰难的力量
