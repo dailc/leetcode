@@ -2100,3 +2100,125 @@ react最大的特点就是万物皆js，组件化，以及轻量
 
 React是目标是UI组件，通常可以和其它框架组合使用，目前并不适合单独做一个完整的框架
 ```
+
+### 解释一下 Backbone 的 MVC 实现方式？
+
+```js
+Backbone为复杂WEB应用程序提供模型(models)、集合(collections)、视图(views)的结构。
+其中models用于绑定键值数据和自定义事件；
+collections附有可枚举函数的丰富API；
+views可以声明事件处理函数，并通过RESRful JSON接口连接到应用程序。
+
+Backbone将数据呈现为模型, 你可以创建模型、对模型进行验证和销毁，甚至将它保存到服务器。
+当UI的变化引起模型属性改变时，模型会触发"change"事件；
+所有显示模型数据的视图会接收到该事件的通知，继而视图重新渲染。
+你无需查找DOM来搜索指定id的元素去手动更新HTML。 — 当模型改变了，视图便会自动变化。
+
+里面的集合器Collection是对单独的数据模型进行统一控制
+```
+
+### 什么是“前端路由”?什么时候适合使用“前端路由”? “前端路由”有哪些优点和缺点?
+
+```js
+譬如单页面应用
+a.com
+但是它做了几个url
+a.com/a
+a.com/b
+...
+
+输入／a，其实就是触发了路由，然后跳转到相应功能
+
+比如vue做出来的就是前端路由
+
+相比后端路由
+用户体验好，不需要每次都从服务器全部获取，快速展现给用户
+
+https://segmentfault.com/q/1010000005336260
+```
+
+### 知道什么是webkit么? 知道怎么用浏览器的各种工具来调试和debug代码么?
+
+```js
+Chrome（现在是blink）,safari浏览器的内核
+
+准确的说，chrome是基于chromium引擎，而使用webkit内核
+
+weblit是当初苹果开源的
+google在次基础上开发了chrmium（现在内核变为了blink）
+
+chrome中的devtools的调试工具
+```
+
+### 如何测试前端代码？知道BDD,TDD，Unit Test么？ 知道怎么测试你的前端工程么(mocha, sinon, jasmin, qUnit..)?
+
+```js
+一般是指程序开发完后开发人员的自动测试，而不是后期测试人员的测试
+
+TDD: 测试驱动开发
+简单的理解，开发功能前，先根据需求，写一个测试案例，然后开发功能，直到能正常通过
+并不是只有单纯的测试，而是把需求分析，设计，质量控制量化的过程
+TDD指的是在单元测试级别，也即函数级别进行测试驱动开发。
+
+BDD:行为驱动开发
+一种敏捷开发模式
+主要是从用户的需求出发，强调系统的行为
+它包括验收测试和客户测试驱动等的极限编程的实践，作为对测试驱动开发的回应。
+使用BDD可以解决需求和开发脱节的问题
+
+BDD，不是跟TDD一个层级的，B是说代码的行为，或许比单元测试高那么一点点吧，
+主要是跟ATDD（接收测试驱动开发）、SBE（实例化需求）等实践一并提及的，
+因为他们都是对应到传统测试理论里面，高于单元和模块测试，
+从功能测试、集成到系统、性能等这些高级别测试的范围。
+```
+
+### 前端templating(Mustache, underscore, handlebars)是干嘛的, 怎么用?
+
+```js
+模版映射引擎
+
+简单的说，将html模版（譬如{{name}}）
+和对象({name: 'ss'})
+
+映射，然后{{name}}就可以映射成'ss'了
+
+底层基本都会用正则进行分析匹配
+
+兼容mustache语法
+可以循环映射
+有if-else等语句
+空白处理等等
+
+处理流程：
+1.获取模版-可以是jq获取
+2.Handlebars.compile(tpl);编译模版
+3.模版匹配json:var html = template(data);
+4.添加到dom中
+
+http://www.cnblogs.com/hustskyking/p/principle-of-javascript-template.html
+```
+
+### 检测浏览器版本版本有哪些方式？
+
+```js
+一般通过useragent检测
+譬如：navigator.userAgent
+"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_2) AppleWebKit/537.36
+    (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36"
+    
+如webview容器一般会加上自己特色的头部
+```
+
+### 用js实现千位分隔符?
+
+```js
+function commafy(num) {
+    return num && num
+          .toString()
+          .replace(/(\d)(?=(\d{3})+\.)/g, function($0, $1) {
+              return $1 + ",";
+          });
+}
+
+console.log(commafy(1234567.90)); //1,234,567.90
+```

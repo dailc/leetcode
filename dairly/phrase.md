@@ -93,3 +93,9 @@ It does not do to dwell on dreams and forget to live.
 
 Do not pray for an easy life, pray for the strength to endure a difficult one.
 不要祈求安逸的人生，祈求拥有渡过艰难的力量
+
+The education of a man is never completed until he diws.
+一个人的学习之路，至死方休
+
+Love is composed of a single soul inhabiting two bodies.
+爱是一个灵魂住在两个身体里
