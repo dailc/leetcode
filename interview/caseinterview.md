@@ -2222,3 +2222,61 @@ function commafy(num) {
 
 console.log(commafy(1234567.90)); //1,234,567.90
 ```
+
+### What is a Polyfill?
+
+```js
+polyfill
+是指在旧浏览器上复制标准API的JavaScript补充
+可以动态地加载 JavaScript 代码或库，在不支持这些标准API的浏览器模拟它们
+
+因为 polyfill 模拟标准 API，所以能够以一种面向所有浏览器未来的方式针对这些 API 进行开发，
+一旦对这些 API 的支持变成绝对大多数，则可以方便地去掉 polyfill，无需做任何额外工作。
+
+例如，geolocation（地理位置）polyfill 可以在 navigator 对象上添加全局的 geolocation 对象，
+还能添加 getCurrentPosition 函数以及“坐标”回调对象，
+所有这些都是 W3C 地理位置 API 定义的对象和函数。
+```
+
+### 做的项目中，有没有用过或自己实现一些 polyfill 方案（兼容性处理方案）？
+
+```js
+譬如：
+html5shiv(h5语义化标签)
+Geolocation
+Placeholder
+
+但是JQ之类的并不属于这个范畴
+polyfill是指标准API的适配，而jq是自己定义一套api
+
+譬如对requestAnimationFrame的兼容适配就属于一种polyfill
+```
+
+### 给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？
+
+```js
+addEventListener(name, func, isBubble)
+第三个参数是是否冒泡
+
+冒泡意味着从下到上
+捕获则相反，从上到下
+
+无论是冒泡事件还是捕获事件，元素都会先执行捕获阶段
+从上往下，如有捕获事件，则执行；
+一直向下到目标元素后，从目标元素开始向上执行冒泡元素，
+即第三个参数为true表示捕获阶段调用事件处理程序，如果是false则是冒泡阶段调用事件处理程序。
+(在向上执行过程中，已经执行过的捕获事件不再执行，只执行冒泡事件。)
+
+所以同时监听捕获和冒泡时的顺序：
+父级捕获->子级捕获->子级冒泡->父级冒泡
+
+e.stopPropagation();可阻止冒泡或捕获的传播
+```
+
+### 使用JS实现获取文件扩展名？
+
+```js
+可以用正则提取(捕获组)
+str.match(/[.]([^.]+)$/)[1];
+没有可以设置为空
+```

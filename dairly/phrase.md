@@ -99,3 +99,6 @@ The education of a man is never completed until he diws.
 
 Love is composed of a single soul inhabiting two bodies.
 爱是一个灵魂住在两个身体里
+
+Keep your face to the sunshine, and you cannot see the shadow.
+面朝阳光，你将不会看到黑暗
