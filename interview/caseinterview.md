@@ -1004,6 +1004,84 @@ name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, u
 ie肯定只是pc端展示，因此更多的是pc端兼容问题，而不是不同设备的响应式
 ```
 
+### viewport的理解？
+
+```js
+layout viewport（布局视口）
+移动设备浏览器一般都会默认设置一个viewport标签
+它的作用是定义一个虚拟的layout viewport，用于解决早起的页面在手机显示问题
+
+譬如默认情况下iOS,android中将这个视口分辨率设置为980px
+所以，pc端网页基本能在手机上展示，只不过元素看起来很小（默认可以通过手指缩放）
+
+当然也可以自己设定一个宽-一般会取device-width
+
+visual viewport（视觉视口）和物理像素
+visual viewport（视觉视口）为物理屏幕的可视区域
+屏幕显示器的物理像素，同样尺寸的屏幕，像素密度大的设备，硬件像素会更多
+例如iPhone的物理像素：
+    iPhone5 ：640 * 1136
+    iPhone6：750 * 1334
+    iPhone6 Plus：1242 * 2208
+
+ideal viewport（理想视口）和 dip （设备逻辑像素）
+ideal viewport（理想视口）通常是我们说的屏幕分辨率。
+dip （设备逻辑像素）跟设备的硬件像素无关的。一个 dip 在任意像素密度的设备屏幕上都占据相同的空间。
+
+比如MacBook Pro的 Retina （视网膜）屏显示器硬件像素是：2880 * 1800。
+当你设置屏幕分辨率为 1920 * 1200 的时候，ideal viewport（理想视口）的宽度值是1920像素，
+那么 dip 的宽度值就是1920。设备像素比是1.5（2880/1920）。
+设备的逻辑像素宽度和物理像素宽度（像素分辨率）的关系满足如下公式：
+    逻辑像素宽度*倍率 = 物理像素宽度
+
+而移动端手机屏幕通常不可以设置分辨率，一般都是设备厂家默认设置的固定值
+，换句话说 dip 的值就是 ideal viewport（理想视口）（也就是分辨率）的值
+譬如，iPhone的屏幕分辨率：
+    iPhone5 ：分辨率 320 * 568，物理像素 640 * 1136，@2x
+    iPhone6：分辨率 375 * 667，物理像素 750 * 1334，@2x
+    iPhone6 Plus ：分辨率 414 *  736，物理像素1242 * 2208，@3x，（
+    注意，实际显示图像等比降低至1080×1920，具体原因查看：http://www.css88.com/archives/5972）
+    
+更多设备的 ideal viewport（理想视口）可以查看http://viewportsizes.com/
+
+css像素
+CSS像素（px）用于页面布局的单位。样式的像素尺寸（例如 width: 100px）是以CSS像素为单位指定的。
+CSS像素与 dip 的比例即为网页的缩放比例，如果网页没有缩放，那么一个CSS像素就对应一个 dip（设备逻辑像素）    
+（譬如为device-width时，css像素与逻辑像素一样）
+
+使用viewport元标签控制布局
+```
+
+```html
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1; user-scalable=no;">
+```
+
+```js
+width属性被用来控制layout viewport（布局视口）的宽度，layout viewport（布局视口）宽度默认值是设备厂家指定的。
+iOS, Android基本都将这个视口分辨率设置为 980px。
+我们可以 width=320 这样设为确切的像素数，也可以设为device-width这一特殊值
+一般为了自适应布局，普遍的做法是将width设置为device-width
+
+width=device-width 也就是将layout viewport（布局视口）的宽度设置 ideal viewport（理想视口）的宽度。
+网页缩放比例为100%时，一个CSS像素就对应一个 dip（设备逻辑像素）
+，而layout viewport（布局视口）的宽度，ideal viewport（理想视口）的宽度（通常说的分辨率），
+dip 的宽度值是相等的。
+
+height与width类似，但实际上却不常用。
+
+initial-scale用于指定页面的初始缩放比例：
+initial-scale=1 表示将layout viewport（布局视口）的宽度设置为 ideal viewport（理想视口）的宽度，
+initial-scale=1.5 表示将layout viewport（布局视口）的宽度设置为 ideal viewport（理想视口）的宽度的1.5倍。
+
+maximum-scale用于指定用户能够放大的最大比例，例如
+
+minimum-scale是用来指定页面缩小比例的。通常情况下，不会定义该属性的值，页面太小将难以阅读。
+
+user-scalable来控制用户是否可以通过手势对页面进行缩放。该属性的默认值为yes，可被缩放，你也可以将该值设置为no，表示不允许用户缩放网页。
+
+http://www.css88.com/archives/5975
+```
+
 ### 视差滚动效果，如何给每页做不同动画？（回到顶部，向下滑动要再次出现，和只出现一次分别怎么做？）
 
 ```js
@@ -2279,4 +2357,104 @@ e.stopPropagation();可阻止冒泡或捕获的传播
 可以用正则提取(捕获组)
 str.match(/[.]([^.]+)$/)[1];
 没有可以设置为空
+```
+
+### return?
+
+```js
+return {
+     name: "hello"
+};
+return
+{
+     name: "hello"
+};
+
+前者是一个Object，后者是undefined.
+这是return的设计缺陷-程序被自动补全为了（自动修复机制）
+return;
+{
+     name: "hello"
+};
+```
+
+### JS变量声明，形参，函数声明的顺序与优先级?
+
+```js
+填充变量的顺序：
+
+函数形参 -> 函数声明 -> 变量声明
+当变量声明遇到VO中已有同名时，不会影响已经存在的属性
+
+函数形参：
+由名称和对应值组成的一个变量对象的属性被创建
+没有传对应参数的话，那么由名称和undefined组成的变量对象的属性会被创建
+
+函数声明：
+由名称和对应值（函数对象(function-object)）组成一个变量对象的属性会被创建
+如果变量中已经有这个相同名称的属性，则完全替换
+
+变量声明：
+由名称和对应值（undefined）组成的一个变量对象的属性被创建
+如果变量名称与已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的
+```
+
+### var和let作用域？
+
+```js
+for (let i = 0; i < 5; i++) {
+ setTimeout(function() {
+  console.log(i);
+ }, 1000);
+}
+console.log(i); // 报错 01234
+
+这里的的let是在for循环中声明，
+所以当前的i只在本轮循环有效，每一次的循环就是一个新的变量
+引擎内部会记住上一次循环的值，初始化本轮循环i时，在上一轮的基础上计算
+for循环中，循环语句是一个父作用域，循环体内是一个单独的子作用域
+内部原理：
+for ( LexicalDeclaration Expressionopt ; Expressionopt ) Statement 规则的时候
+每次迭代会新建运行环境记录值为拷贝最后迭代内容
+（每次循环体都是个独立的新scope）
+所以当次循环体里的定义的func往外爬变量就是当次循环体内的值了
+
+let i;          
+for (i = 0; i < 5; i++) {
+ setTimeout(function() {
+  console.log(i);
+ }, 1000);
+}
+console.log(i); // 5 55555
+
+for (var i = 0; i < 5; i++) {
+ setTimeout(function() {
+  console.log(i);
+ }, 1000);
+}
+console.log(i); // 5 55555
+
+https://www.zhihu.com/question/55653122
+```
+
+### Object.is与原来的比较操作符 ===， ==的区别？
+
+```js
+ES6才新增
+两等号判等，会在比较时进行类型转换；
+三等号判等(判断严格)，比较时不进行隐式类型转换,（类型不同则会返回false）；
+
+Object.is 在三等号判等的基础上特别处理了 NaN 、-0 和 +0 ，保证 -0 和 +0 不再相同，
+但 Object.is(NaN, NaN) 会返回 true.
+
+Object.is 应被认为有其特殊的用途，而不能用它认为它比其它的相等对比更宽松或严格。
+```
+
+### react-router 路由系统的实现原理？
+
+```js
+https://segmentfault.com/a/1190000004527878
+
+react引入第三方库：
+https://www.v2ex.com/t/237501
 ```

@@ -102,3 +102,6 @@ Love is composed of a single soul inhabiting two bodies.
 
 Keep your face to the sunshine, and you cannot see the shadow.
 面朝阳光，你将不会看到黑暗
+
+If we did all the things we are capable of, we would literally astound ourselves.
+我们如果尽力去做任何事情，连我们自己都会被惊讶到
