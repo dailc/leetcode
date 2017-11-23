@@ -105,3 +105,6 @@ Keep your face to the sunshine, and you cannot see the shadow.
 
 If we did all the things we are capable of, we would literally astound ourselves.
 我们如果尽力去做任何事情，连我们自己都会被惊讶到
+
+A little bit of mercy makes the world less cold and more just.
+多一点怜悯，可以让世界少一点冷酷和多一点正义
