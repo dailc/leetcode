@@ -108,3 +108,6 @@ If we did all the things we are capable of, we would literally astound ourselves
 
 A little bit of mercy makes the world less cold and more just.
 多一点怜悯，可以让世界少一点冷酷和多一点正义
+
+Happiness is a direction, not a place.
+快乐是一个方向，不是一个目的地
