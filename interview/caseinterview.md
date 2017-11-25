@@ -418,6 +418,34 @@ strong,em,ins,del,code
 正常来说应该使用最符合的语义化标签（但是请勿滥用）
 ```
 
+### 前端需要注意那些seo?
+
+```html
+<meta content="xxxx" name="keywords">
+<meta content="xxx" name="description">
+```
+
+```js
+1.合理的title,description,keywords
+引擎搜索对三项的权重逐渐减小，
+title强调重点即可(重点关键词出现不要超过2次，而且要靠前)，不同页面title要不同
+description把页面内容高度概括，长度合适，不可过分堆砌关键词，不同页面的description要有所区分
+keywords列举出重点关键词
+
+2.语义化html，符合w3c规范，语义化让搜索引擎容易理解网页
+
+3.重要的html内容放在最前方，搜索引擎抓取html顺序是从上到下，
+有得搜索引擎长度有限制，因此要确保重要内容被抓取
+
+4.重要内容不要用js输出（爬虫不会执行js获取内容）
+
+5.避免iframe,爬虫不会抓取iframe中的内容
+
+6.非装饰性图片必须加alt(图片无法显示时替代，图片内容的等价描述，读屏器会阅读图片，搜索引擎重点分析)
+
+7.提高网站访问速度，网站速度是搜索引擎排序的一个重要指标
+```
+
 ## CSS
 
 ### 介绍一下标准的CSS的盒子模型？与低版本IE的盒子模型有什么不同的？
@@ -2619,6 +2647,77 @@ HTTP网站一般在浏览器端用公钥加密敏感数据，然后在服务器�
     　　Error 501 - 未实现
     HTTP 502 - 网关错误
     HTTP 503：由于超载或停机维护，服务器目前无法使用，一段时间后可能恢复正常
+```
+
+### html method？
+
+```js
+一台服务器要与HTTP1.0兼容，只要为资源实现Get和head方法即可
+
+8中方法
+HTTP1.0定义了三种请求方法： GET, POST 和 HEAD方法。
+HTTP1.1新增了五种请求方法：OPTIONS, PUT, DELETE, TRACE 和 CONNECT 方法。
+
+1.GET是最常用的方法，通常用于请求服务器某个资源
+
+2.HEAD与get类似，但服务器在响应中只返回头部，不返回实体的主体部分
+
+3.put让服务器用请求的主体部分来创建一个由所请求的url命名的新文档，
+或者如果那个url已存在的话，用这个主体替代
+
+4.POST起初是用于向服务器输入数据，以前通常用于支持html表单请求，
+前后端开发趋势后，通常用于标准的restful请求
+
+5.trace会在目的服务器发起一个迂回诊断，最后一站的服务器会弹回一个trace响应，
+并在响应主体中携带它收到的原始请求报文，
+trace方法主要用于诊断，验证请求是否如愿的穿过了请求／响应链
+
+6.options方法用于web服务器告知其支持的各种功能。
+可以查询服务器支持哪些方法或对某些特殊资源支持哪些方法
+跨域ajax复杂请求时候会进行一次options预检，以确认服务端是否支持改次跨域ajax请求
+(headers, origin, method)
+
+7.delete请求服务器删除请求url指定的资源
+
+8.CONNECT http/1.0协议中预留给能够将链接改为管道方式的代理服务器
+
+又有一说是15种？（应该不是标准）
+加上PATCH，MOVE，COPY，LINK，UNLINK，WRAPPED，Extension-mothed
+http://tools.jb51.net/table/http_request_method
+
+但总结下来，标准的方法应该是只有8种的
+```
+
+### resuful请求？
+
+```js
+REST -- REpresentational State Transfer
+表现层状态转移
+描述的是在网络中一种client和server交互方式
+rest本身不实用，实用的是如何设计 RESTful API(REST风格的网络接口)
+
+简述作用：
+URL定位资源，用http动词(GET,POST,DELETE)描述操作
+
+譬如
+定义为
+GET 用来获取资源
+POST 用来新建资源
+PUT 用来更新资源
+DELETE 用来删除资源
+
+POST http:xxx/friend 添加好友
+DELETE http:xxx/friend 删除好友
+会禁止使用get请求来删除资源
+
+服务端和客户端之间通过特定形式传递资源
+譬如json,xml等
+
+然后http code用来传递server的状态信息
+譬如200成功，500内部错误等
+
+总的来说，从以前的jsp,asp,php等架构脱离出来。
+变成了前后端分离，前端展示内容，通过API和后台交互
 ```
 
 ### 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）***(需要重点过一遍)
