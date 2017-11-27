@@ -1338,6 +1338,17 @@ HTML标准一直是规定style不应该出现在body中
 但是可能会引起fouc(Flash of Unstyled Content-无内容闪烁)，重绘或重新布局
 ```
 
+### 什么是FOUC？如何避免？
+
+```js
+Flash Of Unstyled Cotent
+大概就是样式加载前浏览器用默认样式渲染文档，
+样式加载后重新渲染文档，造成页面闪烁
+
+解决方案是：
+样式放在head中，这样在加载文档前样式已经有了
+```
+
 ### 什么是CSS预处理器／后处理器？
 
 ```js
@@ -2718,6 +2729,72 @@ DELETE http:xxx/friend 删除好友
 
 总的来说，从以前的jsp,asp,php等架构脱离出来。
 变成了前后端分离，前端展示内容，通过API和后台交互
+```
+
+### http request报文结构？
+
+```js
+rfc2616（HTTP协议）中进行了定义：
+
+1.首行Request-line包括：请求方法，请求url，协议版本，CRLF
+
+2.首行之后是若干行请求头：包括general-header，request-header，或entity-header，每一行以一个CRLF结束
+
+3.请求头和实体消息之间有一个CRLF分隔
+
+4.根据实际请求可能需要包含一个消息实体
+
+示例如下：
+
+GET /Protocols/rfc2616/rfc2616-sec5.html HTTP/1.1
+Host: www.w3.org
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.1916.153 Safari/537.36
+Referer: https://www.google.com.hk/
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
+Cookie: authorstyle=yes
+If-None-Match: "2cc8-3e3073913b100"
+If-Modified-Since: Wed, 01 Sep 2004 13:24:52 GMT
+
+name=qiu&age=25
+
+
+CRLF->Windows-style
+LF->Unix Style
+CR->Mac Style
+```
+
+### http response报文结构？
+
+```js
+rfc2616中进行了定义：
+
+1.首行是状态行，包括： http版本，状态码，状态描述，后面跟一个CRLF
+
+2.首行之后是若干行响应头，包括：通用头部，响应头部，实体头部
+
+3.响应头部和响应实体之间用一个CRLF分隔
+
+4.最后一个可能是消息实体
+
+示例
+
+HTTP/1.1 200 OK
+Date: Tue, 08 Jul 2014 05:28:43 GMT
+Server: Apache/2
+Last-Modified: Wed, 01 Sep 2004 13:24:52 GMT
+ETag: "40d7-3e3073913b100"
+Accept-Ranges: bytes
+Content-Length: 16599
+Cache-Control: max-age=21600
+Expires: Tue, 08 Jul 2014 11:28:43 GMT
+P3P: policyref="http://www.w3.org/2001/05/P3P/p3p.xml"
+Content-Type: text/html; charset=iso-8859-1
+
+{"name": "qiu", "age": 25}
 ```
 
 ### 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）***(需要重点过一遍)

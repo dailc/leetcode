@@ -111,3 +111,6 @@ A little bit of mercy makes the world less cold and more just.
 
 Happiness is a direction, not a place.
 快乐是一个方向，不是一个目的地
+
+Don't undermine your worth by comparing yourself width others.
+别拿自己和他人比较，这样只会降低你原有的价值
