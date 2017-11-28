@@ -114,3 +114,9 @@ Happiness is a direction, not a place.
 
 Don't undermine your worth by comparing yourself width others.
 别拿自己和他人比较，这样只会降低你原有的价值
+
+Eternity is said not to be an extension of time but an absence of time.
+永恒不是时间的无限延伸，而是没有时间
+
+Of all the tribulations in this world, boredom is the one most hard to bear.
+所有的苦难中，无聊是最难以忍受的
