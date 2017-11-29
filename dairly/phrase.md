@@ -120,3 +120,6 @@ Eternity is said not to be an extension of time but an absence of time.
 
 Of all the tribulations in this world, boredom is the one most hard to bear.
 所有的苦难中，无聊是最难以忍受的
+
+Don't you wonder sometimes, what might have happened if you tried？
+有时候别想那么多，试一试，看看结果会怎么样？
