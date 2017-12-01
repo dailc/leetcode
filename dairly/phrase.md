@@ -126,3 +126,6 @@ Don't you wonder sometimes, what might have happened if you tried？
 
 If you shut the door to all errors, truth will be shut out.
 你如果拒绝面对错误，真相也会被挡在门外
+
+First say to yourself what you would be, and then do what you have to do.
+先说你要成为什么样的人，接着做你必须做的事
