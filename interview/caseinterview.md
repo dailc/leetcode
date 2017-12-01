@@ -560,6 +560,14 @@ px所有浏览器都支持
 
 5. `!important`拥有最高优先级
 
+### css的 !important属性作用是什么
+
+```js
+忽略ie下的bug,!important的css定义可以让对于属性拥有最高的优先级(据说权重为100W)
+
+注意:非到万不得已，尽量避免使用这个属性，要不然后续维护起来权重会混乱，变的麻烦
+```
+
 ### CSS3新增伪类有那些？
 
 ```js
@@ -1249,6 +1257,27 @@ active-将样式添加到被激活的元素
 而伪元素可以理解为伪造的元素（譬如：：after表示插入一个新的元素）
 
 在不考虑兼容的情况下，伪类用（：表示），伪元素用（：：）表示
+```
+
+### position属性的三个值：relative，absolute，fixed的区别？
+
+```js
+relative:
+生成相对元素，无top,left时，元素就是在正常的文档流中，
+譬如如果设置了left:20px，就会从左侧偏离20像素
+
+absolute:
+生成绝对定位元素，相对于上级元素中第一个position属性非static的元素来定位
+使用left,right,top,bottom来定位
+
+fixed:
+生成绝对定位元素，相对于浏览器视窗来定位
+使用left,right,top,bottom定位
+
+position的其它值:
+static:默认值，没有定位，元素出现在正常流中
+忽略top,bottom,left,right或者z-index声明
+
 ```
 
 ### 如何修改chrome记住密码后自动填充表单的黄色背景？
