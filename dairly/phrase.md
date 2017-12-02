@@ -129,3 +129,6 @@ If you shut the door to all errors, truth will be shut out.
 
 First say to yourself what you would be, and then do what you have to do.
 先说你要成为什么样的人，接着做你必须做的事
+
+The best way to gain self-confidence is to do what you are afraid to do.
+获得自信的最好方法是去做你不敢做的事情
