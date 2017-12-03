@@ -132,3 +132,6 @@ First say to yourself what you would be, and then do what you have to do.
 
 The best way to gain self-confidence is to do what you are afraid to do.
 获得自信的最好方法是去做你不敢做的事情
+
+Be present - it is the only moment that matters.
+留意当下-这是唯一的重要时刻
