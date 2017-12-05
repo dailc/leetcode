@@ -1,43 +1,45 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-08
- * 描述: Group-Anagrams
- * 
+ * 一刷时间: 2017-04-08
+ * 二刷时间：2017-12-05
  * 来自: https://leetcode.com/problems/group-anagrams
  */
 (function(exports) {
 
-	/**
-	 * @description groupAnagrams
-	 * @param {string[]} strs
- 	 * @return {string[][]}
-	 */
-	exports.groupAnagrams = function(strs) {
-		if(!strs) {
-			return [];
-		}
-		var len = strs.length;
-		var hash = {};
-		for( var i = 0; i < len; i ++ ) {
-			var str = strs[i].split('');
-			str.sort();
-			str = str.join('');
-			if(!hash[str]) {
-				hash[str] = [];
-			} 
-			
-			hash[str].push(strs[i]);
-		}
-		
-		//读取hash
-		var result = [];
-		for( var item in hash) {
-			result.push(hash[item]);
-		}
-		return result;
-	};
-	
-	
-	
+    /**
+     * @param {string[]} strs
+     * @return {string[][]}
+     */
+    function groupAnagrams(strs) {
+        if (!strs) {
+            return [];
+        }
+        const len = strs.length;
+        const hash = {};
+
+        for (let i = 0; i < len; i++) {
+            const str = strs[i];
+            const strArr = str.split('');
+
+            strArr.sort();
+
+            const hashKey = strArr.join('');
+
+            if (!hash[hashKey]) {
+                hash[hashKey] = [];
+            }
+
+            hash[hashKey].push(str);
+        }
+
+        const res = [];
+
+        Object.keys(hash).forEach(function(hashKey) {
+            res.push(hash[hashKey]);
+        });
+
+        return res;
+    }
+
+    exports.groupAnagrams = groupAnagrams;
 
 })(window.LeetCode = window.LeetCode || {});

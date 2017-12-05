@@ -847,6 +847,72 @@ supplement:
 3.fixed:它的containing block一律为跟元素(html/body)，跟元素也是initial containing block
 ```
 
+### display:none和visibility:hidden的区别？
+
+```js
+相同点： 都能将网页上的某个元素隐藏
+
+不同点：
+display:none。隐藏对象并且不保留空间，即使用后该对象会从页面上消失，看不见，摸不着
+涉及到了DOM结构，故产生reflow与repaint
+
+visibility:hidden。使得对象在网页不可见（点击事件也无法触发），但是对象在网页上所占的空间没变（变为一块空白占据原有空间）
+保留空间，不影响结构，故只产生repaint
+```
+
+### 回流与重绘
+
+```js
+https://www.cnblogs.com/dll-ft/p/5810639.html
+
+页面显示过程分为以下几个阶段：
+1.生成dom树(包括display:none的节点)
+2.在dom树的基础上根据节点的集合属性(margin,padding,width,height等)生成render树（不包括display:none，head节点，但是包括visibility:hidden的节点）
+3.在render树的基础上继续渲染颜色，背景色等样式
+
+reflow：当render树的一部分或者全部因为大小边距等问题发送变化而需要重建的过程，叫回流
+repaint：当诸如颜色背景等不会引起页面布局变化，而只需要重新渲染的过程叫做重绘
+
+改变结构都将导致回流，重绘代价要远远小于回流。
+
+什么会引起回流
+1.页面渲染初始化
+2.DOM结构改变，比如删除了某个节点
+3.render树变化，比如减少了padding
+4.窗口resize
+5.最复杂的一种：获取某些属性，引发回流
+    很多浏览器会对回流做优化，会等到数量足够时做一次批处理回流
+    但是除了render树的直接变化，当获取一些属性时，浏览器为了获得正确的值也会触发回流，这样使得浏览器优化无效，包括
+    （1）offset(Top/Left/Width/Height)
+     (2) scroll(Top/Left/Width/Height)
+     (3) cilent(Top/Left/Width/Height)
+     (4) width,height
+     (5) 调用了getComputedStyle()或者IE的currentStyle
+     
+回流一定伴随着重绘，重绘却可以单独出现
+
+减少回流
+减少逐项更改样式，最好一次性更改style，或者将样式定义为class并一次性更新
+避免循环操作dom，创建一个documentFragment或div，在它上面应用所有DOM操作，最后再把它添加到window.document。
+避免多次读取offset等属性。无法避免则将它们缓存到变量
+将复杂的元素绝对定位或固定定位，使得它脱离文档流，否则回流代价会很高
+
+注意：改变字体大小会引发回流
+```
+
+示例
+
+```js
+var s = document.body.style;
+s.padding = "2px"; // 回流+重绘
+s.border = "1px solid red"; // 再一次 回流+重绘
+s.color = "blue"; // 再一次重绘
+s.backgroundColor = "#ccc"; // 再一次 重绘
+s.fontSize = "14px"; // 再一次 回流+重绘
+// 添加node，再一次 回流+重绘
+document.body.appendChild(document.createTextNode('abc!'));
+```
+
 ### CSS里的visibility属性有一个collapse属性值时干嘛的?在不同浏览器下有什么区别？
 
 ```js

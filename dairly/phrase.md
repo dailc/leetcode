@@ -135,3 +135,9 @@ The best way to gain self-confidence is to do what you are afraid to do.
 
 Be present - it is the only moment that matters.
 留意当下-这是唯一的重要时刻
+
+My success just evolved from working hard at the business at hand each day.
+我的成功来自每天努力把手边的工作做好
+
+The most rewarding things you do in life are often the ones that look like they cannot be done.
+最令人满足的事，是完成那些看似无法完成的事
