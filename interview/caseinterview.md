@@ -940,6 +940,8 @@ document.body.appendChild(document.createTextNode('abc!'));
 ### 对BFC规范（块级格式化上下文：block formatting context）的理解？
 
 ```js
+BFC的全称是Blok formatting contexts(块级格式化上下文)
+
 W3C CSS2.1规范中的一个概念，它是一个独立容器，决定了元素如何对其内容进行定位，以及与其它元素的关系和相互作用
 一个页面是有很多个Box组成的，元素的类型和display属性决定了这个Box的类型
 
@@ -953,7 +955,8 @@ overflow的值不为visible
 display的值为inline-block,table-cell,table-caption
 position的值为absolute或fixed
 
-而display:table，有这个属性时会默认生成一个匿名的table-cell，所以也会间接的生成BFC
+有时候会把display：table也认为可以生成BFC，
+其实这里的主要原因在于Table会默认生成一个匿名的table-cell，正是这个匿名的table-ccell生成了BFC
 
 BFC中相邻的块级元素垂直外边界会折叠
 BFC不会与float的元素区域重叠（如果浮动元素后有一个BFC，它不会和前面的浮动元素折叠）
@@ -963,6 +966,17 @@ BFC不会与float的元素区域重叠（如果浮动元素后有一个BFC，它
 默认可以是认为处于body的bfc中
 
 http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html
+
+BFC仍然属于文档流中
+BFC的约束规则分解如下:
+1.内部的Box会在垂直方向上一个接一个的放置
+2.垂直方向上的距离由margin决定。
+（完整的说法是：属于同一个BFC的两个相邻块级元素Box的垂直margin会发生重叠。）
+3.每个元素的左外边距与包含块的左边界相接触（从左向右），即使浮动元素也是如此。
+（这说明BFC中子元素不会超出他的包含块，而position为absolute的元素可以超出他的包含块边界）
+4.BFC的区域不会与float的元素区域重叠
+5.计算BFC的高度时，浮动子元素也参与计算
+6. BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面元素，反之亦然
 ```
 
 ### css定义的权重
@@ -1682,7 +1696,195 @@ Flash Of Unstyled Cotent
 
 6. `object`，复杂对象
 
-7. `symbol`，`es6`新增，表独一无二
+7. `symbol`，`es6`新增，表示独一无二
+
+__object类型中的拓展类型__
+
+```js
+Array, Date,RegExp,Error,String,Boolean,Number。
+这些拓展类型有一个特点就是使用typeof 只会返回”object”。
+(注意,这里的String等和简单类型中的string是有差别的,简单类型中的string指向的是栈内存中的常量，
+而String的对象的栈内存区是一个指针，指向堆内存区的内容，所以才会认为是object型)
+
+另外还有一个特殊的Object拓展类型: Function,这个类型的对象用typeof 会返回”function”
+```
+
+__null__
+
+```js
+null型也只有一个值,即null，从逻辑角度来看，null值表示一个空指针
+(这也是使用typeof操作符检测返回object的原因)。
+如果定义的变量准备在将来用于保存对象，那么最好将该变量初始化为null而不是其它值。
+这样只要直接检测null值就可以知道相应的变量是否已经保存了一个对象的引用了。
+(实际上，undefined值是派生自null值得,所以undefined==null但是undefined!==null)
+```
+
+__boolean__
+
+```js
+boolean型只有两个字面值true,false。但是这两个值和数字值不是一回事
+true不一定等于1,而false也不一定等于0。
+对象在判断时，比如”if(booleanObj)”会自动将它类型转为boolean值
+```
+
+转换规则：
+
+| 类型 | 转为true的值 | 转为false的值 |
+| :------------- |:-------------:|-------------:|
+| Boolean | true | false |
+| String | 任何非空字符串 | 空字符串（"",''） |
+| Number | 任意非零数字（包括无穷大） | 0和NAN |
+| Object | 任意非空对象 | null |
+| Undefined | 不适用 | undefined |
+
+__number__
+
+```js
+number类型用来表示整型和浮点数字
+还有一种特殊的数值NaN-not a number,
+(这个数值用于表示一个本来要返回数值的操作数未返回数值得情况-防止抛出错误)
+
+比如在其它语言中数值÷0都会导致错误，停止运行，
+但是在JS中。0/0、NaN/0会返回NaN，其它数字/0会返回Infinity，不会报错。
+
+NaN与任何值都不相等，包括NaN本身
+任何涉及与NaN的操作都会返回NaN，
+JS有一个isNaN()函数，可以判断接收的参数是否为NaN,或者参数转化为数字后是否为NaN
+```
+
+注意:Infinity的类型是Number(不是基础数据类型)
+
+有两种方法可以将非number类型的值转换为number类型
+
+```js
+// 一种是隐式转换,如进行(*、/)操作时,会自动其余类型的值转为number类型
+
+console.log("1" * 2); // 12
+console.log("1" / 2); // 0.5
+console.log("1a" / 2); // NaN
+
+一种是显示转换-调用Number()、parseInt()、parseFloat()方法转换
+```
+
+Number()函数的转换规则如下：
+
+```js
+如果是boolean值，true和false将分别被替换为1和0
+如果是数字值，只是简单的传入和返回
+如果是null值，返回0
+如果是undefined，返回NaN
+如果是字符串，遵循下列规则：
+    如果字符串中只包含数字，则将其转换为十进制数值，即”1“会变成1，”123“会变成123，而”011“会变成11（前导的0被忽略）
+    如果字符串中包含有效的浮点格式，如”1.1“，则将其转换为对应的浮点数（同样，也会忽略前导0）
+    如果字符串中包含有效的十六进制格式，例如”0xf“，则将其转换为相同大小的十进制整数值
+    如果字符串是空的，则将其转换为0
+    如果字符串中包含除了上述格式之外的字符，则将其转换为NaN
+如果是对象，则调用对象的valueOf()方法，然后依照前面的规则转换返回的值。
+如果转换的结果是NaN，则调用对象的toString()方法，然后再依次按照前面的规则转换返回的字符串值。
+```
+
+```js
+console.log(Number('')); // 0
+console.log(Number('a')); // NaN
+console.log(Number(true)); // 1
+console.log(Number('001')); // 1
+console.log(Number('001.1')); // 1.1
+console.log(Number('0xf')); // 15
+console.log(Number('000xf')); // NaN
+var a = {};
+console.log(Number(a)); // NaN
+a.toString = function(){return 2};
+console.log(Number(a)); // 2
+a.valueOf = function(){return 1};
+console.log(Number(a)); // 1  
+```
+
+parseInt()常常用于将其它类型值转化为整形。parseInt转换与Number()有区别，具体规则如下
+
+```js
+parseInt(value,radius)有两个参数，第一个参数是需要转换的值，第二个参数是转换进制
+(该值介于 2 ~ 36 之间。如果该参数小于 2 或者大于 36，则 parseInt() 将返回 NaN。)
+
+如果不传(或值为0)，默认以10为基数(如果value以 “0x” 或 “0X” 开头，将以 16 为基数)
+
+注意在第二个参数默认的情况下，如果需要转换的string值以0开头,
+如'070',有一些环境中,会自动转化为8进制56，有一些环境中会自动转化为10进制70。
+所以为了统一效果，我们在转换为10进制时，会将第二个参数传10
+```
+
+parseInt转换示例
+
+```js
+console.log(parseInt('')); // NaN
+console.log(parseInt('a')); // NaN
+console.log(parseInt('1234blue')); // 1234
+console.log(parseInt(true)); // NaN
+console.log(parseInt('070')); // 70,但是有一些环境中会自动转换为8进制56
+console.log(parseInt('070',8)); // 56
+console.log(parseInt('001.1')); // 1
+console.log(parseInt('0xf')); // 15,16进制
+console.log(parseInt('AF',16)); // 175，16进制
+console.log(parseInt('AF')); // NaN
+console.log(parseInt('000xf')); // 0
+var a = {};
+console.log(parseInt(a)); // NaN
+a.toString = function(){return 2};
+console.log(parseInt(a)); // 2
+a.valueOf = function(){return 1};
+console.log(parseInt(a)); // 2                            
+```
+
+parseFloat()转换规则基本与parseInt()一致，只有如下不同点
+
+```js
+parseFloat()遇到浮动数据时，浮点有效(但是只有第一个.有效)，如"10.1"会被转为10.1；'10.1.1'会被转为10.1
+parseFloat()只会默认处理为10进制，而且会忽略字符串前面的0，所以不会有在默认情况下转为8进制的情况
+```
+
+```js
+console.log(parseFloat('1234blue')); // 1234
+console.log(parseFloat('1234blue',2)); // 1234
+console.log(parseFloat('0xA')); // 0
+console.log(parseFloat('10.1')); // 10.1
+console.log(parseFloat('10.1.1')); // 10.1
+console.log(parseFloat('010')); // 10     
+```
+
+由于Number()函数在转换字符串时比较复杂而且不够合理，因此在处理整数的时候更常用的是parseInt()函数
+-需注意最好第二个参数传10，处理浮点数时更常用parseFloat()
+
+另外注意,浮点数直接的计算存在误差,所以两个浮点数无法用"=="进行判断
+
+```js
+var a=10.2;
+var b= 10.1;
+
+console.log(a - b === 0.1); // false
+console.log(a - 10.1 === 0.1); // false,实际是0.09999999999999964
+console.log(a - 0.1 === 10.1); // true    
+```
+
+__string__
+
+```js
+string类型用于表示由零或多个16位Unicode字符组成的字符序列，即字符串。
+字符串可以由单引号(')或双引号(")表示。任何字符串的长度都可以通过访问其length属性取得。
+要把一个值转换为一个字符串有两种方式。
+第一种是使用几乎每个值都有的toString()方法(null和undefined没有)；
+第二种是通过加上一个空字符串。
+```
+
+__object__
+
+```js
+除去简单数据类型，其它类型都是基于Object类型拓展的。
+
+这种类型有一种笼统的称呼为引用类型(因为指向的栈内存去为指针、引用，指向的是堆内存区的实际内容)。
+该类型的实例化对象时一组数据和功能(函数)的集合，实例化对象的过程有两种，
+一种是通过new操作符，一种是通过对象字面量表示法。
+
+像一些常见的类型如Array,Date,Function等都是基于Object进行拓展的。所以它们的本质都是Object型。
+```
 
 ### 说说写JavaScript的基本规范？
 
