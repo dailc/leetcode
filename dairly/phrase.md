@@ -141,3 +141,6 @@ My success just evolved from working hard at the business at hand each day.
 
 The most rewarding things you do in life are often the ones that look like they cannot be done.
 最令人满足的事，是完成那些看似无法完成的事
+
+The beautiful thing about learning is nobody can take it away from you.
+学习的美好之处，在于没有人可以把它从你身上拿走
