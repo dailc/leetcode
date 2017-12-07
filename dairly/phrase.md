@@ -144,3 +144,6 @@ The most rewarding things you do in life are often the ones that look like they 
 
 The beautiful thing about learning is nobody can take it away from you.
 学习的美好之处，在于没有人可以把它从你身上拿走
+
+The useless men are those who never change width the years.
+没用的人是那些不随岁月改变的人
