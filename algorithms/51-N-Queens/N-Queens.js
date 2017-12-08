@@ -14,16 +14,12 @@
             return [];
         }
         const res = [];
-        // fill出错
-        // const positions = new Array(n).fill(new Array(n).fill('.'));
-
+        // fill出错，原因-fill了同一个引用对象。。。而不是多个新的数组
+        // const positions =  new Array(n).fill(new Array(n).fill('.'));
         const positions = [];
-
+        
         for (let i = 0; i < n; i++) {
-            positions[i] = [];
-            for (let j = 0; j < n; j++) {
-                positions[i].push('.');
-            }
+            positions[i] = new Array(n).fill('.');
         }
 
         // 回溯法
@@ -80,9 +76,6 @@
     }
     exports.solveNQueens = solveNQueens;
 
-    function solveNQueens2(n) {
-
-    }
 
     /**
      * @param {number} n
@@ -93,8 +86,6 @@
             return [];
         }
         const res = [];
-        // fill出错
-        // const positions = new Array(n).fill(-1);
 
         const positions = [];
 
@@ -166,8 +157,6 @@
             return [];
         }
         const res = [];
-        // fill出错
-        // const positions = new Array(n).fill(-1);
 
         const positions = [];
 

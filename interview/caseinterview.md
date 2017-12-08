@@ -2162,6 +2162,59 @@ ie中支持冒泡型，火狐中两种都支持（默认为事件捕获）
 
 阻止冒泡：event.stopPropagation();(符合W3C标准)
 (旧版IE用event.cancelBubble = true)-IE8及以下，但其实chrome和firefox中也支持（只是考虑到非标准，后续迟早要移除）
+
+IE浏览器中:事件从里向外发生，事件从最精确对象(target)开始触发，然后逐步向上级，最终到最不精确的对象(document)触发，即事件冒泡
+Netscape：事件从外向里发生，事件从最不精确的最新(document)开始触发，然后到最精确对象(target)触发，即事件捕获
+
+W3C标准将两者进行中和，在任何的w3c的事件模型中，事件先进入捕获阶段，再进入冒泡阶段。
+在w3c dom浏览器中，绑定事件为 addeventListener(type,fn,useCapture)。
+其中useCapture:布尔值(true或false)，true代表采用事件捕获机制，false代表采用事件冒泡机制，默认为false(一般为了兼容各种浏览器也会设为false)
+
+注意:在ie678中，不支持事件捕获，所以没有addeventListener()方法，IE提供了另一个函数attachEvent(type,fn)。没有第三个参数(移除用的detachEvent)
+
+非IE中阻止事件传播(event.stopPropagation())
+IE中阻止事件传播(event.cancelBubble=true;)
+```
+
+### event.prventDefault()与event.stopPropagation()的区别？
+
+```js
+(不考虑部分IE浏览器，
+IE浏览器的preventDefault得用
+Window.event.returnValue=false替代。IE下的stopPropagation要用event.cancelBubble=true替代)
+
+event.preventDefault()用于取消事件的默认行为，
+例如当点击提交按钮时，监听方法内部使用了这句代码可以阻止默认的表单提交行为。
+同理可以适用于阻止a标签的跳转行为等等
+
+同理可以适用于阻止a标签的跳转行为等等,
+即事件冒泡或事件捕获时阻止事件的冒泡或者阻止被下一级捕获。
+比如div中点击a标签。事件冒泡中,在a标签的监听函数内部使用这句代码可以阻止事件冒泡到div上，所以div无法获取到点击事件。
+在事件捕获中，在div的监听函数内部使用这句代码可以阻住a标签捕获事件，所以a标签无法捕获到监听事件。
+(avveventListener的第三个参数为false代表使用冒泡机制，为true代表使用捕获机制，默认为false)
+
+
+```
+
+### 给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？
+
+```js
+addEventListener(name, func, useCapture)
+第三个参数是是否冒泡
+
+冒泡意味着从下到上
+捕获则相反，从上到下
+
+无论是冒泡事件还是捕获事件，元素都会先执行捕获阶段
+从上往下，如有捕获事件，则执行；
+一直向下到目标元素后，从目标元素开始向上执行冒泡元素，
+即第三个参数为true表示捕获阶段调用事件处理程序，如果是false则是冒泡阶段调用事件处理程序。
+(在向上执行过程中，已经执行过的捕获事件不再执行，只执行冒泡事件。)
+
+所以同时监听捕获和冒泡时的顺序：
+父级捕获->子级捕获->子级冒泡->父级冒泡
+
+e.stopPropagation();可阻止冒泡或捕获的传播
 ```
 
 ### 什么是闭包(closure)，为什么要用它？
@@ -3022,26 +3075,6 @@ polyfill是指标准API的适配，而jq是自己定义一套api
 譬如对requestAnimationFrame的兼容适配就属于一种polyfill
 ```
 
-### 给一个dom同时绑定两个点击事件，一个用捕获，一个用冒泡。会执行几次事件，会先执行冒泡还是捕获？
-
-```js
-addEventListener(name, func, isBubble)
-第三个参数是是否冒泡
-
-冒泡意味着从下到上
-捕获则相反，从上到下
-
-无论是冒泡事件还是捕获事件，元素都会先执行捕获阶段
-从上往下，如有捕获事件，则执行；
-一直向下到目标元素后，从目标元素开始向上执行冒泡元素，
-即第三个参数为true表示捕获阶段调用事件处理程序，如果是false则是冒泡阶段调用事件处理程序。
-(在向上执行过程中，已经执行过的捕获事件不再执行，只执行冒泡事件。)
-
-所以同时监听捕获和冒泡时的顺序：
-父级捕获->子级捕获->子级冒泡->父级冒泡
-
-e.stopPropagation();可阻止冒泡或捕获的传播
-```
 
 ### 使用JS实现获取文件扩展名？
 

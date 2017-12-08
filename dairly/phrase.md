@@ -147,3 +147,6 @@ The beautiful thing about learning is nobody can take it away from you.
 
 The useless men are those who never change width the years.
 没用的人是那些不随岁月改变的人
+
+Change is a law, and no amount of pretending will alter that reality.
+改变是一个定律，再多的假装也无法改变这个事实
