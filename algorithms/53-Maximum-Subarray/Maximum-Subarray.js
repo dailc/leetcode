@@ -1,35 +1,37 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-09
- * 描述: Maximum-Subarray
- * 
- * 来自: https://leetcode.com/problems/n-queens-ii
+ * 一刷时间: 2017-04-10
+ * 二刷时间：2017-12-10
+ * 来自: https://leetcode.com/problems/Maximum-Subarray
  */
 (function(exports) {
 
-	/**
-	 * @description maxSubArray
-	 * @param {number[]} nums
-	 * @return {number}
-	 */
-	exports.maxSubArray = function(nums) {
-		if(!nums) {
-			return 0;
-		}
-		var sum = 0,
-			maxSum = -Infinity;
-		for(var i = 0, len = nums.length; i < len; i++) {
-			if(sum <= 0) {
-				sum = nums[i];
-			} else {
-				sum += nums[i];
-			}
-			if(sum > maxSum) {
-				maxSum = sum;
-			}
-		}
-		return maxSum;
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    function maxSubArray(nums) {
+        if (!nums) {
+            return -Infinity;
+        }
+        const len = nums.length;
+        let sum = 0;
+        let maxSum = -Infinity;
 
-	};
+        for (let i = 0; i < len; i++) {
+            if (sum < 0) {
+                sum = nums[i];
+            } else {
+                sum += nums[i];
+            }
+
+            if (sum > maxSum) {
+                maxSum = sum;
+            }
+        }
+
+        return maxSum;
+    }
+
+    exports.maxSubArray = maxSubArray;
 
 })(window.LeetCode = window.LeetCode || {});

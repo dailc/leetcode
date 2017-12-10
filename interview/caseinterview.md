@@ -3848,4 +3848,48 @@ webview.getSettings().setTextSize(WebSetting.TextSize.LARGEST);
 在CSS解析之后，渲染之前，将所有的字体大小的值进行缩放，后面的排版和渲染都会直接使用缩放后的CSS值。
 
 所以看出android和iOS的不同，ios中只改变size-adjust，但是android中渲染时确实是实实在在的字体被改了
+
+https://www.cnblogs.com/axl234/p/7753187.html
+```
+
+### 函数节流与防抖？
+
+```js
+http://www.cnblogs.com/fsjohnhuang/p/4147810.html
+
+节流throttle：触发-上次动作执行时间〉大于限制时间->执行动作，记录执行时间
+我们不是要在每完成等待某个时间后去执行某函数，而是要每间隔某个时间去执行某函数，避免函数的过多执行
+频率控制 返回函数连续调用时，action 执行频率限定为 次 / delay
+
+譬如，如果有一个update函数每帧都会触发，那么里面加上节流的作用就是，可以防止代码连续触发（设一个间隔），可以中间休息（避免无意义的过渡损耗）
+
+var throttle = function(delay, action){
+  var last = 0
+  return function(){
+    var curr = +new Date()
+    if (curr - last > delay){
+      action.apply(this, arguments)
+      last = curr 
+    }
+  }
+}
+
+
+防抖debounce：触发-记录触发时间-上次动作触发时间〉大于限制时间-执行动作
+就是让某个函数在上一次执行后，满足等待某个时间内不再触发此函数后再执行，而在这个等待时间内再次触发此函数，等待时间会重新计算。
+空闲控制 返回函数连续调用时，空闲时间必须大于或等于 idle，action 才会执行
+
+var debounce = function(idle, action){
+  var last
+  return function(){
+    var ctx = this, args = arguments
+    clearTimeout(last)
+    last = setTimeout(function(){
+        action.apply(ctx, args)
+    }, idle)
+  }
+}
+
+throttle和debounce均是通过减少实际逻辑处理过程的执行来提高事件处理函数运行性能的手段，
+并没有实质上减少事件的触发次数。两者在概念理解上确实比较容易令人混淆，结合各js库的具体实现进行理解效果将会更好。
 ```

@@ -150,3 +150,6 @@ The useless men are those who never change width the years.
 
 Change is a law, and no amount of pretending will alter that reality.
 改变是一个定律，再多的假装也无法改变这个事实
+
+What value will there ever be in life, if we are not togrther?
+如果我们不在一起，生活还有什么意义？
