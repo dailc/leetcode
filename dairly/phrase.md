@@ -153,3 +153,6 @@ Change is a law, and no amount of pretending will alter that reality.
 
 What value will there ever be in life, if we are not togrther?
 如果我们不在一起，生活还有什么意义？
+
+Sometimes affection is a shy flower that takes time to blossom.
+有时候爱情犹如一朵娇羞的花朵，需要时间才能慢慢绽放
