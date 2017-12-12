@@ -3527,6 +3527,92 @@ Content-Type: text/html; charset=iso-8859-1
 {"name": "qiu", "age": 25}
 ```
 
+### http各个头部的含义
+
+```js
+HTTP消息包括客户机向服务器的请求消息和服务器向客户机的响应消息。
+这两种类型的消息由一个起始行，一个或者多个头域，一个只是头域结束的空行和可选的消息体组成。
+HTTP的头域包括通用头，请求头，响应头和实体头(一般实体头域部分放在响应头中)四个部分。
+每个头域由一个域名，冒号（:）和域值三部分组成，
+下图是某次请求的头部信息截图，以及头部中的域名信息的各自含义。
+```
+
+![](images/http_headers.png)
+
+__通用头域__
+
+```js
+Request Url: 请求的web服务器地址
+
+Request Method: 请求方式,
+Get-向Web服务器请求一个文件，
+POST-向WEB服务器发送数据让WEB服务器进行处理，
+PUT-向WEB服务器发送数据并存储在WEB服务器内部，
+HEAD-检查一个对象是否存在，
+DELETE-从WEB服务器上删除一个文件，
+CONNECT-对通道提供支持，http/1.0协议中预留给能够将链接改为管道方式的代理服务器
+TRACE-跟踪到服务器的路径，
+OPTIONS-查询服务器性能(ajax cros方案里面会用这种方式进行预检)
+
+Status Code: 请求的返回状态码，如200代表成功
+
+Remote Address: 请求的远程服务器地址（会转为IP）
+```
+
+__请求头域__
+
+```js
+Accept: 接收类型，表示浏览器支持的MIME类型
+Accept-Ranges：表明服务器是否支持制定范围请求以及哪种类型的分段请求,比如bytes
+Accept-Encoding：浏览器支持的压缩类型,如gzip等,超出类型不能接收
+Accept-Language：浏览器支持的语言类型，如zh-CN,zh;q=0.8，并且优先支持靠前的语言类型
+Cache-Control: 指定请求和响应遵循的缓存机制，如no-cache
+Connection: 当浏览器与服务器通信时对于长连接如何进行处理,如keep-alive
+Cookie: 当服务器返回cookie，这些cookie是之前服务器发给浏览器的
+Host：请求的服务器URL
+Origin：最初的请求是从哪里发起的（只会精确到端口）,Origin比Referer更尊重隐私
+Referer：该页面的来源URL(适用于所有类型的请求，会精确到详细页面地址)
+User-Agent：用户客户端的一些必要信息，如UA头部等
+```
+
+__响应头部__
+
+```js
+Access-Control-Allow-Origin: 服务器端允许的请求Origin头部
+Age: 从原始服务器到代理缓存形成的估算时间(以秒计算,非负)，比如12
+Allow:服务器运行的有效的请求行为(如GET,HEAD)，不允许时返回405
+Cache-Control：告诉浏览器或其他客户，什么环境可以安全的缓存文档，如private(对于单个用户的整个或部分响应消息，不能被共享缓存处理)
+Connection：当浏览器与服务器通信时对于长连接如何进行处理,如keep-alive
+Content-Encoding：返回数据在传输过程中所使用的压缩编码方式
+Content-Type：返回数据的MIME类型，字符集等
+Content-Language：响应体数据的语言
+Content-Length：响应体的长度
+Content-Location：请求资源可替代的另一个地址,如(/index.html)
+Content-Md5：返回资源的MD5校验值
+Content-Range：在整个返回体中，本部分的字节位置，如bytes 21010-47021/47022
+Date：数据从服务器发送的时间
+ETag：请求变量的实体标签的当前值
+Expires：应该在什么时候认为文档已经过期,从而不再缓存它
+Last-Modified：请求资源的最后修改时间
+Location：用来重定向接收方到非请求URL的位置来完成请求或标识新资源,如http:***/*.html
+Pragma：包括实现特定的指令，它可应用到响应链上的任何接收方，如no-cache
+Refresh：应用于重定向或一个新的资源被创造，在5秒后重定向(网景提出，被大部分浏览器支持)，如5;url=http:***/*/*.html
+Retry-After：如果实体暂时不可取，通知客户端在指定时间之后再次尝试
+Server：服务器名字，Servlet一般不设置这个值，而是由WEB服务器自己设置
+Set-Cookie：设置和页面关联的cookie，web服务器通过传送HTTP包中的Set-Cookie消息把一个cookie发送到用户的浏览器中
+Transfer-Encoding：数据传输方式，如chunked(输出的内容长度不能确定，动态页面会用到)
+Vary：告诉代理服务器/缓存/CDN，如何判断请求是否一样，值要么是*要么是header中的key名称组合(服务器判断的依据)，
+比如Vary中有User-Agent，那么即使相同的请求，但是浏览器不同，CDN也会认为是不同页面。
+如果Vary中没有User-Agent，那么CDN/代理会认为是相同的页面，直接给用户返回缓存的页面，而不会再去web服务器请求相应的页面
+Via：告知代理客户端响应是通过哪里发送的,如:1.0 fred, 1.1 nowhere.com(Apache/1,1)
+X-Powered-By：这个值得意义是告知网站是用何种语言或者框架编写的，
+不是由Apache或Nginx输出的，而是由语言解析器或者应用程序框架输出的(如PHP的标准输出值是PHP/5.2.1,
+也可在php.ini中增加或修改expose_php=OFF关闭。如.net标准输出为ASP.NET)
+Warning：警告实体可能存在的问题
+WWW-Authenticate：表明客户端请求实体应该使用的授权方案,如Basic
+X-UA-Compatible：页面的UA兼容情况(一般响应页面时asp是会有这个设置)
+```
+
 ### 一个页面从输入 URL 到页面加载显示完成，这个过程中都发生了什么？（流程说的越详细越好）***(需要重点过一遍)
 
 ```js
