@@ -1,30 +1,29 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
-		<meta name="renderer" content="webkit" />
-		<!-- 移动端的响应式特性 -->
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Merge-Intervals" name="Keywords">
-		<meta content="leetcodeJS大法之Merge-Intervals" name="description">
-		<title>leetcodeJS大法之Merge-Intervals</title>
-		<link rel="stylesheet" href="../../css/common/reset.css" />
-	</head>
-	<body>
-		<script type="text/javascript" src="Merge-Intervals.js" ></script>
-		<script>
-		//2147483647 83647
-		
-		var result = LeetCode.merge([{
-			start:2,
-			end:5
-		},{
-			start:3,
-			end:8
-		}]);
-		
-		console.log(JSON.stringify(result));
-		</script>
-	</body>
+
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>leetcodeJS大法之Merge-Intervals</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
+
+    <body>
+        <script type="text/javascript" src="Merge-Intervals.js"></script>
+        <script>
+            const merge = LeetCode.merge;
+
+            console.log(merge([{
+                start: 2,
+                end: 5
+            }, {
+                start: 3,
+                end: 8
+            }]));
+        </script>
+    </body>
+
 </html>

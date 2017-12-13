@@ -159,3 +159,6 @@ Sometimes affection is a shy flower that takes time to blossom.
 
 Why are you keeping the curiosity door locked?
 为什么你要把好奇心锁住？
+
+God must be a painter. Why else would we have so many colors?
+上帝一定是一位画家，不然我们怎么会有这么多的颜色？
