@@ -792,6 +792,30 @@ flexbox可以把列表放在同一个方向（从上到下或左到右），并�
 }
 ```
 
+### 安卓上如何实现1px像素线？
+
+```html
+https://zhuanlan.zhihu.com/p/27048192
+基于的实际：border:1px solid #000
+用这个后，在高分辨率的手机中，线会变胖，并不是1px
+
+原理：
+iPhone 3GS 和 iPhone 4 的像素分别是 320px 和 640px，但是显示屏的宽度却却都是相同的，
+所以为了在所有设备上渲染出的显示效果相同，CSS 中的 1px 映射到 iPhone 4 的物理像素上，就会是 2px
+同样的道理，在 iPhone 5、6 上 CSS 的 1px 对应物理像素 2px，6plus 则是 3px
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+所以当我们设置 1px 时，实际的显示效果其实是由两个甚至三个像素点所绘制的
+
+那么如何设置真实的1px线？（注意，android中，直接0.5px并不适应-或许未来可以，但现在还是不能这样）
+先放大，然后利用transform(scale(0.5));缩小（一般不会单独兼容3被像素的，兼容2devicePixelRatios就可以了）
+即构建1个伪元素, 将它的长宽放大到2倍, 边框宽度设置为1px, 再以transform缩放到50%.
+（为什么放大200%，因为，需要缩小0.5，否则位置会不对，像素仍然是那个1px的边框）
+
+或者通过设置对应viewport的rem基准值，这种方式就可以像以前一样轻松愉快的写1px了。
+(2的时候，viewport缩放为0.5,3的时候，viewport缩放为0.33，然后这样就1px就是实际的像素了（不过和viewport为1时的像素大小是不一样的，注意）)
+或者用对多背景渐变实现的也有
+```
+
 ### 经常遇到的浏览器的兼容性有哪些？原因以及解决方法是什么？常用hack技巧？
 
 ```js
@@ -1921,6 +1945,102 @@ __object__
 像一些常见的类型如Array,Date,Function等都是基于Object进行拓展的。所以它们的本质都是Object型。
 ```
 
+__symbol__
+
+```js
+http://www.infoq.com/cn/articles/es6-in-depth-symbols
+https://my.oschina.net/u/2903254/blog/818796
+es6引入的一种新的基本类型，由全局Symbol()函数创建，每次调用Symbol()函数，都会返回一个唯一的Symbol,
+因为每个 Symbol 值都是唯一的，因此该值不与其它任何值相等。
+
+let symbol1 = Symbol();
+let symbol2 = Symbol();
+ 
+console.log(symbol1 === symbol2); // false
+console.log(typeof symbol1); // "symbol"
+
+它常常用于充当唯一的对象键。
+
+JavaScript中最常见的对象检查的特性会忽略symbol键。
+例如，for-in循环只会遍历对象的字符串键，symbol键直接跳过，
+Object.keys(obj)和Object.getOwnPropertyNames(obj)也是一样。
+但是symbols也不完全是私有的：
+用新的API Object.getOwnPropertySymbols(obj)就可以列出对象的symbol键。
+另一个新的API，Reflect.ownKeys(obj)，会同时返回字符串键和symbol键。
+
+注意：symbol不能被自动转换为字符串，这和语言中的其它类型不同。尝试拼接symbol与字符串将得到TypeError错误。
+通过String(sym)或sym.toString()可以显示地将symbol转换为一个字符串，从而回避这个问题。
+
+获取symbol的三种方法
+1.调用Symbol()。这种方式每次调用都会返回一个新的唯一symbol。
+2.调用Symbol.for(string)。这种方式会访问symbol注册表，其中存储了已经存在的一系列symbol。
+这种方式与通过Symbol()定义的独立symbol不同，symbol注册表中的symbol是共享的。
+如果你连续三十次调用Symbol.for("cat")，每次都会返回相同的symbol。
+注册表非常有用，在多个web页面或同一个web页面的多个模块中经常需要共享一个symbol。
+3.使用标准定义的symbol，例如：Symbol.iterator。
+标准根据一些特殊用途定义了少许的几个symbol。
+
+应用：
+1.使instanceof可扩展。
+在ES6中，表达式object instanceof constructor被指定为构造函数的一个方法：
+constructor[Symbol.hasInstance](object)。这意味着它是可扩展的。
+2.消除新特性和旧代码之间的冲突。
+这一点非常复杂，但是我们发现，添加某些ES6数组方法会破坏现有的Web网站。
+其它Web标准有相同的问题：向浏览器中添加新方法会破坏原有的网站。
+然而，破坏问题主要由动态作用域引起，
+所以ES6引入一个特殊的symbol——Symbol.unscopables，Web标准可以用这个symbol来阻止某些方法别加入到动态作用域中。
+3.支持新的字符串匹配类型。
+在ES5中，str.match(myObject)会尝试将myObject转换为正则表达式对象（RegExp）。
+在ES6中，它会首先检查myObject是否有一个myObject[Symbol.match](str)方法。
+现在的库可以提供自定义的字符串解析类，所有支持RegExp对象的环境都可以正常运行。
+
+还可以用来模拟私有变量
+可以用来创建枚举类型
+
+
+实际上，symbol是PHP和Python中的__doubleUnderscores在JavaScript语言环境中的改进版。
+symbol在Firefox 36和Chrome 38中均已被实现。
+```
+
+### js的浮点误差？
+
+```js
+var a=10.2;
+var b= 10.1;
+
+console.log(a - b === 0.1); // false
+console.log(a - 10.1 === 0.1); // false,实际是0.09999999999999964
+console.log(a - 0.1 === 10.1); // true
+
+一般比较方法是判断两个浮点数的误差不大于某个极小数即可，如
+a - b < 1e-7
+
+或者.toFixed(10)
+在判断浮点运算结果前对计算结果进行精度缩小，因为在精度缩小的过程总会自动四舍五入: 
+这样
+parseFloat((1.0-0.9).toFixed(10)) === 0.1 // true
+parseFloat((1.0-0.8).toFixed(10)) === 0.2 // true
+
+https://www.cnblogs.com/ppforever/p/5011660.html
+不光是js，只要采用IEEE754浮点数标准(由电气电子工程师学会定义的浮点数在内存中的算法规范。)的语言都存在这个问题。
+（由美国电气电子工程师学会（IEEE）计算机学会旗下的微处理器标准委员会（Microprocessor Standards Committee, MSC）发布）
+IEEE754浮点数主要有单精度（32位）和双精度（64位），js采用双精度。
+有些浮点数比如0.1转化为二进制是无穷的，而64位的浮点数表示法尾数位只允许52位，
+超出的部分进一舍零，会造成浮点数精度丢失，两个浮点数转化二进制相加后的结果，也遵循这个原则。
+
+譬如：
+    十进制           二进制
+    0.1              0.0001 1001 1001 1001 ...
+    0.2              0.0011 0011 0011 0011 ...
+    0.3              0.0100 1100 1100 1100 ...
+    0.4              0.0110 0110 0110 0110 ...
+    0.5              0.1
+    0.6              0.1001 1001 1001 1001 ...
+    
+所以比如 1.1，其程序实际上无法真正的表示 ‘1.1'，而只能做到一定程度上的准确，这是无法避免的精度丢失：
+1.09999999999999999
+```
+
 ### typeof知多少
 
 ```js
@@ -1936,11 +2056,21 @@ Object:null类型或者其它的object类型和object拓展类型(去除Function
 ### instanceof知多少
 
 ```js
+https://segmentfault.com/q/1010000003872816?_ea=403162
 instanceof用于判断一个变量是否是某个对象的实例，
 主要判断某个构造函数的prototype属性是否在另一个要检查对象的原型链上
 
 instanceof可以用于判断是否原型链继承，可以判断内置的对象类型(基于obejct拓展的,如Array,Date等)，可以判断自定义类型，
 但是不能判断简单类型(因为本质是通过原型来判断，但是简单类型只是一个常量，并不是Object)
+
+a instanceof b 真正的语义是检查 b.prototype 是否在 a 的原型链上，仅此而已。
+
+所以，对b会有要求，如果b没有原型链，会报错，譬如
+obj instanceof undefined 会报错，Right-hand side of 'instanceof' is not an object
+如果obj.prototype = undefined;
+那么123 instanceof obj 会报错，Right-hand side of 'instanceof' is not callable
+
+可以看出，如果右侧的值没有prototype对象，会报错
 ```
 
 ### Object.prototype.toString知多少
@@ -2040,6 +2170,18 @@ instance.constructor.prototype = instance.__proto__
 简单类型在栈中，复杂类型栈中有一个堆中的引用（栈中只保留指针，堆中才是实际数据）
 
 分为两大类型： 原始数据类型（栈），引用数据类型（堆）
+
+### 判断一个对象是否是数组？
+
+```js
+1.Array.isArray(arr);(ECMAScript5引入-当然了，不考虑ie8)
+2.arr instanceof Array
+3.arr.constructor === Array
+
+注意，由于跨iframe实例化的对象彼此不共享原型，因此2，3检测kennel会有问题
+
+4.Object.prototype.toString.call(arr) === '[object Array]';
+```
 
 ### Javascript如何实现继承？
 
@@ -2960,13 +3102,46 @@ server-side rendering
 简单说就是nodejs这一层就将html页面组装好了，然后交给浏览器渲染。
 ```
 
-### 移动端的点击事件的有延迟，时间是多久，为什么会有？ 怎么解决这个延时？
+### 移动端的点击事件的有延迟(click的300毫秒延迟)，时间是多久，为什么会有？ 怎么解决这个延时？
 
 ```js
 click 有 300ms 延迟,为了实现safari的双击事件的设计，浏览器要知道你是不是要双击操作。
 
 一般采用touch方式模拟点击可以去除延迟
 或者直接采用fastclick等第三方库
+
+移动端浏览器的默认显示宽度是980px(不同机型各异，但相差不大)，而不是屏幕的宽度(320px或其他)。
+为了对早期普通网页更好的体验，iphone设计了双击放大显示的功能--这就是300ms延迟的来源：
+如果用户一次点击后300ms内没有其他操作，则认为是个单击行为；否则为双击放大行为。
+
+解决：
+1.user-scalable=no。 
+不能缩放就不会有双击缩放操作，因此click事件也就没了300ms延迟，这个是Chrome首先在Android中提出的。
+2.设置显示宽度：width=device-width。
+Chrome 开发团队不久前宣布，在 Chrome 32 这一版中，
+他们将在包含 width=device-width 或者置为比 viewport 值更小的页面上禁用双击缩放。
+当然，没有双击缩放就没有 300 毫秒点击延迟。
+3.直接采用fastclick等第三方库
+简而言之，FastClick 在检测到 touchend事件的时候，
+会通过 DOM 自定义事件立即触发一个模拟click事件，并把浏览器在 300 毫秒之后真正触发的 click事件阻止掉。
+```
+
+### 什么是点透行为?
+
+```js
+http://www.jianshu.com/p/fed6b110ff2e
+假设有两个层级，A和B；A在上面，B在下面。
+如果A监听touch事件(zepto的tap事件)，而且B上有个链接(或者监听click事件)，
+那么当touch A后，先后触发了touchStart和touchEnd事件，touchEnd后A层隐藏，
+而此刻会触发在document最前面B的click事件；这就是点透行为。
+
+这是因为在移动端浏览器，事件执行的顺序是touchstart > touchend > click。
+而click事件有300ms的延迟，当touchstart事件把B元素隐藏之后，隔了300ms，
+浏览器触发了click事件，但是此时B元素不见了，所以该事件被派发到了A元素身上。
+如果A元素是一个链接，那此时页面就会意外地跳转。
+
+如上述解决了300ms延迟的方案中，自然也会结局点透。。。
+如user-scalable=no。
 ```
 
 ### 知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?

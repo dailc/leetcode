@@ -162,3 +162,6 @@ Why are you keeping the curiosity door locked?
 
 God must be a painter. Why else would we have so many colors?
 上帝一定是一位画家，不然我们怎么会有这么多的颜色？
+
+we live only to discover beauty. All else is a form of waiting.
+活着只是为了发现美，其它一切只是一种等待
