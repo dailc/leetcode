@@ -651,6 +651,59 @@ margin: 0 auto;
  }
 ```
 
+### css实现垂直水平居中
+
+![](center_vandh.png)
+
+```js
+.center-container {  
+  position: relative;  
+  width: 200px;
+  height: 200px;
+  background: #008855;
+}  
+  
+.absolute-center {  
+  width: 50%;  
+  height: 50%;  
+  overflow: auto;  
+  margin: auto;  
+  position: absolute;  
+  top: 0;
+  left: 0; 
+  bottom: 0; 
+  right: 0;  
+  background: #0000CC;
+}  
+```
+
+```js
+http://blog.csdn.net/freshlover/article/details/11579669
+如上代码可以实现绝对的垂直水平居中
+
+优点：
+
+1.支持跨浏览器，包括IE8-IE10.
+
+2.无需其他特殊标记，CSS代码量少
+
+3.支持百分比%属性值和min-/max-属性
+
+4.只用这一个类可实现任何内容块居中
+
+5.不论是否设置padding都可居中（在不使用box-sizing属性的前提下）
+
+6.内容块可以被重绘。
+
+7.完美支持图片居中。
+
+缺点：
+
+1.必须声明高度（查看可变高度Variable Height）。
+
+2.建议设置overflow:auto来防止内容越界溢出。（查看溢出Overflow）。
+```
+
 ### display有哪些值？说明他们的作用。
 
 - `none`，隐藏元素，并且不保留位置（`visibile`的话会保留）
@@ -809,7 +862,8 @@ iPhone 3GS 和 iPhone 4 的像素分别是 320px 和 640px，但是显示屏的�
 那么如何设置真实的1px线？（注意，android中，直接0.5px并不适应-或许未来可以，但现在还是不能这样）
 先放大，然后利用transform(scale(0.5));缩小（一般不会单独兼容3被像素的，兼容2devicePixelRatios就可以了）
 即构建1个伪元素, 将它的长宽放大到2倍, 边框宽度设置为1px, 再以transform缩放到50%.
-（为什么放大200%，因为，需要缩小0.5，否则位置会不对，像素仍然是那个1px的边框）
+（为什么放大200%，因为，需要缩小0.5，否则的话可能长度就不对了，比如绘制100px的1px宽线，先绘制200px的2px，然后缩小一半）
+-1csspx(实际两像素),缩小0.5后就是实际一像素
 
 或者通过设置对应viewport的rem基准值，这种方式就可以像以前一样轻松愉快的写1px了。
 (2的时候，viewport缩放为0.5,3的时候，viewport缩放为0.33，然后这样就1px就是实际的像素了（不过和viewport为1时的像素大小是不一样的，注意）)
@@ -2021,6 +2075,8 @@ a - b < 1e-7
 parseFloat((1.0-0.9).toFixed(10)) === 0.1 // true
 parseFloat((1.0-0.8).toFixed(10)) === 0.2 // true
 
+(a - 10.1).toFixed(10) // 0.1000000000（自动四舍五入了）
+
 https://www.cnblogs.com/ppforever/p/5011660.html
 不光是js，只要采用IEEE754浮点数标准(由电气电子工程师学会定义的浮点数在内存中的算法规范。)的语言都存在这个问题。
 （由美国电气电子工程师学会（IEEE）计算机学会旗下的微处理器标准委员会（Microprocessor Standards Committee, MSC）发布）
@@ -3124,6 +3180,12 @@ Chrome 开发团队不久前宣布，在 Chrome 32 这一版中，
 3.直接采用fastclick等第三方库
 简而言之，FastClick 在检测到 touchend事件的时候，
 会通过 DOM 自定义事件立即触发一个模拟click事件，并把浏览器在 300 毫秒之后真正触发的 click事件阻止掉。
+
+
+事件执行顺序：
+touchstart->-touchmove（如果有的话）>touchend
+->mousedown->mousemove（如果有的话）->mouseup
+->click->dblckick（如果有的话，IOS上不支持dblclick事件，Android支持dblclick事件）
 ```
 
 ### 什么是点透行为?
@@ -3142,6 +3204,42 @@ http://www.jianshu.com/p/fed6b110ff2e
 
 如上述解决了300ms延迟的方案中，自然也会结局点透。。。
 如user-scalable=no。
+```
+
+### 如何实现Tap事件？
+
+```js
+https://segmentfault.com/a/1190000008578783
+利用touch（前提也必需设置<meta>禁止页面缩放才能避免点透）
+
+基于touchstart、touchmove、touchend这三个事件
+
+start记录触发的startX和startY（pageX,pagey）
+mouve中记录最后的endX和endY
+end中进行判断，是否合法（譬如endX-startX,endY-startY 不能大于25）
+并且endTime-startTime <150(防止长按等其它事件)
+如果符合要求，就触发tap事件，通过如下触发
+
+var event=new CustomEvent('tap',{
+    bubbles: true,
+    cancelable: true
+});
+    
+// 触发btn上的tap事件
+btn.dispatchEvent(event); 
+
+同时，trigger时设置30ms的延迟
+setTimeout(function(){
+    trigger(target, 'tap');
+}, 30);
+
+如果要在pc上也兼容可以再通过mousedown、mouseup、mousemove来处理，原理一样，只是做个pc与移动判断
+
+其中给setTimeout()设置了30毫秒的延时，实际上手机浏览器计时并不准确，延时定短了tap有可能就在click前面执行了。
+虽然松开手指时touchend和click会一前一后触发，但之间的间隔并不是每次都一样，
+少的时候只有几毫米，多的时候有二三十毫秒，因此tap需要延时在30毫秒之后，
+保证它在click之后执行。
+（因为要确保tap不影响原有的）
 ```
 
 ### 知道各种JS框架(Angular, Backbone, Ember, React, Meteor, Knockout...)么? 能讲出他们各自的优点和缺点么?
@@ -3376,6 +3474,26 @@ return;
 变量声明：
 由名称和对应值（undefined）组成的一个变量对象的属性被创建
 如果变量名称与已经声明的形式参数或函数相同，则变量声明不会干扰已经存在的
+```
+
+### indexof与findindex的区别？
+
+```js
+indexOf是es5中的（同批次还有every、some 、forEach、filter 、indexOf、lastIndexOf、isArray、map、reduce、reduceRigh）
+findIndex是es6中新增的（与find同批次）
+findIndex和find都可以发现NaN，弥补了数组的IndexOf方法的不足。
+
+例如
+[NaN].indexOf(NaN)  
+// -1  
+[NaN].findIndex(y => Object.is(NaN, y))  
+// 0  
+
+indexOf方法无法识别数组的NaN成员，但是findIndex方法可以借助Object.is方法做到。
+
+另外findIndex传入的是条件函数，
+（返回符合测试条件-true，的第一个数组元素索引，如果没有符合条件的则返回 -1。）
+而indexOf是直接传入目标
 ```
 
 ### var和let作用域？
