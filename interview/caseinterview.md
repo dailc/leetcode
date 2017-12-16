@@ -944,6 +944,140 @@ body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, fo
   table { border-collapse:collapse; border-spacing:0; }
 ```
 
+### inline-block之间的间距？
+
+http://www.zhangxinxu.com/wordpress/2012/04/inline-block-space-remove-%E5%8E%BB%E9%99%A4%E9%97%B4%E8%B7%9D/?_t_t_t=0.9321090382856176
+
+```js
+inline布局或者inline-block布局之间就会有间隙，例如如下布局
+```
+
+```html
+.space a {
+    display: inline-block;
+    padding: .5em 1em;
+    background-color: #cad5eb;
+}
+
+<div class="space">
+    <a href="##">惆怅</a>
+    <a href="##">淡定</a>
+    <a href="##">热血</a>
+</div>
+```
+
+```js
+不管是display: inline-block;还是display: inline;
+会发现a标签之间会有一定的间距
+
+这个是正常现象！！！这种表现是符合规范的应该有的表现！
+
+产生间距的原因是标签之间的__空白字符__
+```
+
+如何去除？方法很多，譬如
+
+1. 标签不换行，这样不同标签之间就没有空白字符
+
+```html
+<a href="##">
+    惆怅</a><a href="##">
+    淡定</a><a href="##">
+    热血</a>
+    
+或
+<a href="##">惆怅</a><a href="##">淡定</a><a href="##">热血</a>
+
+总之，只要`><a`之间没有空白即可
+```
+
+2.使用margin负值
+
+```js
+.space a {
+    display: inline-block;
+    margin-right: -3px;
+}
+
+这些方案，margin负值的大小与上下文的字体和文字大小相关
+所以不同字体，字体大小需要使用的margin还不一样
+不太适合大规模使用
+```
+
+3.标签不闭合
+
+```html
+<a href="##">惆怅
+<a href="##">淡定
+<a href="##">热血
+
+注意，为了向下兼容IE6/IE7等低版本的浏览器，最后一个列表的标签的结束（闭合）标签不能丢。
+```
+
+4.使用font-size:0
+
+```js
+.space {
+    /*解决某些Chrome,版本中默认有最小字体大小限制*/
+    -webkit-text-size-adjust:none;
+    font-size: 0;
+}
+.space a {
+    font-size: 12px;
+}
+
+这样，空白字符就不会占位（没有大小）
+```
+
+5.使用letter-spacing
+
+```js
+.space {
+    letter-spacing: -6px;
+}
+.space a {
+    letter-spacing: 0;
+}
+
+同样需要调试到合适的大小，基本适用于所有浏览器
+注意，Opera浏览器下有问题：最小间距1像素，然后，letter-spacing再小就还原了。
+```
+
+6.使用word-spacing
+
+```js
+.space {
+    word-spacing: -6px;
+}
+.space a {
+    word-spacing: 0;
+}
+
+与上相比，一个是字符间距(letter-spacing)一个是单词间距(word-spacing)，大同小异
+经测试，word-spacing的负值只要大到一定程度，其兼容性上的差异就可以被忽略。
+因为，好像，word-spacing即使负值很大，也不会发生重叠。
+
+注意，如果某些版本的Chrome浏览器，可能看到的是间距依旧存在
+这时可以添加display: table;或display:inline-table;让Chrome浏览器也变得乖巧。
+.space {
+    display: inline-table;
+    word-spacing: -6px;
+}
+```
+
+7.设置float:left
+
+```js
+.space a {
+    float:left;
+}
+
+原理是浮动元素不会去和文档流中的位置计算，因此直接重叠到原有空白上了
+```
+
+基本上一些框架中解决间距都是以上方法的组合，
+譬如YUI 3 CSS Grids 使用letter-spacing和word-spacing去除格栅单元见间隔
+
 ### absolute的containing block(容器块)计算方式跟正常流有什么不同？
 
 ```js
