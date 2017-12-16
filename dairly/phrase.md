@@ -165,3 +165,9 @@ God must be a painter. Why else would we have so many colors?
 
 we live only to discover beauty. All else is a form of waiting.
 活着只是为了发现美，其它一切只是一种等待
+
+The rest of the world may follow the rules, but I must follow my heart!
+其他人遵从规则，而我听从内心
+
+A half-read book is a half-finished love affair.
+读了一半的书相当于谈了一半的恋爱

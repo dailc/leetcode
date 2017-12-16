@@ -1,71 +1,68 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-12
- * 描述: Spiral-Matrix-II
- * 
+ * 一刷时间: 2017-04-12
+ * 二刷时间：2017-12-16
  * 来自: https://leetcode.com/problems/spiral-matrix-ii
  */
 (function(exports) {
-	
-	
-	/**
-	 * @description generateMatrix
-	 * @param {number} n
- 	 * @return {number[][]}
-	 */
-	exports.generateMatrix = function(n) {
-		if(n<=0) {
-			return [];
-		}
-		var result = [];
-		for( var i = 0; i < n; i ++ ) {
-			result[i] = [];
-			for( var j = 0; j < n; j ++ ) {
-				result[i][j] = 0;
-			}
-		}
-		
-		var rows = n,
-			cols = n,
-			start = 0,
-			count = [1];
-		while(cols > start * 2 && rows > start * 2) {
-			matrixInCircle(result, cols, rows, start, count);
-			start++;
-		}
-		return result;
-	};
-	
-	function matrixInCircle(result,colunms, rows, start, count) {
-		var endX = colunms - 1 - start;
-		var endY = rows - 1 - start;
-		//第一步,横向打印
-		for(var i = start; i <= endX; i++) {
-			//console.log(arr[start][i]);
-			result[start][i] = count[0]++;
-		}
-		//第二步
-		if(start < endY) {
-			for(var i = start + 1; i <= endY; i++) {
-				//console.log(arr[i][endX]);
-				result[i][endX] = count[0]++;
-			}
-		}
-		//第三步,从右到左
-		if(start < endX && start < endY) {
-			for(var i = endX - 1; i >= start; i--) {
-				//console.log(arr[endY][i]);
-				result[endY][i] = count[0]++;
-			}
-		}
-		//第四步，从下到上,和第三步相比，Y要多一行
-		if(start < endX && start < endY - 1) {
-			for(var i = endY - 1; i >= start + 1; i--) {
-				//console.log(arr[i][start]);
-				result[i][start] = count[0]++;
-			}
-		}
-	}
-	
+
+    /**
+     * @param {number} n
+     * @return {number[][]}
+     */
+    function generateMatrix(n) {
+        if (!n) {
+            return [];
+        }
+        const res = [];
+
+        for (let i = 0; i < n; i++) {
+            res[i] = new Array(n);
+            res[i].fill(0);
+        }
+
+        const count = [1];
+        const rows = n;
+        const cols = n;
+        let start = 0;
+
+        while (start * 2 < rows && start * 2 < cols) {
+            matrixInCircle(res, rows, cols, start++, count);
+        }
+
+        return res;
+    }
+
+    function matrixInCircle(res, rows, cols, start, count) {
+        const endX = cols - 1 - start;
+        const endY = rows - 1 - start;
+
+        // 从左到右
+        for (let i = start; i <= endX; i++) {
+            res[start][i] = count[0]++;
+        }
+
+        // 从上到下
+        if (endY > start) {
+            for (let i = start + 1; i <= endY; i++) {
+                res[i][endX] = count[0]++;
+            }
+        }
+
+        // 从右到左
+        if (endY > start && endX > start) {
+            for (let i = endX - 1; i >= start; i--) {
+                res[endY][i] = count[0]++;
+            }
+        }
+
+        // 从下到上，由于最上和最下已经都赋值了的，所以必须还多一个才行
+        if (endY > start + 1 && endX > start) {
+            for (let i = endY - 1; i >= start + 1; i--) {
+                res[i][start] = count[0]++;
+            }
+        }
+    }
+
+    exports.generateMatrix = generateMatrix;
 
 })(window.LeetCode = window.LeetCode || {});
