@@ -1929,6 +1929,16 @@ Flash Of Unstyled Cotent
 
 ## JS
 
+### ECMAScript与javascript的区别？
+
+```js
+ECMAScript是标准
+javascript是实现
+
+ECMAScript定义javascript语音的实现
+但是浏览器端的javascript-一般意义上的泛指，同时还包括bom和dom
+```
+
 ### 介绍JavaScript的基本数据类型。
 
 1. `number`-数字

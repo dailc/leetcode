@@ -171,3 +171,6 @@ The rest of the world may follow the rules, but I must follow my heart!
 
 A half-read book is a half-finished love affair.
 读了一半的书相当于谈了一半的恋爱
+
+There is no gene for the human spirit.
+没有那个基因能决定人的灵魂
