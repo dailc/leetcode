@@ -38,6 +38,70 @@ HTML5不基于SGML，因此不需要DTD引用，但也需要doctype来规范浏�
 HTML4.01基于SGML，所以需要对DTD进行引用，才能告知浏览器使用的文档类型
 ```
 
+### noscript标签知道么？
+
+类别：基础概念
+
+```html
+这是为了解决早起浏览器不兼容javascript或者脚本被禁用后的问题而创造出的标签
+
+<noscript>
+<p>本页面需要浏览器支持（启用）javascript</p>
+</noscript>
+
+示例如上
+只是为了提升用户体验，现在一般用不到
+```
+
+### 加载远程脚本时，script标签中嵌入执行代码会怎么样？
+
+类别：基础概念
+
+```html
+<script src="xxx.jd">
+alert('hello world');
+</script>
+```
+
+
+```js
+带有src属性的script标签中嵌入的任何代码都会被忽略
+-这个标签只会去加载src
+```
+
+### script标签中defer和async的区别？
+
+```js
+https://segmentfault.com/a/1190000006778717
+async：异步加载
+xHTML中要设为：async="async"
+表示立即加载脚本-但是异步加载，也就是说页面的其它操作并不会暂停
+并且只对外部脚本生效
+而且异步加载的脚本并不确保执行顺序（所以建议异步脚本不要再加载期间修改dom）
+异步脚本一定会在load事件前执行，但是可能在DOMContentLoaded事件的前面或后面
+
+defer：延迟执行
+xHTML中要设为：defer="defer"
+立即下载，但延迟执行（同样异步加载），这个脚本会被等到文档完全解析和显示后在执行
+并且只对外部脚本生效
+html5规范要求，延迟加载的执行顺序是和引入顺序一样的，而且脚本执行顺序先于DOMContentLoaded事件
+（但是实际上不一定按这个顺序，而且也不一定在DOMContentLoaded事件执行-浏览器的实现问题）
+按规范来说，defer应该是立即异步下载并延迟执行，
+但是实际实现来说，譬如chrome中defer是和将script放到body底部一样的效果。
+（相当于延迟下载了-浏览器优化的结果）
+
+注意，如果普通的script，下载和执行时都会阻塞文档解析
+```
+
+### load事件与DOMContentLoaded事件
+
+```js
+当 onload 事件触发时，页面上所有的DOM，样式表，脚本，图片，flash都已经加载完成了。
+
+当 DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash。
+(譬如如果有async加载的脚本就不一定完成)
+```
+
 ### 请问html5的主要特点是什么(初级)？html5与前面个版本的主要区别？(高级)？
 
 ```js
@@ -636,6 +700,10 @@ margin: 0 auto;
 3.居中absolute
 
 - left为`50%`，然后`margin-left: -width/2`
+（如果不知道尺寸，可以使用）
+-webkit-transform: translate(-50%,-50%);  
+      -ms-transform: translate(-50%,-50%);  
+          transform: translate(-50%,-50%);  
 
 ```js
  div {
@@ -649,6 +717,84 @@ margin: 0 auto;
     right: 0;
     background-color: pink; /* 方便看效果 */
  }
+```
+
+4.inline-block实现居中
+
+```html
+<div class="center-container is-inline">  
+  <div class="center-block">  
+    <!-- CONTENT -->  
+  </div>  
+</div>  
+
+.center-container.is-inline {   
+  text-align: center;  
+  overflow: auto;  
+}  
+  
+.center-container.is-inline:after,  
+.is-inline .center-block {  
+  display: inline-block;  
+  vertical-align: middle;  
+}  
+  
+.center-container.is-inline:after {  
+  content: '';  
+  height: 100%;  
+  margin-left: -0.25em; /* To offset spacing. May vary by font */  
+}  
+  
+.is-inline .center-block {  
+  max-width: 99%; /* Prevents issues with long content causes the content block to be pushed to the top */  
+  /* max-width: calc(100% - 0.25em) /* Only for IE9+ */   
+}
+```
+
+```js
+关键在于inline-block可以vertical-align: middle;  实现垂直居中
+水平居中依赖于margin-left: -0.25em;的作用是去除inline-block时空白字符的宽度-不同的字体和大小需要进行调整
+after中height: 100%;的作用是自适应撑开高度，便于inline-block垂直居中计算
+
+优点：
+
+1.      高度可变
+
+2.      内容溢出会将父元素撑开。
+
+3.      支持跨浏览器，也适应于IE7。
+
+缺点：
+
+1.需要一个容器
+
+2.水平居中依赖于margin-left: -0.25em;该尺寸对于不同的字体/字号需要调整。
+
+3.内容块宽度不能超过容器的100% - 0.25em。
+```
+
+5.flex-box
+
+这是目前的布局趋势
+可以解决像垂直居中这样的常见布局问题
+也可以分栏或者解决一些令人抓狂的布局问题。
+
+```js
+优点：
+
+1.内容块的宽高任意，优雅的溢出。
+
+2.可用于更复杂高级的布局技术中。
+
+缺点：
+
+1.      IE8/IE9不支持。
+
+2.      Body需要特定的容器和CSS样式。
+
+3.      运行于现代浏览器上的代码需要浏览器厂商前缀。
+
+4.      表现上可能会有一些问题
 ```
 
 ### css实现垂直水平居中
@@ -702,6 +848,16 @@ http://blog.csdn.net/freshlover/article/details/11579669
 1.必须声明高度（查看可变高度Variable Height）。
 
 2.建议设置overflow:auto来防止内容越界溢出。（查看溢出Overflow）。
+
+譬如还可以单独的设置
+left: auto; right: 20px;...
+等等来适应各种布局
+而且加上min-width/max-width 和min-height/max-height这些属性在自适应盒子内的表现也和预期很一致。
+给内容块元素加上padding也不影响内容块元素的绝对居中实现。
+
+可以加上 overflow: auto;  处理内容高度大于块元素或容器（视区viewport或设为position:relative的父容器）的溢出问题
+
+可以通过resize: both;  来处理窗口改变的重绘问题
 ```
 
 ### display有哪些值？说明他们的作用。
