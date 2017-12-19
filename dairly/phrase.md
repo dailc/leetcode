@@ -174,3 +174,9 @@ A half-read book is a half-finished love affair.
 
 There is no gene for the human spirit.
 没有那个基因能决定人的灵魂
+
+No matter what happens, even if the stars fall, I will live.
+无论发生什么，即使星辰陨落，我也要好好活着。
+
+Time and circumstances change us...and it is pointless to ask why.
+时间和环境会改变我们......没有必要问为什么

@@ -681,6 +681,22 @@ p:last-of-type
 p:nth-child(2)
 ```
 
+### css sprite是什么,有什么优缺点?
+
+```js
+概念：将多个小图片拼接到一个图片中。通过background-position和元素尺寸调节需要显示的背景图案。
+
+优点：
+1.减少HTTP请求数，极大地提高页面加载速度
+2.只要加载一次后，可以避免其它图首次显示时的延迟（如果是独立的图片，每一张首次显示时都会有一个加载延迟）
+3.增加图片信息重复度，提高压缩比，减少图片大小
+4.更换风格方便，只需在一张或几张图片上修改颜色或样式即可实现
+
+缺点：
+1.图片合并麻烦（可以用在线工具或者node等自动工具）
+2.维护麻烦，修改一个图片可能需要从新布局整个图片，样式
+```
+
 ### 如何居中div？如何居中一个浮动元素？如何让绝对定位的div居中？
 
 1.居中div
@@ -4650,4 +4666,67 @@ var debounce = function(idle, action){
 
 throttle和debounce均是通过减少实际逻辑处理过程的执行来提高事件处理函数运行性能的手段，
 并没有实质上减少事件的触发次数。两者在概念理解上确实比较容易令人混淆，结合各js库的具体实现进行理解效果将会更好。
+```
+
+### 考察promise与settimeout的时机，一下代码的执行顺序？
+
+```js
+setTimeout(function() {
+  console.log(1)
+}, 0);
+new Promise(function executor(resolve) {
+  console.log(2);
+  for( var i=0 ; i<10000 ; i++ ) {
+    i == 9999 && resolve();
+  }
+  console.log(3);
+}).then(function() {
+  console.log(4);
+});
+console.log(5);
+```
+
+```js
+答案是： 23541
+
+理由：
+new Promise(executor);
+中是立即执行函数，会立即执行，所以最先是:2,3
+注意，这里执行resolve时，需要等到下一轮A类循环（先于settimeout）才会去执行then
+
+所以接下来先是 5，然后是4，最后才是1
+
+主要观察的是执行顺序
+```
+
+### 下述代码的区别？考察指针指向
+
+```js
+function foo() {
+    console.log(this.a)
+}
+
+function active(fn) {
+    fn(); // 真实调用者，为独立调用
+}
+
+var a = 20;
+var obj = {
+    a: 10,
+    getA: foo
+}
+active(obj.getA); // 20-相当于foo();
+```
+
+```js
+var a = 20;
+function getA() {
+    return this.a;
+}
+var foo = {
+    a: 10,
+    getA: getA
+}
+console.log(foo.getA());  // 10
+
 ```
