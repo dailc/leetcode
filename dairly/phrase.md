@@ -180,3 +180,6 @@ No matter what happens, even if the stars fall, I will live.
 
 Time and circumstances change us...and it is pointless to ask why.
 时间和环境会改变我们......没有必要问为什么
+
+You want to hide a tree, then a forest is the best place to do it.
+隐藏一颗树的绝佳地点，就是森林
