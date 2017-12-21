@@ -183,3 +183,6 @@ Time and circumstances change us...and it is pointless to ask why.
 
 You want to hide a tree, then a forest is the best place to do it.
 隐藏一颗树的绝佳地点，就是森林
+
+Reading a novel was like returning to a once-beloved holiday destination.
+读一本小说就像重返曾经心爱的度假胜地。

@@ -1,48 +1,48 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-14
- * 描述: Minimum-Path-Sum
- * 
+ * 一刷时间: 2017-04-14
+ * 二刷时间：2017-12-21
  * 来自: https://leetcode.com/problems/minimum-path-sum
  */
 (function(exports) {
 
-	/**
-	 * @description minPathSum
-	 * @param {number[][]} grid
-	 * @return {number}
-	 */
-	exports.minPathSum = function(grid) {
-		if(!grid||grid.length==0) {
-			return 0;
-		}
-		
-		var m = grid.length;
-		var n = grid[0].length;
-		var step = [];
-		//初始化条件时的注意,不能全部是1
-		for(var i = 0; i < m; i++) {
-			step[i] = [];
-		}
-		//第一个
-		step[0][0] = grid[0][0];
-		//第1行
-		for(var j = 1; j < n; j++) {
-			step[0][j] = step[0][j - 1] + grid[0][j];
-		}
+    /**
+     * @param {number[][]} grid
+     * @return {number}
+     */
+    function minPathSum(grid) {
+        if (!grid || !grid[0]) {
+            return 0;
+        }
 
-		//第1列
-		for(var i = 1; i < m; i++) {
-			step[i][0] = step[i - 1][0] + grid[i][0];
-		}
+        const rows = grid.length;
+        const cols = grid[0].length;
+        const dp = [];
 
-		for(var i = 1; i < m; i++) {
-			for(var j = 1; j < n; j++) {
-				step[i][j] = grid[i][j] + Math.min(step[i - 1][j],step[i][j-1]);
-			}
-		}
-		
-		return step[m - 1][n - 1];
-	};
+        for (let i = 0; i < rows; i++) {
+            dp[i] = [];
+        }
+
+        dp[0][0] = grid[0][0];
+
+        // 第一行
+        for (let j = 1; j < cols; j++) {
+            dp[0][j] = dp[0][j - 1] + grid[0][j];
+        }
+
+        // 第一列
+        for (let i = 1; i < rows; i++) {
+            dp[i][0] = dp[i - 1][0] + grid[i][0];
+        }
+
+        // 递推
+        for (let i = 1; i < rows; i++) {
+            for (let j = 1; j < cols; j++) {
+                dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+            }
+        }
+
+        return dp[rows - 1][cols - 1];
+    }
+    exports.minPathSum = minPathSum;
 
 })(window.LeetCode = window.LeetCode || {});
