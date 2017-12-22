@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Valid-Number" name="Keywords">
-		<meta content="leetcodeJS大法之Valid-Number" name="description">
 		<title>leetcodeJS大法之Valid-Number</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,11 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Valid-Number.js"></script>
 		<script>
-			//2147483647 83647
-
-			var result = LeetCode.isNumber2("e");
-
-			console.log(JSON.stringify(result));
+		    const isNumber = LeetCode.isNumber;
+		    
+		    console.log(isNumber("e"));
 		</script>
 	</body>
 

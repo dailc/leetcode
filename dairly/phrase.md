@@ -186,3 +186,6 @@ You want to hide a tree, then a forest is the best place to do it.
 
 Reading a novel was like returning to a once-beloved holiday destination.
 读一本小说就像重返曾经心爱的度假胜地。
+
+Be careful which path you travel now, Strange. Strong men than you have lost their way.
+小心你脚下的路，比你强的人都曾迷失过方向。
