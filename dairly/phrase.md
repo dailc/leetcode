@@ -189,3 +189,6 @@ Reading a novel was like returning to a once-beloved holiday destination.
 
 Be careful which path you travel now, Strange. Strong men than you have lost their way.
 小心你脚下的路，比你强的人都曾迷失过方向。
+
+What's coming will come and we'll just have to meet it when it does.
+该来的总会来。来到时，就勇敢面对。
