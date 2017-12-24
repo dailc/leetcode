@@ -192,3 +192,6 @@ Be careful which path you travel now, Strange. Strong men than you have lost the
 
 What's coming will come and we'll just have to meet it when it does.
 该来的总会来。来到时，就勇敢面对。
+
+The most difficult thing is the decision to act, the rest is merely tenacity.
+最困难的是下决定，剩下的只是坚持。
