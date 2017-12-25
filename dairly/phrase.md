@@ -195,3 +195,6 @@ What's coming will come and we'll just have to meet it when it does.
 
 The most difficult thing is the decision to act, the rest is merely tenacity.
 最困难的是下决定，剩下的只是坚持。
+
+You are the butter to my bread, you are the breath to my life.
+你就是我的面包上的黄油，我的生命，我的呼吸

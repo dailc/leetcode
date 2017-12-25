@@ -1,14 +1,16 @@
-## Text-Justification
+# Text-Justification
 
 ## 说明
+
 css中的一个文本算法，例如，给定:
 
-```
+```js
 ["This", "is", "an", "example", "of", "text", "justification."]
 ```
+
 以及长度16，返回如下:
 
-```
+```js
 [
    "This    is    an",
    "example  of text",
@@ -22,9 +24,10 @@ css中的一个文本算法，例如，给定:
 如果空格不能均匀分配，左侧的空格要比右侧多。
 对于最后一行，它应该左对齐，并且单词间没有额外空格
 
-### 思路
+## 思路
 
-* 1.纯粹的字符操作
-	* `count`计数记录当前长度
+- 1.纯粹的字符操作
+
+	- `count`计数记录当前长度
 	
 	http://www.cnblogs.com/springfor/p/3896168.html
