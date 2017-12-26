@@ -1,10 +1,4 @@
-/**
- * 作者: dailc
- * 时间: 2017-04-15
- * 描述: Text-Justification
- * 
- * 来自: https://leetcode.com/problems/text-justification
- */
+
 /**
  * 一刷时间: 2017-04-15
  * 二刷时间：2017-12-25

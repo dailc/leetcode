@@ -198,3 +198,6 @@ The most difficult thing is the decision to act, the rest is merely tenacity.
 
 You are the butter to my bread, you are the breath to my life.
 你就是我的面包上的黄油，我的生命，我的呼吸
+
+The only way to keep the dream alive is to never try to implement it.
+唯一能使梦想维持活力的方法是永远不要试图实现它。
