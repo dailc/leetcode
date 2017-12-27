@@ -201,3 +201,6 @@ You are the butter to my bread, you are the breath to my life.
 
 The only way to keep the dream alive is to never try to implement it.
 唯一能使梦想维持活力的方法是永远不要试图实现它。
+
+If it doesn't challenge you, it won't change you.
+如果一件事不能难住你，它也不能改变你。
