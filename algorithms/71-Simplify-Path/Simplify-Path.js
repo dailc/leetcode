@@ -1,41 +1,44 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-16
- * 描述: Simplify-Path
- * 
+ * 一刷时间: 2017-04-16
+ * 二刷时间：2017-12-28
  * 来自: https://leetcode.com/problems/simplify-path/
  */
 (function(exports) {
 
-	/**
-	 * @description simplifyPath
-	 * @param {string} path
- 	 * @return {string}
-	 */
-	exports.simplifyPath = function(path) {
-		if(!path) {
-			return path;
-		}
-		var stack = [];
-		var pathArray = path.split('/');
-		for( var i = 0, len = pathArray.length; i < len; i ++ ) {
-			var tmp = pathArray[i];
-			if(tmp == '.'|| tmp == '' ) {
-				continue;
-			} else if(tmp == '..') {
-				stack.pop();
-			} else {
-				stack.push('/'+tmp);
-			}
-		}
-		//判断stack为空的情况，此时为根节点
-		if(stack.length == 0) {
-			return '/';
-		}
-		return stack.join('');
-		
-	};
-	
-	
-	
+    /**
+     * @param {string} path
+     * @return {string}
+     */
+    function simplifyPath(path) {
+        if (!path) {
+            return '/';
+        }
+        const pathArr = path.split('/');
+        const res = [''];
+        const len = pathArr.length;
+
+        for (let i = 0; i < len; i++) {
+            const str = pathArr[i];
+
+            if (str === '' || str === '.') {
+                continue;
+            }
+            if (str === '..') {
+                if (res.length > 1) {
+                    // 至少保留跟路径
+                    res.pop();
+                }
+                continue;
+            }
+            res.push('/' + str);
+        }
+
+        if (res.length === 1) {
+            return '/';
+        }
+
+        return res.join('');
+    }
+    exports.simplifyPath = simplifyPath;
+
 })(window.LeetCode = window.LeetCode || {});

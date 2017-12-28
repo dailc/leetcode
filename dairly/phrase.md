@@ -204,3 +204,6 @@ The only way to keep the dream alive is to never try to implement it.
 
 If it doesn't challenge you, it won't change you.
 如果一件事不能难住你，它也不能改变你。
+
+Life is not a race, but a journey to be savored each step of the way.
+人生不是一场赛跑，而是一步一个脚印的旅程。

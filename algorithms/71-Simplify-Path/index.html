@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Simplify-Path" name="Keywords">
-		<meta content="leetcodeJS大法之Simplify-Path" name="description">
 		<title>leetcodeJS大法之Simplify-Path</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,11 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Simplify-Path.js"></script>
 		<script>
-			//2147483647 83647
-
-			var result = LeetCode.simplifyPath('/..');
-
-			console.log(JSON.stringify(result));
+		    const simplifyPath = LeetCode.simplifyPath;
+		    
+		    console.log(simplifyPath('/..'));
 		</script>
 	</body>
 
