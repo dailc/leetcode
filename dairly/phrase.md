@@ -207,3 +207,7 @@ If it doesn't challenge you, it won't change you.
 
 Life is not a race, but a journey to be savored each step of the way.
 人生不是一场赛跑，而是一步一个脚印的旅程。
+
+Don't set your goals by what other people deem important
+
+别人认为重要的事不一定是你的目标。
