@@ -211,3 +211,6 @@ Life is not a race, but a journey to be savored each step of the way.
 Don't set your goals by what other people deem important
 
 别人认为重要的事不一定是你的目标。
+
+Love doesn't end, just because we don't see each other.
+爱并不会因为见不到彼此就消逝不见。
