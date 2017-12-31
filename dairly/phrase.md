@@ -214,3 +214,6 @@ Don't set your goals by what other people deem important
 
 Love doesn't end, just because we don't see each other.
 爱并不会因为见不到彼此就消逝不见。
+
+Don't forget, a person's greatest emotional need is to feel appreciated.
+莫要忘，人类情感上最大的需要就是感恩。
