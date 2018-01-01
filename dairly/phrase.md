@@ -217,3 +217,6 @@ Love doesn't end, just because we don't see each other.
 
 Don't forget, a person's greatest emotional need is to feel appreciated.
 莫要忘，人类情感上最大的需要就是感恩。
+
+Life's like a movie, write your own ending. Keep believing, keep pretending.
+人生如同电影，写自己的结局，持续相信，持续表演。
