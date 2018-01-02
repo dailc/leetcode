@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Minimum-Window-Substring" name="Keywords">
-		<meta content="leetcodeJS大法之Minimum-Window-Substring" name="description">
 		<title>leetcodeJS大法之Minimum-Window-Substring</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,10 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Minimum-Window-Substring.js"></script>
 		<script>
-			//[1,0,2]  [0,2,1]
-			var result = LeetCode.minWindow2('ADOBECODEBANC','ABC');
-
-			console.log(JSON.stringify(result));
+		    const minWindow = LeetCode.minWindow;
+		    
+		    console.log(minWindow('ADOBECODEBANC', 'ABC'));
 		</script>
 	</body>
 

@@ -220,3 +220,6 @@ Don't forget, a person's greatest emotional need is to feel appreciated.
 
 Life's like a movie, write your own ending. Keep believing, keep pretending.
 人生如同电影，写自己的结局，持续相信，持续表演。
+
+I dream my painting, and then I paint my dream.
+我梦见我的画，然后我画我的梦。
