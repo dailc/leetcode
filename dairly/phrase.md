@@ -223,3 +223,6 @@ Life's like a movie, write your own ending. Keep believing, keep pretending.
 
 I dream my painting, and then I paint my dream.
 我梦见我的画，然后我画我的梦。
+
+My existence is not without reason! I know that I could be a quite a different person!
+我的存在必定又意义！我知道我会成为一个与众不同的人！
