@@ -226,3 +226,6 @@ I dream my painting, and then I paint my dream.
 
 My existence is not without reason! I know that I could be a quite a different person!
 我的存在必定又意义！我知道我会成为一个与众不同的人！
+
+Just do what works for you, because there will always be someone who think differently.
+就做你自己做的，因为天外有天、人外有人、总会有有人想的不同。

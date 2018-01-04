@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Subsets" name="Keywords">
-		<meta content="leetcodeJS大法之Subsets" name="description">
 		<title>leetcodeJS大法之Subsets</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,10 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Subsets.js"></script>
 		<script>
-			//[1,0,2]  [0,2,1]
-			var result = LeetCode.subsets2([1,2,3]);
-
-			console.log(JSON.stringify(result));
+		    const subsets = LeetCode.subsets;
+		    
+		    console.log(subsets([1, 2, 3]));
 		</script>
 	</body>
 
