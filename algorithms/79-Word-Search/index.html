@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Word-Search" name="Keywords">
-		<meta content="leetcodeJS大法之Word-Search" name="description">
 		<title>leetcodeJS大法之Word-Search</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,16 +14,16 @@
 	<body>
 		<script type="text/javascript" src="Word-Search.js"></script>
 		<script>
-			//[1,0,2]  [0,2,1]
-//			var result = LeetCode.exist([
+		    const exist = LeetCode.exist;
+		    
+		    console.log(exist([["a", 'b'], ['c', 'd']], 'cd'));
+		    
+//			var result = exist([
 //['A','B','C','E'],
 //['S','F','C','S'],
 //['A','D','E','E']
 //],'ABCCED');
-
-			var result = LeetCode.exist([["a",'b'],['c','d']],'cd');
-
-			console.log(JSON.stringify(result));
+			
 		</script>
 	</body>
 

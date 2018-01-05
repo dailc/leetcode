@@ -229,3 +229,6 @@ My existence is not without reason! I know that I could be a quite a different p
 
 Just do what works for you, because there will always be someone who think differently.
 就做你自己做的，因为天外有天、人外有人、总会有有人想的不同。
+
+You can't make decisions based on fear and the possibility of what might happen.
+不要因为恐惧未知的可能而妄下决定。

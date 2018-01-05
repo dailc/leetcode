@@ -1,60 +1,62 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-20
- * 描述: Word-Search
- * 
+ * 一刷时间: 2017-04-20
+ * 二刷时间：2018-01-05
  * 来自: https://leetcode.com/problems/subsets
  */
 (function(exports) {
 
-		/**
-		 * @description exist
-		 * @param {character[][]} board
-		 * @param {string} word
-		 * @return {boolean}
-		 */
-		exports.exist = function(board, word) {
-			if(!board) {
-				return false;
-			}
-			var rows = board.length;
-			var cols = board[0].length;
+    /**
+     * @param {character[][]} board
+     * @param {string} word
+     * @return {boolean}
+     */
+    function exist(board, word) {
+        if (!board || !board[0]) {
+            return false;
+        }
 
-			//这个数组表示是否访问过
-			var exists = [];
-			for(var i = 0; i < rows; i++) {
-				exists[i] = [];
-				for(var j = 0; j < cols; j++) {
-					exists[i][j] = false;
-				}
-			}
+        const rows = board.length;
+        const cols = board[0].length;
+        // 访问标志，防止重复访问
+        const exists = [];
 
-			for(var i = 0; i < rows; i++) {
-				for(var j = 0; j < cols; j++) {
-					if(help(exists, board, word, rows, cols,0, i, j)){
-						return true;
-					}
-				}
-			}
+        for (let i = 0; i < rows; i++) {
+            exists[i] = new Array(cols);
 
-			return false;
-		};
+            exists[i].fill(false);
+        }
 
-		function help(exists, board, word,  rows, cols, index,i, j) {
-			if(index == word.length) {
-				return true;
-			} 
-			if(i<0||i>rows-1||j<0||j>cols-1||exists[i][j]||board[i][j]!=word.charAt(index)) {
-				return false;
-			}
-			exists[i][j] = true;
-			var res = help(exists, board, word, rows, cols, index+1, i-1, j)
-					||help(exists, board, word, rows, cols, index+1, i+1, j)
-					||help(exists, board, word, rows, cols, index+1, i, j-1)
-					||help(exists, board, word, rows, cols, index+1, i, j+1);
-			exists[i][j] = false;
-			
-			return res;
-	}
+        for (let i = 0; i < rows; i++) {
+            for (let j = 0; j < cols; j++) {
+                if (dfs(exists, board, word, rows, cols, 0, i, j)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    function dfs(exists, board, word, rows, cols, index, i, j) {
+        if (index === word.length) {
+            return true;
+        }
+        if (i >= rows || i < 0 || j >= cols || j < 0 || exists[i][j] || board[i][j] !== word.charAt(index)) {
+            return false;
+        }
+
+        exists[i][j] = true;
+
+        var res = dfs(exists, board, word, rows, cols, index + 1, i + 1, j) ||
+            dfs(exists, board, word, rows, cols, index + 1, i - 1, j) ||
+            dfs(exists, board, word, rows, cols, index + 1, i, j + 1) ||
+            dfs(exists, board, word, rows, cols, index + 1, i, j - 1);
+
+        exists[i][j] = false;
+
+        return res;
+    }
+
+    exports.exist = exist;
 
 })(window.LeetCode = window.LeetCode || {});
