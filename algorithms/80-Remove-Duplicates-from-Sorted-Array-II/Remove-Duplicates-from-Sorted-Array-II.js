@@ -1,79 +1,40 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-20
- * 描述: Remove-Duplicates-from-Sorted-Array-II
- * 
+ * 一刷时间: 2017-04-20
+ * 二刷时间：2018-01-06
  * 来自: https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii
  */
 (function(exports) {
 
-		/**
-		 * @description removeDuplicates
-		 * @param {number[]} nums
- 		 * @return {number}
-		 */
-		exports.removeDuplicates = function(nums) {
-			if(!nums) {
-				return 0;
-			}
-			var p1 = 0,
-				p2=0,
-				len = nums.length,
-				count = 0,
-				nowCount = 0;
-			while(p2<len) {
-				if(nums[p1]==nums[p2]) {
-					if(nowCount<2) {
-						count ++;
-						nowCount ++;
-						p2 ++;
-					} else {
-						//大于2的，跳过
-						//splice
-						nums.splice(p2,1);
-						//p2 ++;
-						//因为splice了，所以整体长度-1，p2不要加了
-						len --;
-					}
-				} else {
-					//p2和p1已经不同了
+    /**
+     * @param {number[]} nums
+     * @return {number}
+     */
+    function removeDuplicates(nums) {
+        if (!nums) {
+            return 0;
+        }
+        const len = nums.length;
+        let index = 0;
+        let count = 0;
 
-					count ++;
-					//计数变为1
-					nowCount = 1;
-					//p1指向p2 p2执行下一个
-					p1 = p2;
-					p2 ++;
-				}
-				
-			}
-			
-			return count;
-		};
-		
-		
-		exports.removeDuplicates2 = function(nums) {
-			if(!nums) {
-				return 0;
-			}
-			var index = 0,
-				len = nums.length,
-				count = 0;
-			for( var i = 0; i < len; i ++ ) {
-				
-				if(i>0&&nums[i]==nums[i-1]) {
-					count ++;
-					if(count>2) {
-						continue;
-					}
-				} else {
-					count = 1;
-				}
-				nums[index++] = nums[i];
-			}
-			
-			return index;
-		};
-		
+        for (let i = 0; i < len; i++) {
+            if (i > 0 && nums[i] === nums[i - 1]) {
+                // 存在重复
+                count++;
+                if (count > 2) {
+                    // 大于2后，不再继续赋值，直接跳过，直到接下来找到下一个新的值
+                    continue;
+                }
+            } else {
+                // 一个全新的值
+                count = 1;
+            }
+            nums[index++] = nums[i];
+        }
+
+        return index;
+    }
+
+    exports.removeDuplicates = removeDuplicates;
 
 })(window.LeetCode = window.LeetCode || {});

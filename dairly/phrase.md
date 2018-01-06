@@ -232,3 +232,6 @@ Just do what works for you, because there will always be someone who think diffe
 
 You can't make decisions based on fear and the possibility of what might happen.
 不要因为恐惧未知的可能而妄下决定。
+
+In life the most interesting things tend to happen when you are on your way to do something else.
+生活中最有趣的事情往往在你正要做别的事情的时候出现。
