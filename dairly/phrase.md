@@ -235,3 +235,6 @@ You can't make decisions based on fear and the possibility of what might happen.
 
 In life the most interesting things tend to happen when you are on your way to do something else.
 生活中最有趣的事情往往在你正要做别的事情的时候出现。
+
+To remember is to disengage from the present.
+留恋过去就是放弃当下
