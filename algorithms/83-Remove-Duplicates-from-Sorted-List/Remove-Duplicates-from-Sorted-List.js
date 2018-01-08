@@ -1,57 +1,69 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-22
- * 描述: Remove-Duplicates-from-Sorted-List
- * 
- * 来自: https://leetcode.com/problems/remove-duplicates-from-sorted-list
+ * 一刷时间: 2017-04-22
+ * 二刷时间：2018-01-08
+ * 来自:https://leetcode.com/problems/remove-duplicates-from-sorted-list
  */
 (function(exports) {
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    function deleteDuplicates(head) {
+        if (!head) {
+            return null;
+        }
+        if (!head.next) {
+            return head;
+        }
+        let curr;
 
-	/**
-	 * @description deleteDuplicates
-	 * @param {ListNode} head
-	 * @return {ListNode}
-	 */
-	exports.deleteDuplicates = function(head) {
-		return deleteDuplication(head);
-	};
-	function deleteDuplication(pHead) {
-		if(pHead == null) {
-			return null;
-		}
-		if(pHead != null && pHead.next == null) {
-			return pHead;
-		}
-		var current = null;
-		if(pHead.next.val == pHead.val) {
-			current = pHead.next;
-			while(current.next != null && current.next.val == current.val) {
-				current = current.next;
-			}
-			return deleteDuplication(current);
-		} else {
-			current = pHead.next;
-			pHead.next = deleteDuplication(current);
-			return pHead;
-		}
-	}
-	
-	exports.deleteDuplicates2 = function(pHead) {
-		if(pHead == null) {
-			return null;
-		}
-		var before = pHead;
-		var tmp = pHead.next;
-		while(tmp) {
-			if(tmp.val==before.val) {
-				before.next = tmp.next;
-			} else {
-				before = tmp;
-			}	
-			tmp = tmp.next;
-		}
-		
-		return pHead;
-	};
+        if (head.val === head.next.val) {
+            curr = head.next;
+
+            while (curr && curr.next && curr.next.val === head.val) {
+                curr = curr.next;
+            }
+
+            return deleteDuplicates(curr);
+        } else {
+            curr = head.next;
+            head.next = deleteDuplicates(curr);
+        }
+
+        return head;
+    }
+
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    function deleteDuplicates2(head) {
+        if (!head) {
+            return null;
+        }
+        if (!head.next) {
+            return head;
+        }
+        let before = head;
+        let curr = head.next;
+
+        while (curr) {
+            if (curr.val === before.val) {
+                before.next = curr.next;
+            } else {
+                before = curr;
+            }
+            curr = curr.next;
+        }
+
+        return head;
+    }
+    exports.deleteDuplicates2 = deleteDuplicates2;
 
 })(window.LeetCode = window.LeetCode || {});

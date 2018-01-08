@@ -1,64 +1,48 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
-		<meta name="renderer" content="webkit" />
-		<!-- 移动端的响应式特性 -->
-		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Remove-Duplicates-from-Sorted-List-II" name="Keywords">
-		<meta content="leetcodeJS大法之Remove-Duplicates-from-Sorted-List-II" name="description">
-		<title>leetcodeJS大法之Remove-Duplicates-from-Sorted-List-II</title>
-		<link rel="stylesheet" href="../../css/common/reset.css" />
-	</head>
+    <head>
+        <meta charset="UTF-8">
+        <!-- 让国内基于webkit的浏览器默认采用webkit内核进行渲染 -->
+        <meta name="renderer" content="webkit" />
+        <!-- 移动端的响应式特性 -->
+        <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>leetcodeJS大法之Remove-Duplicates-from-Sorted-List-II</title>
+        <link rel="stylesheet" href="../../css/common/reset.css" />
+    </head>
 
-	<body>
-		<script type="text/javascript" src="Remove-Duplicates-from-Sorted-List-II.js"></script>
-		<script>
-			
-			var list = {
-					val: 1,
-					next: {
-						val: 1,
-						next: {
-							val: 1,
-							next: {
-								val: 4,
-								next: {
-									val: 4,
-									next: {
-										val: 4,
-										next: {
-											val: 5,
-											next: {
-												val: 6,
-												next: null
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				};
-			var list = {
-					val: 1,
-					next: {
-						val: 2,
-						next: {
-							val: 2,
-							next: {
-								val: 2,
-								next: null
-							}
-						}
-					}
-				};
-			var result = LeetCode.deleteDuplicates(list);
+    <body>
+        <script type="text/javascript" src="Remove-Duplicates-from-Sorted-List-II.js"></script>
+        <script>
+            const deleteDuplicates = LeetCode.deleteDuplicates;
+            const list = {
+                val: 1,
+                next: {
+                    val: 1,
+                    next: {
+                        val: 1,
+                        next: {
+                            val: 4,
+                            next: {
+                                val: 4,
+                                next: {
+                                    val: 4,
+                                    next: {
+                                        val: 5,
+                                        next: {
+                                            val: 6,
+                                            next: null
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
 
-			console.log(JSON.stringify(result));
-		</script>
-	</body>
+            console.log(deleteDuplicates(list));
+        </script>
+    </body>
 
 </html>
