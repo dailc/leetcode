@@ -239,3 +239,5 @@ In life the most interesting things tend to happen when you are on your way to d
 To remember is to disengage from the present.
 留恋过去就是放弃当下
 
+Use your smile to change the world. Don't let the world change your smile.
+用你的笑容去改变这个世界，别让这个世界改变了你的笑容。
