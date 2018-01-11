@@ -1,47 +1,53 @@
 /**
- * 作者: dailc
- * 时间: 2017-04-23
- * 描述: Partition-List
- * 
+ * 一刷时间: 2017-04-23
+ * 二刷时间：2018-01-11
  * 来自: https://leetcode.com/problems/maximal-rectangle
  */
 (function(exports) {
 
-	/**
-	 * @description partition
-	 * @param {ListNode} head
- 	 * @param {number} x
- 	 * @return {ListNode}
-	 */
-	exports.partition = function(head, x) {
-		if(!head) {
-			return head;
-		}
-		var lessHead = {},
-			greaterHead = {};
-		
-		var node = head,
-			less = lessHead,
-			greater = greaterHead;
-		
-		while(node!=null) {
-			var next = node.next;
-			if(node.val < x) {
-				less.next = node;
-				less = less.next;
-				less.next = null;
-			} else {
-				greater.next = node;
-				greater = greater.next;
-				greater.next = null;
-			}
-			node = next;
-		}
-		less.next = greaterHead.next;
-		
-		return lessHead.next;
-	};
-	
+    /**
+     * Definition for singly-linked list.
+     * function ListNode(val) {
+     *     this.val = val;
+     *     this.next = null;
+     * }
+     */
+    /**
+     * @param {ListNode} head
+     * @param {number} x
+     * @return {ListNode}
+     */
+    function partition(head, x) {
+        if (!head) {
+            return head;
+        }
+        const lesserHeader = {};
+        const greaterHeader = {};
+        let lesser = lesserHeader;
+        let greater = greaterHeader;
+        let currNode = head;
 
-	
+        while (currNode) {
+            const next = currNode.next;
+
+            if (currNode.val < x) {
+                lesser.next = currNode;
+                lesser = lesser.next;
+                lesser.next = null;
+            } else {
+                greater.next = currNode;
+                greater = greater.next;
+                greater.next = null;
+            }
+
+            currNode = next;
+        }
+
+        lesser.next = greaterHeader.next;
+
+        return lesserHeader.next;
+    }
+    
+    exports.partition = partition;
+
 })(window.LeetCode = window.LeetCode || {});

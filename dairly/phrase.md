@@ -241,3 +241,9 @@ To remember is to disengage from the present.
 
 Use your smile to change the world. Don't let the world change your smile.
 用你的笑容去改变这个世界，别让这个世界改变了你的笑容。
+
+No need to have a reason to love you, Anything can be a reason not to love you.
+喜欢你，不需要理由，不喜欢你，什么都可以成为理由。
+
+Live, travel, adventure, bless, and don't be sorry.
+精彩生活，不停地行，大胆冒险，心怀感激，不留遗憾。
