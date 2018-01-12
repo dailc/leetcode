@@ -247,3 +247,6 @@ No need to have a reason to love you, Anything can be a reason not to love you.
 
 Live, travel, adventure, bless, and don't be sorry.
 精彩生活，不停地行，大胆冒险，心怀感激，不留遗憾。
+
+Nothing behind me, everything ahead of me, as is ever so on the road.
+我的身后空空荡荡，整个世界都在前方，这就是在路上。
