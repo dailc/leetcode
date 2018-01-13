@@ -74,8 +74,10 @@
             }
             if (i < lenH && haystack.charAt(i) != needle.charAt(j)) {
                 if (j) {
+                    // 关键的，回到前面相同长度的前缀地方那去，从而重写从后匹配
                     j = lps[j - 1];
                 } else {
+                    // j中没有重复前缀，i往后挪移
                     i++;
                 }
             }
@@ -94,8 +96,10 @@
             if (needle.charAt(i) == needle.charAt(count)) {
                 lps[i++] = ++count;
             } else if (count) {
+                // 往后回溯，减少共同前后缀的匹配范围，直至最后回溯到0
                 count = lps[count - 1];
             } else {
+                // 此时前后缀共同长度为0
                 lps[i++] = 0;
             }
         }

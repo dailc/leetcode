@@ -23,3 +23,6 @@ Output: -1
 - 粗暴的遍历
 
 - KMP算法，复杂度O(M+N)
+
+推荐这篇博客:浅显易懂
+http://www.ruanyifeng.com/blog/2013/05/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm.html
