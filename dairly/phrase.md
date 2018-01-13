@@ -250,3 +250,6 @@ Live, travel, adventure, bless, and don't be sorry.
 
 Nothing behind me, everything ahead of me, as is ever so on the road.
 我的身后空空荡荡，整个世界都在前方，这就是在路上。
+
+Anyone who has no spiritual aspirations is an idiot.
+任何没有精神追求的人都是愚昧无知的人。

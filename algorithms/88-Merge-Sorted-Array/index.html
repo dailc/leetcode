@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Merge-Sorted-Array" name="Keywords">
-		<meta content="leetcodeJS大法之Merge-Sorted-Array" name="description">
 		<title>leetcodeJS大法之Merge-Sorted-Array</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,11 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Merge-Sorted-Array.js"></script>
 		<script>
+		    const merge = LeetCode.merge;
 			
-			var result = [1,2,3,5];
-			LeetCode.merge2(result,0,[2,4],2);
-
-			console.log(JSON.stringify(result));
+			console.log(merge([1, 2, 3, 5], 0, [2, 4], 2));
 		</script>
 	</body>
 

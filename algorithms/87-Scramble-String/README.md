@@ -61,3 +61,5 @@ r   g  ta  e
 	* `result[k][i][j]` 表示`s1[i...i+k]`是否可以由`s2[j...j+k]`变化得来。
 	
     * `result[len][i][j]`表示的是以i和j分别为s1和s2起点的长度为len的字符串是不是互为scramble。
+    
+https://www.cnblogs.com/grandyang/p/4318500.html
