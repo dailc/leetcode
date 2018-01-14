@@ -253,3 +253,6 @@ Nothing behind me, everything ahead of me, as is ever so on the road.
 
 Anyone who has no spiritual aspirations is an idiot.
 任何没有精神追求的人都是愚昧无知的人。
+
+Embrace your life, for we only live once.
+拥抱你的生活，因为我们只能活一次。
