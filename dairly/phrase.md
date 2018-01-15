@@ -256,3 +256,6 @@ Anyone who has no spiritual aspirations is an idiot.
 
 Embrace your life, for we only live once.
 拥抱你的生活，因为我们只能活一次。
+
+We got things to do. Places to go. People to see. Futures to make.
+我们有很多事情要做，有好些地方要去，要见不同的人，要去创造更美好的未来。
