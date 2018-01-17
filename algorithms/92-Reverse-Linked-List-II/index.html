@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Reverse-Linked-List-II" name="Keywords">
-		<meta content="leetcodeJS大法之Reverse-Linked-List-II" name="description">
 		<title>leetcodeJS大法之Reverse-Linked-List-II</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,7 +14,8 @@
 	<body>
 		<script type="text/javascript" src="Reverse-Linked-List-II.js"></script>
 		<script>
-			var list = {
+		    const reverseBetween = LeetCode.reverseBetween;
+			const list = {
 				val:1,
 				next:{
 					val:2,
@@ -31,10 +30,9 @@
 						}
 					}
 				}
-			}
-			var result = LeetCode.reverseBetween(list,1,1);
+			};
 
-			console.log(JSON.stringify(result));
+			console.log(reverseBetween(list, 1, 1));
 		</script>
 	</body>
 

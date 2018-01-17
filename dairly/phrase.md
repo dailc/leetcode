@@ -259,3 +259,9 @@ Embrace your life, for we only live once.
 
 We got things to do. Places to go. People to see. Futures to make.
 我们有很多事情要做，有好些地方要去，要见不同的人，要去创造更美好的未来。
+
+Accept who you are; and revel in it.
+接受真实的自己，并乐在其中。
+
+Don't let go too soon, but don't hold on too long.
+不要太快放手，也别紧握太久。
