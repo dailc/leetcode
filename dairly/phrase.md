@@ -265,3 +265,6 @@ Accept who you are; and revel in it.
 
 Don't let go too soon, but don't hold on too long.
 不要太快放手，也别紧握太久。
+
+To strive, to seek, to find, and not to yield.
+去奋斗，去寻觅，去探索，但绝不屈服。

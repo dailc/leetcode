@@ -1,48 +1,55 @@
-/* 作者: dailc
- * 时间: 2017-04-25
- * 描述: Restore-IP-Addresses
- * 
+/**
+ * 一刷时间: 2017-04-25
+ * 二刷时间：2018-01-18
  * 来自: https://leetcode.com/problems/restore-ip-addresses
  */
 (function(exports) {
 
-	/**
-	 * @description restoreIpAddresses
-	 * @param {string} s
-	 * @return {string[]}
-	 */
-	exports.restoreIpAddresses = function(s) {
-		var result = [];
-		if(s == null || s.length < 4 || s.length > 12) {
-			return result;
-		}
-		dfs(result,s, '', 0);
+    /**
+     * @param {string} s
+     * @return {string[]}
+     */
+    function restoreIpAddresses(s) {
+        if (!s || s.length < 4 || s.length > 12) {
+            return [];
+        }
+        const res = [];
 
-		return result;
-	};
+        dfs(res, s, '', 0);
 
-	function dfs(result, s, tmp, count) {
-		if(count == 3 && isValid(s)) {
-			result.push(tmp+s);
-			return;
-		} else {
-			for(var i = 0; i <= 3 && i < s.length - 1; i++) {
-				var tmpStr = s.substring(0, i+1);
-				if(isValid(tmpStr)) {
-					dfs(result, s.substring(i+1, s.length), tmp + tmpStr +'.', count+1);
-				}
-			}
-		}
+        return res;
+    }
 
-	}
+    function dfs(res, s, preIpAddress, count) {
+        // count代表3位ip都满了
+        if (count === 3 && isValid(s)) {
+            res.push(preIpAddress + s);
 
-	function isValid(s) {
-		if(s.charAt(0) == '0') {
-			return s == "0";
-		}
-		var num = parseInt(s);
+            return;
+        }
+        const len = s.length;
 
-		return num > 0 && num <= 255;
-	}
+        for (let i = 0; i <= 3 && i < len - 1; i++) {
+            // 依次尝试1，2，3个字符
+            const tmpIp = s.substring(0, i + 1);
+
+            if (isValid(tmpIp)) {
+                dfs(res, s.substring(i + 1, s.length), preIpAddress + tmpIp + '.', count + 1);
+            }
+
+        }
+    }
+
+    function isValid(s) {
+        if (s.charAt(0) === '0') {
+            // 考虑.0的情况
+            return s === "0";
+        }
+
+        const num = +s;
+
+        return num > 0 && num <= 255;
+    }
+    exports.restoreIpAddresses = restoreIpAddresses;
 
 })(window.LeetCode = window.LeetCode || {});
