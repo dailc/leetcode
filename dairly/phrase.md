@@ -268,3 +268,6 @@ Don't let go too soon, but don't hold on too long.
 
 To strive, to seek, to find, and not to yield.
 去奋斗，去寻觅，去探索，但绝不屈服。
+
+As iron sharpens iron, so a friend sharpens a friend.
+铁磨铁，磨出刃；朋友相感，也是如此

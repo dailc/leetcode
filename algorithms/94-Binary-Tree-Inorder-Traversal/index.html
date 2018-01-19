@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Binary-Tree-Inorder-Traversal" name="Keywords">
-		<meta content="leetcodeJS大法之Binary-Tree-Inorder-Traversal" name="description">
 		<title>leetcodeJS大法之Binary-Tree-Inorder-Traversal</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,7 +14,9 @@
 	<body>
 		<script type="text/javascript" src="Binary-Tree-Inorder-Traversal.js"></script>
 		<script>
-			var binaryTree = {
+		    const inorderTraversal = LeetCode.inorderTraversal3;
+		    
+			const binaryTree = {
 				val:1,
 				left:null,
 				right:{
@@ -25,11 +25,9 @@
 						val:3
 					}
 				}
-			}
+			};
 			
-			var result = LeetCode.inorderTraversal2(binaryTree);
-
-			console.log(JSON.stringify(result));
+			console.log(inorderTraversal(binaryTree));
 		</script>
 	</body>
 
