@@ -271,3 +271,9 @@ To strive, to seek, to find, and not to yield.
 
 As iron sharpens iron, so a friend sharpens a friend.
 铁磨铁，磨出刃；朋友相感，也是如此
+
+We may encounter many defeats but we must not be defeated.
+我们可能会失败很多次，但绝不能被打败。
+
+Your attitude, not your aptitude, will determine your altitude.
+决定你人生高度的，不是你的才能，而是你的态度。
