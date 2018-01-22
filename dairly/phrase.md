@@ -277,3 +277,6 @@ We may encounter many defeats but we must not be defeated.
 
 Your attitude, not your aptitude, will determine your altitude.
 决定你人生高度的，不是你的才能，而是你的态度。
+
+It is only when you are pursued that you become swift.
+唯有在被追赶时，你才能真正奔跑。
