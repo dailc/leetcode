@@ -280,3 +280,6 @@ Your attitude, not your aptitude, will determine your altitude.
 
 It is only when you are pursued that you become swift.
 唯有在被追赶时，你才能真正奔跑。
+
+Remembrance is a form of meeting. Forgetfulness is a form of freedom.
+记忆是一种相遇。遗忘是一种自由。
