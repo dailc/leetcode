@@ -283,3 +283,9 @@ It is only when you are pursued that you become swift.
 
 Remembrance is a form of meeting. Forgetfulness is a form of freedom.
 记忆是一种相遇。遗忘是一种自由。
+
+The best things are put together of a night and vanish with the morning.
+最美好的东西都是薄暮而至晨曦而逝
+
+Distance makes the hearts grow fonder.
+距离使两颗心靠的更近

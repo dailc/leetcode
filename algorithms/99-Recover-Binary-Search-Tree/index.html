@@ -7,8 +7,6 @@
 		<meta name="renderer" content="webkit" />
 		<!-- 移动端的响应式特性 -->
 		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-		<meta content="leetcode,算法,Recover-Binary-Search-Tree" name="Keywords">
-		<meta content="leetcodeJS大法之Recover-Binary-Search-Tree" name="description">
 		<title>leetcodeJS大法之Recover-Binary-Search-Tree</title>
 		<link rel="stylesheet" href="../../css/common/reset.css" />
 	</head>
@@ -16,19 +14,21 @@
 	<body>
 		<script type="text/javascript" src="Recover-Binary-Search-Tree.js"></script>
 		<script>
-			
-			var binaryTree = {
-				val:2,
-				left:{
-					val:null
-				},
-				right:{
-					val:1
-				}
-			};
-			var result = LeetCode.recoverTree2(binaryTree);
-
-			console.log(JSON.stringify(binaryTree));
+		    const recoverTree = LeetCode.recoverTree2;
+		    
+		    const binaryTree = {
+                val:2,
+                left:{
+                    val:null
+                },
+                right:{
+                    val:1
+                }
+            };
+            
+            recoverTree(binaryTree);
+		    
+		    console.log(binaryTree);
 		</script>
 	</body>
 
