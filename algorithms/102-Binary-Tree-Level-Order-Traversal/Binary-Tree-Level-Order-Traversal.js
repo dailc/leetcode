@@ -1,79 +1,93 @@
-/* 作者: dailc
- * 时间: 2017-05-03
- * 描述: Binary-Tree-Level-Order-Traversal
- * 
- * 来自: https://leetcode.com/problems/binary-tree-level-order-traversal
- */
-(function(exports) {
+
+/* 
+* 一刷时间: 2017-05-03
+* 二刷时间：2018-04-24
+* 来自: https://leetcode.com/problems/binary-tree-level-order-traversal
+*/
+(function (exports) {
+
+	function levelOrder2(root) {
+		if (!root) {
+			return [];
+		}
+		const res = [];
+
+		levelOrderRecurse(res, root, 0);
+
+		return res;
+	}
+
+	function levelOrderRecurse(res, root, level) {
+		if (!root) {
+			return;
+		}
+		res[level] = res[level] || [];
+		res[level].push(root.val);
+
+		levelOrderRecurse(res, root.left, level + 1);
+		levelOrderRecurse(res, root.right, level + 1);
+	}
+
+	exports.levelOrder = levelOrder2;
 
 	/**
-	 * @description levelOrder
 	 * @param {TreeNode} root
 	 * @return {number[][]}
 	 */
-	exports.levelOrder = function(root) {
-		var result = [];
-		levelOrderRecurse(result, root, 0);
-
-		return result;
-	};
-
-	function levelOrderRecurse(result, root, level) {
-
-		if(!root) {
-			//没有就暂时不添加
-			//result[level].push(null);
-			return;
-		}
-		result[level] = result[level] || [];
-		result[level].push(root.val);
-		levelOrderRecurse(result, root.left, level + 1);
-		levelOrderRecurse(result, root.right, level + 1);
-	}
-
-	exports.levelOrder2 = function(root) {
-		if(!root) {
+	function levelOrder(root) {
+		if (!root) {
 			return [];
 		}
-		var result = [];
-		var nodes = [];
+		const nodes = [];
+		const res = [];
+
 		nodes.push({
 			node: root,
 			level: 0
 		});
-		var currLevel = -1;
-		var tmp = [];
-		while(nodes.length) {
-			//先进先出，用 shift
-			var nodeObj = nodes.shift();
-			var node = nodeObj.node;
-			var nodeLevel = nodeObj.level;
 
-			if(node.left) {
+		let tmp = [];
+		let currLevel = -1;
+
+		while (nodes.length) {
+			const nodeObj = nodes.shift();
+			const node = nodeObj.node;
+			const level = nodeObj.level;
+
+			if (node.left) {
 				nodes.push({
 					node: node.left,
-					level: nodeLevel + 1
+					level: level + 1
 				});
 			}
-			if(node.right) {
+
+			if (node.right) {
 				nodes.push({
 					node: node.right,
-					level: nodeLevel + 1
+					level: level + 1
 				});
 			}
-			if(currLevel != nodeLevel) {
-				if(currLevel!=-1) {
-					result.push(tmp);
+
+			if (level !== currLevel) {
+				if (currLevel !== -1) {
+					// 层级不同了，将上一个level的数据添加
+					res.push(tmp);
 				}
-				currLevel = nodeLevel;
+				currLevel = level;
 				tmp = [];
 				tmp.push(node.val);
 			} else {
+				// 同一个层级的，继续添加数据
 				tmp.push(node.val);
 			}
 		}
-		result.push(tmp);
-		return result;
-	};
+
+		res.push(tmp);
+
+		return res;
+	}
+
+
+	exports.levelOrder = levelOrder;
 
 })(window.LeetCode = window.LeetCode || {});
