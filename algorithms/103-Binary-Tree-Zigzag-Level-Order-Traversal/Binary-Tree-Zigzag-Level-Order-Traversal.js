@@ -1,92 +1,113 @@
-/* 作者: dailc
- * 时间: 2017-05-03
- * 描述: Binary-Tree-Zigzag-Level-Order-Traversal
- * 
- * 来自: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
- */
-(function(exports) {
+/* 
+* 一刷时间: 2017-05-03
+* 二刷时间：2018-04-25
+* 来自: https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/
+*/
+(function (exports) {
 
 	/**
-	 * @description zigzagLevelOrder
 	 * @param {TreeNode} root
 	 * @return {number[][]}
 	 */
-	exports.zigzagLevelOrder = function(root) {
-		var result = [];
-		zigzagLevelOrderRecurse(result, root, 0);
-
-		return result;
-	};
-
-	function zigzagLevelOrderRecurse(result, root, level) {
-
-		if(!root) {
-			//没有就暂时不添加
-			//result[level].push(null);
-			return;
-		}
-		result[level] = result[level] || [];
-		if(level & 0x1) {
-			result[level].unshift(root.val);
-		} else {
-			result[level].push(root.val);
-		}
-
-		zigzagLevelOrderRecurse(result, root.left, level + 1);
-		zigzagLevelOrderRecurse(result, root.right, level + 1);
-	}
-
-	exports.zigzagLevelOrder2 = function(root) {
-		if(!root) {
+	function zigzagLevelOrder2(root) {
+		if (!root) {
 			return [];
 		}
-		var result = [];
-		var nodes = [];
+		const res = [];
+
+		zigzagLevelOrderRecurse(res, root, 0);
+
+		return res;
+	}
+
+	function zigzagLevelOrderRecurse(res, root, level) {
+		if (!root) {
+			return;
+		}
+		res[level] = res[level] || [];
+
+		if (level & 1) {
+			res[level].unshift(root.val);
+		} else {
+			res[level].push(root.val);
+		}
+
+		zigzagLevelOrderRecurse(res, root.left, level + 1);
+		zigzagLevelOrderRecurse(res, root.right, level + 1);
+	}
+
+	exports.zigzagLevelOrder2 = zigzagLevelOrder2;
+
+	/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+	/**
+	 * @param {TreeNode} root
+	 * @return {number[][]}
+	 */
+	function zigzagLevelOrder(root) {
+		if (!root) {
+			return [];
+		}
+		const res = [];
+		const nodes = [];
+
 		nodes.push({
 			node: root,
 			level: 0
 		});
-		var currLevel = -1;
-		var tmp = [];
-		while(nodes.length) {
-			//先进先出，用 shift
-			var nodeObj = nodes.shift();
-			var node = nodeObj.node;
-			var nodeLevel = nodeObj.level;
 
-			if(node.left) {
+		let currLevel = -1;
+		let tmp = [];
+
+		while (nodes.length) {
+			const nodeObj = nodes.shift();
+			const node = nodeObj.node;
+			const level = nodeObj.level;
+
+			if (node.left) {
 				nodes.push({
 					node: node.left,
-					level: nodeLevel + 1
-				});
+					level: level + 1
+				})
 			}
-			if(node.right) {
+
+			if (node.right) {
 				nodes.push({
 					node: node.right,
-					level: nodeLevel + 1
-				});
+					level: level + 1
+				})
 			}
-			if(currLevel != nodeLevel) {
-				if(currLevel != -1) {
-					result.push(tmp);
+
+			if (level !== currLevel) {
+				if (currLevel !== -1) {
+					res.push(tmp);
 				}
-				currLevel = nodeLevel;
+				currLevel = level;
 				tmp = [];
-				if(currLevel&0x1) {
+				if (level & 1) {
 					tmp.unshift(node.val);
 				} else {
 					tmp.push(node.val);
 				}
-				
 			} else {
-				if(currLevel&0x1) {
+				if (level & 1) {
 					tmp.unshift(node.val);
 				} else {
 					tmp.push(node.val);
 				}
 			}
 		}
-		result.push(tmp);
-		return result;
-	};
+
+		res.push(tmp);
+
+		return res;
+	}
+
+	exports.zigzagLevelOrder = zigzagLevelOrder;
+
 })(window.LeetCode = window.LeetCode || {});
