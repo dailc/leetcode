@@ -1,60 +1,74 @@
-/* 作者: dailc
- * 时间: 2017-05-04
- * 描述: Maximum-Depth-of-Binary-Tree
- * 
- * 来自: https://leetcode.com/problems/maximum-depth-of-binary-tree
- */
-(function(exports) {
+/* 
+* 一刷时间: 2017-05-04
+* 二刷时间：2018-05-02
+* 来自: https://leetcode.com/problems/maximum-depth-of-binary-tree
+*/
+(function (exports) {
 
 	/**
 	 * @description maxDepth
 	 * @param {TreeNode} root
 	 * @return {number}
 	 */
-	exports.maxDepth = function(root) {
+	function maxDepth2(root) {
 		return maxDepthRecurse(root);
-	};
+	}
 
 	function maxDepthRecurse(root) {
-		if(!root) {
+		if (!root) {
 			return 0;
 		}
-		var left = maxDepthRecurse(root.left);
-		var right = maxDepthRecurse(root.right);
-		return(left > right) ? (left + 1) : (right + 1);
+
+		const left = maxDepthRecurse(root.left);
+		const right = maxDepthRecurse(root.right);
+
+		return left > right ? left + 1 : right + 1;
 	}
-	
-	exports.maxDepth2 = function(root) {
-		if(!root) {
+
+	exports.maxDepth2 = maxDepth2;
+
+	function maxDepth(root) {
+		if (!root) {
 			return 0;
 		}
-		var level = 0;
-		var stack = [];
-		stack.push(root);
-		//当前层的数量
-		var currNum = 1;
-		//下一层的数量
-		var nextNum = 0;
-		while(stack.length) {
-			//从前面出
-			var node = stack.shift();
-			currNum --;
-			if(node.left) {
-				stack.push(node.left);
-				nextNum ++;
+
+		const nodes = [];
+
+		nodes.push(root);
+
+		// 当前层级
+		let level = 0;
+		// 当前层节点的数量
+		let currNum = 1;
+		// 下一层节点数量
+		let nextNum = 0;
+
+		while (nodes.length) {
+			const node = nodes.shift();
+
+			currNum--;
+
+			if (node.left) {
+				nextNum++;
+				nodes.push(node.left);
 			}
-			if(node.right) {
-				stack.push(node.right);
-				nextNum ++;
+
+			if (node.right) {
+				nextNum++;
+				nodes.push(node.right);
 			}
-			if(currNum==0) {
+
+			if (currNum === 0) {
 				currNum = nextNum;
 				nextNum = 0;
-				level ++;
+				level++;
 			}
 		}
-		
+
 		return level;
-	};
+	}
+
+
+	exports.maxDepth = maxDepth;
 
 })(window.LeetCode = window.LeetCode || {});
