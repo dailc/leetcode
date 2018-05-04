@@ -1,45 +1,50 @@
-/* 作者: dailc
- * 时间: 2017-05-04
- * 描述: Construct-Binary-Tree-from-Inorder-Traversal-and-Postorder-Traversal.js
- * 
- * 来自: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal
- */
-(function(exports) {
+/*
+* 一刷时间: 2017-05-04
+* 二刷时间：2018-05-04
+* 来自: https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal
+*/
+(function (exports) {
 	function TreeNode(val) {
-    	this.val = val;
-    	this.left = this.right = null;
-  	}
+		this.val = val;
+		this.left = this.right = null;
+	}
 	/**
 	 * @description buildTree
 	 *  @param {number[]} preorder
  	 * @param {number[]} inorder
  	 * @return {TreeNode}
 	 */
-	exports.buildTree = function(inorder,postorder) {
-		if(!postorder||!inorder||postorder.length==0||postorder.length!=inorder.length) {
+	function buildTree(inorder, postorder) {
+		if (!postorder || !inorder || !postorder.length || postorder.length !== inorder.length) {
 			return null;
 		}
-		return buildTreeRecurse(postorder,0,postorder.length-1, inorder,0,inorder.length-1);
-	};
-	
-	function buildTreeRecurse(postorder, postStart,postEnd,inorder,inStart,inEnd) {
-		if(postStart>postEnd||inStart>inEnd) {
+		return buildTreeRecurse(inorder, 0, inorder.length - 1, postorder, 0, postorder.length - 1);
+	}
+
+	function buildTreeRecurse(inorder, inStart, inEnd, postorder, postStart, postEnd) {
+		if (postStart > postEnd || inStart > inEnd) {
 			return null;
 		}
-		var rootVal = postorder[postEnd];
-		var rootIndex = 0;
-		for( var i = inStart; i <= inEnd; i ++) {
-			if(inorder[i]==rootVal) {
-				rootIndex = i;
+		const rootVal = postorder[postEnd];
+		let rootIndexInOrder = inStart;
+
+		// 找到中序遍历中根节点
+		for (let i = inStart; i <= inEnd; i++) {
+			if (inorder[i] === rootVal) {
+				rootIndexInOrder = i;
 				break;
 			}
 		}
-		var len = rootIndex - inStart;
-		var root = new TreeNode(rootVal);
-		root.left = buildTreeRecurse(postorder, postStart,postStart+len-1,inorder,inStart,rootIndex-1);
-		root.right = buildTreeRecurse(postorder, postStart+len,postEnd-1,inorder,rootIndex+1,inEnd);
-		
+
+		const len = rootIndexInOrder - inStart;
+		const root = new TreeNode(rootVal);
+
+		root.left = buildTreeRecurse(inorder, inStart, rootIndexInOrder - 1, postorder, postStart, postStart + len - 1);
+		root.right = buildTreeRecurse(inorder, rootIndexInOrder + 1, inEnd, postorder, postStart + len, postEnd - 1);
+
 		return root;
 	}
-	
+
+	exports.buildTree = buildTree;
+
 })(window.LeetCode = window.LeetCode || {});
